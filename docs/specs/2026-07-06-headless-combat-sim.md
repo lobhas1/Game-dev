@@ -33,6 +33,8 @@ A `Clause` is a serializable record — `{ verb, <flat params>, template? }` —
 ### 2.5 Balance authority
 All band tables — sizes, durations, rates, the tier-budget curve, delivery multipliers (§4), cast multipliers (§3) — live in one named place, `BalanceTables`. That table *is* the balance authority in code form: `Magnitude = tierBudget(tier) × share × multipliers`, with durations / sizes / rates resolved from their bands.
 
+**Two magnitude currencies.** Damage, heal, shield, and DoT/HoT per-tick potency ride the exponential tier budget — a higher-tier burn ticks harder (§5 of `verbs.md`). Stat-modifier potency does **not**: it resolves as a bounded percentage (`share × 100`, clamped at `BalanceTables.StatModPotencyCap`), because a T5 slow at share 0.2 on the budget curve would resolve to −131% move speed. Two semantics, two resolutions; conflating them is a compiler bug, not a balance tweak. Symmetrically, `WorldState.GetStat` aggregates per stat kind — additive percentage-point deltas for base-0 stats (DamageIn/Out, Armor, Crit, Evasion, Resist), multiplicative for base-1 stats (Move/CastSpeed, CritMult).
+
 ### 2.6 Spatial-lite (not no-op)
 XZ positions in `WorldState`; deterministic analytic **line-sweep** (projectile → nearest hit) and **circle-overlap** (groundAoE / nova → units within radius) implemented in the sim; `NavClamp` a documented identity. Without this, Blink Strike's projectile hits nothing and the golden is vacuous.
 
@@ -50,7 +52,7 @@ An unknown verb, status, or field is a hard parse failure, never silently ignore
 - **Deliveries:** `self`, `targetUnit`, `projectile`, `groundAoE`. **`melee` is consciously dropped** — a knowing deviation from §9 step 1; no §8 proof needs it.
 - **Cast modes:** `instant`, `cast` (cost/gate + windup advanced on the clock).
 - **Templates (§7):** parse-validate all eight; **execute `ifStatus` and `onHit`**; the other six (`onKill`, `onCrit`, `delayed`, `repeating`, `onExpire`, `hpThreshold`) are stubbed at execution and clearly marked. Frost Shatter needs the first; `onHit` is the workhorse.
-- **Statuses:** all 20 present as catalog data; the DoT / DR / stat-mod machinery is driven by the clock. Only the categories this slice exercises are on the hot path.
+- **Statuses:** all 20 present as catalog data; the DoT / DR / stat-mod machinery is driven by the clock. Only the categories this slice exercises are on the hot path. `blind` is a **documented gap** — it applies as a present status but has no mechanical effect, because "large miss chance" needs an attacker-accuracy term the damage pipeline doesn't model yet (widen). Documented, never a silent no-op.
 - **Widen (out of slice):** the other 21 verbs, more deliveries and cast modes, the six stubbed templates, `castSpell`'s cross-tier re-resolve, and wiring JSON-Schema validation into CI.
 
 ---
@@ -70,6 +72,8 @@ The three §8 listings mix proposal- and compiled-stage fields: `amplify: 2.5`, 
 - `src/Spellcraft/CombatSim.cs` — verbs + interpreter (budget resolver, strict recursive converter, dispatcher, pipeline, delivery, cast, templates, clock, guards, geometry, sim runner).
 - `tests/Spellcraft.Tests/` — xUnit (`dotnet test`, CI-able). Golden tests assert a **canonical event projection plus final-state invariants** — never raw exact sequences, which rot into regenerate-on-red reflexes. Runs the three §8 proofs from JSON. Unit tests cover the hard-CC DR curve (100 → 50 → 25 → immune), shields-before-health ordering, and DoT tick counts under the fixed clock.
 
+**Differential-assertion law.** Every status and modifier requires a with-versus-without test that changes a *measured* outcome — presence is not effect. Asserting only `HasStatus(Vulnerable)` (true even when Vulnerable did nothing) is precisely how the base-0 stat-aggregation bug shipped; the one-line differential "the vulnerable target takes more damage than the control" catches it. See `DifferentialTests.cs`.
+
 ---
 
 ## 6. Layout
@@ -85,7 +89,22 @@ src/Spellcraft/Spellcraft.csproj
 src/Spellcraft/CombatModel.cs      # nouns
 src/Spellcraft/CombatSim.cs        # verbs + interpreter
 tests/Spellcraft.Tests/Spellcraft.Tests.csproj
+tests/Spellcraft.Tests/Fixtures.cs
 tests/Spellcraft.Tests/GoldenTests.cs
 tests/Spellcraft.Tests/UnitTests.cs
+tests/Spellcraft.Tests/DifferentialTests.cs
 Spellcraft.sln
 ```
+
+---
+
+## 7. Post-review corrections (v0.1.1)
+
+A code review surfaced four defects, all rooted in effect never being asserted — only presence:
+
+1. **Base-0 stats were immune to modification (critical).** `GetStat` applied `base × (1 + Σpct/100)` to every stat; for base-0 stats (`DamageIn`, `DamageOut`, `Armor`, `CritChance`, `Evasion`, `Resist`) that is `0 × anything = 0`, so no modifier could move them and the entire evasion/crit/armor/resist surface was dead code. Fixed with per-`StatKind` aggregation (§2.5). Its sibling: stat-mod potency was riding the exponential budget (T5 slow → −131%); now a clamped percentage.
+2. **Push was capped at one unit.** The push destination was a synthetic 1-unit anchor fed through the overshoot clamp meant for pull. Now push computes its destination directly and moves the full distance.
+3. **Zone-tick RNG key was culture-dependent** (`{Now:0.###}` → `0,25` vs `0.25`), violating §2.7. Now keyed on an integer tick ordinal.
+4. **`blind` was a silent no-op.** Now a documented gap (§3): present but inert, pending an attacker-accuracy model.
+
+The meta-fix is the **differential-assertion law** (§5): the goldens asserted status *presence*, never *effect*, which is what let #1 through. Every status/modifier now has a with-versus-without test.

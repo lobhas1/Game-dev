@@ -419,6 +419,11 @@ public static class BalanceTables
     // tierBudget(t) = 100 × 1.6^(t-1)
     public static float TierBudget(int tier) => 100f * MathF.Pow(1.6f, Math.Max(0, tier - 1));
 
+    /// <summary>Cap on stat-modifier potency (percentage points). Stat-mod potency does NOT ride the
+    /// exponential tier budget (that currency is for damage/heal magnitudes) — a T5 slow at share 0.2
+    /// would otherwise resolve to −131% move speed. Percentages get their own bounded curve.</summary>
+    public const float StatModPotencyCap = 90f;
+
     private static readonly Dictionary<string, float> CastTimeBands = new()
         { ["instant"] = 0f, ["quick"] = 0.4f, ["normal"] = 0.8f, ["long"] = 1.5f };
 
@@ -706,6 +711,8 @@ public sealed class ZoneInstance
     public float ExpireTime { get; init; }
     public Clause[] TickClauses { get; init; } = Array.Empty<Clause>();
     public int Depth { get; init; }
+    /// <summary>Monotonic tick counter — the culture-independent key for per-tick RNG substreams.</summary>
+    public int TickIndex { get; set; }
 }
 
 public sealed class WorldState
@@ -772,6 +779,11 @@ public sealed class WorldState
         _ => 0f
     };
 
+    /// <summary>Multiplier stats scale a non-zero baseline (speeds, crit multiplier); everything
+    /// else is an additive percentage-point delta on a base that is legitimately 0.</summary>
+    private static bool IsMultiplierStat(StatKind k) =>
+        k is StatKind.MoveSpeed or StatKind.CastSpeed or StatKind.CritMult;
+
     public float GetStat(EntityRef r, StatId s)
     {
         float baseVal = GetBaseStat(r, s);
@@ -780,7 +792,10 @@ public sealed class WorldState
             .GroupBy(m => m.SourceClass)
             .Select(g => g.OrderByDescending(m => MathF.Abs(m.AmountPct)).First().AmountPct);
         float pct = byClass.Sum();
-        return baseVal * (1f + pct / 100f);
+        // Two stat semantics, two aggregations. Applying base×(1+pct/100) to a base-0 stat is the
+        // critical bug: 0 × anything = 0, so DamageIn/DamageOut/Armor/Crit/Evasion/Resist could
+        // never be moved and the entire mitigation-modifier surface was dead.
+        return IsMultiplierStat(s.Kind) ? baseVal * (1f + pct / 100f) : baseVal + pct;
     }
 
     public ModifierId AddStatModifier(EntityRef r, StatId stat, float amountPct, float duration, string sourceClass)

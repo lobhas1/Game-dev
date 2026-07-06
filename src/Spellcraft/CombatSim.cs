@@ -99,6 +99,14 @@ public static class SpellCompiler
     private static float Magnitude(int tier, float share, float dMult, float cMult) =>
         BalanceTables.TierBudget(tier) * share * dMult * cMult;
 
+    /// <summary>Status potency resolves per category. Stat-mod potency is a bounded percentage
+    /// (tier-independent, clamped) — not the exponential damage budget. DoT/HoT potency IS
+    /// budget-scaled, so a higher-tier burn ticks harder (§5).</summary>
+    private static float ResolvePotency(StatusId status, int tier, float share, float dMult, float cMult) =>
+        StatusCatalog.Get(status).Category == StatusCategory.StatMod
+            ? MathF.Min(share * 100f, BalanceTables.StatModPotencyCap)
+            : Magnitude(tier, share, dMult, cMult);
+
     private static Clause CompileClause(Clause c, int tier, float dMult, float cMult)
     {
         VerbParams p = c.Params switch
@@ -112,7 +120,7 @@ public static class SpellCompiler
             },
             ApplyStatusParams a => a with
             {
-                Potency = Magnitude(tier, a.Share, dMult, cMult),
+                Potency = ResolvePotency(a.Status, tier, a.Share, dMult, cMult),
                 Duration = BalanceTables.Duration(a.DurationBand)
             },
             ModifyStatParams m => m with
@@ -692,9 +700,11 @@ public static class SpellVerbs
         Vec3 dest = p.Mode switch
         {
             DisplaceMode.Teleport => ctx.World.NavClamp(anchor),
+            // Pull/Dash move TOWARD the anchor and must not overshoot it (clamp is correct).
             DisplaceMode.Pull => MoveToward(from, anchor, p.Distance),
             DisplaceMode.Dash => MoveToward(from, anchor, p.Distance),
-            DisplaceMode.Push => MoveToward(from, from + from.DirectionXZ(anchor) * -1f, p.Distance),
+            // Push moves AWAY from the anchor by the full distance (no overshoot clamp).
+            DisplaceMode.Push => from + anchor.DirectionXZ(from) * p.Distance,
             _ => throw new NotImplementedInSliceException($"Displace mode '{p.Mode}' is widen-scope.")
         };
         dest = ctx.World.NavClamp(dest);
@@ -776,6 +786,10 @@ public static class SpellVerbs
         StatusId.Slow => new[] { (StatId.MoveSpeed, -potency) },
         StatusId.Chill => new[] { (StatId.MoveSpeed, -potency), (StatId.CastSpeed, -potency) },
         StatusId.Haste => new[] { (StatId.MoveSpeed, +potency), (StatId.CastSpeed, +potency) },
+        // Blind ("large miss chance") is a documented gap, not a silent no-op: it needs an
+        // attacker-accuracy term the damage pipeline doesn't model yet. It applies as a *present*
+        // status (Blink Strike relies on that) but has no mechanical effect in this slice — widen.
+        StatusId.Blind => Enumerable.Empty<(StatId, float)>(),
         _ => Enumerable.Empty<(StatId, float)>()
     };
 }
@@ -1020,7 +1034,10 @@ public sealed class Sim
         Events.Emit(new ZoneTicked(zone.Id, affected.Count));
 
         var impact = new ImpactCtx(zone.Center, new Vec3(1, 0, 0), null, DeliveryType.GroundAoE);
-        var rng = SeededRng.FromSeed(_baseSeed).Fork($"zone:{zone.Id}:{State.Now:0.###}");
+        // Key the substream on an integer tick ordinal, never a formatted float — "0.25" vs "0,25"
+        // across cultures would fork divergent streams and break §2.7 determinism.
+        zone.TickIndex++;
+        var rng = SeededRng.FromSeed(_baseSeed).Fork($"zone:{zone.Id.Value}:{zone.TickIndex}");
         var guards = new CastGuards();
 
         foreach (var unit in affected)
