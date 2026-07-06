@@ -409,6 +409,41 @@ public static class StatusCatalog
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// Stat-units authority — the ONE named place the currency of every StatKind is declared, so a
+// number never crosses the GetStat → consumer boundary with an undeclared unit. Additive stats
+// are all in percentage POINTS; multiplier stats scale a non-zero baseline. `WorldState.GetStat`
+// and `GetStatFraction` both cite this table; no consumer re-derives a conversion.
+// ─────────────────────────────────────────────────────────────────────────────
+
+public enum StatUnit
+{
+    Multiplier,     // GetStat = base × (1 + Σpts/100); base ≈ 1 (speeds) or 2 (crit mult)
+    Points,         // additive percentage points; consumed as 1 + pts/100, or a DR rating (armor)
+    Probability,    // additive points, consumed as a chance:  clamp(pts/100, 0, 1)
+    ResistFraction  // additive points, consumed as a resist:  clamp(pts/100, 0, 0.95)
+}
+
+public static class StatUnits
+{
+    private static readonly Dictionary<StatKind, StatUnit> Table = new()
+    {
+        [StatKind.MoveSpeed]  = StatUnit.Multiplier,
+        [StatKind.CastSpeed]  = StatUnit.Multiplier,
+        [StatKind.CritMult]   = StatUnit.Multiplier,
+        [StatKind.DamageIn]   = StatUnit.Points,
+        [StatKind.DamageOut]  = StatUnit.Points,
+        [StatKind.Armor]      = StatUnit.Points,
+        [StatKind.Lifesteal]  = StatUnit.Points,
+        [StatKind.CritChance] = StatUnit.Probability,
+        [StatKind.Evasion]    = StatUnit.Probability,
+        [StatKind.Resist]     = StatUnit.ResistFraction,
+    };
+
+    public static StatUnit Of(StatKind k) => Table[k];
+    public static bool IsMultiplier(StatKind k) => Table[k] == StatUnit.Multiplier;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Balance authority — the ONE named place every band and multiplier lives.
 // Magnitude = tierBudget(tier) × share × deliveryMult × castMult.
 // Durations / sizes / rates resolve from their own bands (not budget-scaled).
@@ -779,11 +814,10 @@ public sealed class WorldState
         _ => 0f
     };
 
-    /// <summary>Multiplier stats scale a non-zero baseline (speeds, crit multiplier); everything
-    /// else is an additive percentage-point delta on a base that is legitimately 0.</summary>
-    private static bool IsMultiplierStat(StatKind k) =>
-        k is StatKind.MoveSpeed or StatKind.CastSpeed or StatKind.CritMult;
-
+    /// <summary>Aggregate a stat in its declared currency (StatUnits). Additive stats — base and
+    /// modifiers both in POINTS — sum; multiplier stats scale their baseline. (Applying
+    /// base×(1+pts/100) to a base-0 stat was the critical bug: 0 × anything = 0.) Callers that need
+    /// a probability/resist FRACTION must use GetStatFraction, never divide here.</summary>
     public float GetStat(EntityRef r, StatId s)
     {
         float baseVal = GetBaseStat(r, s);
@@ -791,12 +825,19 @@ public sealed class WorldState
         var byClass = Entities[r].Modifiers.Where(m => m.Stat.Equals(s))
             .GroupBy(m => m.SourceClass)
             .Select(g => g.OrderByDescending(m => MathF.Abs(m.AmountPct)).First().AmountPct);
-        float pct = byClass.Sum();
-        // Two stat semantics, two aggregations. Applying base×(1+pct/100) to a base-0 stat is the
-        // critical bug: 0 × anything = 0, so DamageIn/DamageOut/Armor/Crit/Evasion/Resist could
-        // never be moved and the entire mitigation-modifier surface was dead.
-        return IsMultiplierStat(s.Kind) ? baseVal * (1f + pct / 100f) : baseVal + pct;
+        float pts = byClass.Sum();
+        return StatUnits.IsMultiplier(s.Kind) ? baseVal * (1f + pts / 100f) : baseVal + pts;
     }
+
+    /// <summary>Points → the fraction a probability/resist stat is consumed as. The single place the
+    /// points→fraction conversion lives, so no consumer re-derives it and saturates: a +5-point
+    /// evasion buff is 5%, not a guaranteed dodge.</summary>
+    public float GetStatFraction(EntityRef r, StatId s) => StatUnits.Of(s.Kind) switch
+    {
+        StatUnit.Probability => Math.Clamp(GetStat(r, s) / 100f, 0f, 1f),
+        StatUnit.ResistFraction => Math.Clamp(GetStat(r, s) / 100f, 0f, 0.95f),
+        _ => throw new InvalidOperationException($"{s.Kind} is not a fraction-consumed stat.")
+    };
 
     public ModifierId AddStatModifier(EntityRef r, StatId stat, float amountPct, float duration, string sourceClass)
     {

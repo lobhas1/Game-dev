@@ -86,14 +86,14 @@ public class DifferentialTests
     {
         // These branches were dead code when crit/evasion base was always 0 — no RNG was ever drawn.
         var (s1, c1, e1) = TwoFighters();
-        s1.State.Get(c1).BaseStats[StatId.CritChance] = 1.0f; // always crit
+        s1.State.Get(c1).BaseStats[StatId.CritChance] = 100f; // 100 points = 100% ⇒ always crit
         var crit = SpellVerbs.Damage(Ctx(s1, c1), e1,
             new DamageParams { Element = Element.Arcane, Amount = 50f, CanCrit = true }, 1f);
         Assert.True(crit.Crit);
         Assert.Equal(100f, crit.Final, 3); // ×2 CritMult
 
         var (s2, c2, e2) = TwoFighters(100f);
-        s2.State.Get(e2).BaseStats[StatId.Evasion] = 1.0f; // always dodge
+        s2.State.Get(e2).BaseStats[StatId.Evasion] = 100f; // 100 points = 100% ⇒ always dodge
         var dodged = SpellVerbs.Damage(Ctx(s2, c2), e2,
             new DamageParams { Element = Element.Arcane, Amount = 50f, CanCrit = false }, 1f);
         Assert.True(dodged.Evaded);
@@ -140,5 +140,53 @@ public class DifferentialTests
                 new ApplyStatusParams { Status = StatusId.Slow, Share = 1.5f, DurationBand = "short" }) }
         });
         Assert.Equal(BalanceTables.StatModPotencyCap, ((ApplyStatusParams)huge.Clauses[0].Params).Potency, 3);
+    }
+
+    // The sharpened law: coverage is per verb-REACHABLE stat, not per status. Evasion/CritChance/
+    // Resist have no status onto them — modifyStat is their only path, and it's exactly where the
+    // saturation bug lived. Saturation differential: a small buff SHIFTS the odds, never guarantees.
+    [Fact]
+    public void SmallCritBuff_ShiftsOddsWithoutSaturating()
+    {
+        Assert.Equal(0, CountCrits(critPoints: 0f, n: 200));   // no buff ⇒ never crits
+        int buffed = CountCrits(critPoints: 20f, n: 200);      // +20 points via modifyStat ⇒ ~20%
+        Assert.True(buffed > 0, "a +20 crit buff must produce some crits");
+        Assert.True(buffed < 200, "a +20 crit buff must NOT guarantee crit (the saturation bug)");
+        Assert.InRange(buffed, 10, 100);                       // ≈ 20% of 200, generously bounded
+    }
+
+    private static int CountCrits(float critPoints, int n)
+    {
+        var sim = new Sim();
+        var c = sim.State.AddEntity("c", Faction.Player, 100, new Vec3(0, 0, 0));
+        var e = sim.State.AddEntity("e", Faction.Enemy, 1_000_000, new Vec3(1, 0, 0));
+        if (critPoints != 0f)
+            SpellVerbs.ModifyStat(Ctx(sim, c.Ref), c.Ref,
+                new ModifyStatParams { Stat = StatId.CritChance, AmountPct = critPoints, Duration = float.PositiveInfinity }, 1f);
+        int crits = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var ctx = Ctx(sim, c.Ref) with { Rng = SeededRng.FromSeed(1).Fork($"attack:{i}") };
+            if (SpellVerbs.Damage(ctx, e.Ref,
+                    new DamageParams { Element = Element.Arcane, Amount = 1f, CanCrit = true }, 1f).Crit)
+                crits++;
+        }
+        return crits;
+    }
+
+    [Fact]
+    public void SmallResistBuff_ReducesButDoesNotNullify()
+    {
+        var (c, cc, ce) = TwoFighters();
+        float baseline = Hit(c, cc, ce, 100f); // no resist ⇒ full
+
+        var (t, tc, te) = TwoFighters();
+        SpellVerbs.ModifyStat(Ctx(t, tc), te,
+            new ModifyStatParams { Stat = StatId.Resist(Element.Arcane), AmountPct = 20f, Duration = float.PositiveInfinity }, 1f);
+        float resisted = Hit(t, tc, te, 100f); // +20 points ⇒ 20% reduction
+
+        Assert.Equal(100f, baseline, 3);
+        Assert.Equal(80f, resisted, 3);        // not 5 — the 95%-saturation bug
+        Assert.True(resisted > 0f && resisted < baseline);
     }
 }

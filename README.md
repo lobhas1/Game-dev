@@ -30,9 +30,9 @@ dotnet test
 
 ## Status
 
-Tier-0 slice, 11/11 tests green. Implements the eight Tier-0 verbs (`damage`, `heal`,
-`shield`, `applyStatus`, `dispel`, `modifyStat`, `displace`, `spawnZone`), the §2
-resolution pipeline, a fixed-timestep clock, the §7 trigger framework (`ifStatus` and
-`onHit` executing; the other six parse-validate), forked-substream deterministic RNG,
-and strict closed-vocabulary parsing. The three §8 proofs — Blink Strike, Gravity Well,
-Frost Shatter — run end to end from JSON.
+Tier-0 slice. Implements the eight Tier-0 verbs (`damage`, `heal`, `shield`, `applyStatus`,
+`dispel`, `modifyStat`, `displace`, `spawnZone`), the §2 resolution pipeline, a fixed-timestep
+clock, the §7 trigger framework (`ifStatus` and `onHit` executing; the other six parse-validate),
+forked-substream deterministic RNG, and strict closed-vocabulary parsing. The three §8 proofs —
+Blink Strike, Gravity Well, Frost Shatter — run end to end from JSON. Run `dotnet test` for the
+current suite status.

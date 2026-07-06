@@ -468,8 +468,9 @@ public static class SpellVerbs
             return new DamageResult(0, 0, false, false, 0, false);
         }
 
-        // evasion (own substream — adding a roll never shifts others)
-        float evasion = Math.Clamp(st.GetStat(target, StatId.Evasion), 0f, 1f);
+        // evasion (own substream — adding a roll never shifts others). Points → chance via the
+        // one declared conversion, so a small evasion buff shifts odds instead of guaranteeing.
+        float evasion = st.GetStatFraction(target, StatId.Evasion);
         if (evasion > 0f && ctx.Rng.Fork("evasion").Chance(evasion))
         {
             ctx.Events.Emit(new DamageDealt(target, 0, p.Element, false, false, 0, true));
@@ -483,7 +484,7 @@ public static class SpellVerbs
         bool crit = false;
         if (p.CanCrit)
         {
-            float cc = Math.Clamp(st.GetStat(ctx.Caster, StatId.CritChance), 0f, 1f);
+            float cc = st.GetStatFraction(ctx.Caster, StatId.CritChance);
             if (cc > 0f && ctx.Rng.Fork("crit").Chance(cc))
             {
                 crit = true;
@@ -507,7 +508,7 @@ public static class SpellVerbs
         float amount = MathF.Max(0f, postCrit);
         if (element.HasValue)
         {
-            float resist = Math.Clamp(st.GetStat(target, StatId.Resist(element.Value)), 0f, 0.95f);
+            float resist = st.GetStatFraction(target, StatId.Resist(element.Value));
             amount *= 1f - resist;
         }
         float armor = st.GetStat(target, StatId.Armor);

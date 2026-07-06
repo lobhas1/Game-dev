@@ -33,7 +33,9 @@ A `Clause` is a serializable record — `{ verb, <flat params>, template? }` —
 ### 2.5 Balance authority
 All band tables — sizes, durations, rates, the tier-budget curve, delivery multipliers (§4), cast multipliers (§3) — live in one named place, `BalanceTables`. That table *is* the balance authority in code form: `Magnitude = tierBudget(tier) × share × multipliers`, with durations / sizes / rates resolved from their bands.
 
-**Two magnitude currencies.** Damage, heal, shield, and DoT/HoT per-tick potency ride the exponential tier budget — a higher-tier burn ticks harder (§5 of `verbs.md`). Stat-modifier potency does **not**: it resolves as a bounded percentage (`share × 100`, clamped at `BalanceTables.StatModPotencyCap`), because a T5 slow at share 0.2 on the budget curve would resolve to −131% move speed. Two semantics, two resolutions; conflating them is a compiler bug, not a balance tweak. Symmetrically, `WorldState.GetStat` aggregates per stat kind — additive percentage-point deltas for base-0 stats (DamageIn/Out, Armor, Crit, Evasion, Resist), multiplicative for base-1 stats (Move/CastSpeed, CritMult).
+**Two magnitude currencies.** Damage, heal, shield, and DoT/HoT per-tick potency ride the exponential tier budget — a higher-tier burn ticks harder (§5 of `verbs.md`). Stat-modifier potency does **not**: it resolves as a bounded percentage (`share × 100`, clamped at `BalanceTables.StatModPotencyCap`), because a T5 slow at share 0.2 on the budget curve would resolve to −131% move speed. Two semantics, two resolutions; conflating them is a compiler bug, not a balance tweak.
+
+**Stat-units authority.** A number crossing the `GetStat` → consumer boundary with an undeclared unit is a recurring bug species (points-vs-multiplier at aggregation; points-vs-fraction at consumption). So the unit of every `StatKind` is declared in one named table, `StatUnits`, with the same standing as `BalanceTables`: `Multiplier` (base × (1 + Σpts/100)) for Move/CastSpeed and CritMult; `Points` (additive) for DamageIn/Out, Armor, Lifesteal; `Probability` and `ResistFraction` for the fraction-consumed stats. Additive stats — base *and* modifiers — are all in points; base-0 stats must be movable. `WorldState.GetStat` aggregates per that table, and the single `GetStatFraction` accessor owns the points→fraction conversion (`clamp(pts/100, …)`), so no consumer re-derives it and a +5-point evasion buff is 5%, not a guaranteed dodge.
 
 ### 2.6 Spatial-lite (not no-op)
 XZ positions in `WorldState`; deterministic analytic **line-sweep** (projectile → nearest hit) and **circle-overlap** (groundAoE / nova → units within radius) implemented in the sim; `NavClamp` a documented identity. Without this, Blink Strike's projectile hits nothing and the golden is vacuous.
@@ -72,7 +74,7 @@ The three §8 listings mix proposal- and compiled-stage fields: `amplify: 2.5`, 
 - `src/Spellcraft/CombatSim.cs` — verbs + interpreter (budget resolver, strict recursive converter, dispatcher, pipeline, delivery, cast, templates, clock, guards, geometry, sim runner).
 - `tests/Spellcraft.Tests/` — xUnit (`dotnet test`, CI-able). Golden tests assert a **canonical event projection plus final-state invariants** — never raw exact sequences, which rot into regenerate-on-red reflexes. Runs the three §8 proofs from JSON. Unit tests cover the hard-CC DR curve (100 → 50 → 25 → immune), shields-before-health ordering, and DoT tick counts under the fixed clock.
 
-**Differential-assertion law.** Every status and modifier requires a with-versus-without test that changes a *measured* outcome — presence is not effect. Asserting only `HasStatus(Vulnerable)` (true even when Vulnerable did nothing) is precisely how the base-0 stat-aggregation bug shipped; the one-line differential "the vulnerable target takes more damage than the control" catches it. See `DifferentialTests.cs`.
+**Differential-assertion law.** Coverage is per **verb-reachable stat**, not per status: any stat the oracle can move — via `applyStatus` *or* `modifyStat` — requires a with-versus-without test that changes a *measured* outcome. Presence is not effect. Asserting only `HasStatus(Vulnerable)` (true even when Vulnerable did nothing) is how the base-0 aggregation bug shipped; "the vulnerable target takes more damage than the control" catches it. The per-status framing left a hole — no status maps onto Evasion/CritChance/Resist, so their only path (`modifyStat`) went untested, which is exactly where the saturation bug lived. So for probability/resist stats add a **saturation differential**: a small buff must shift the odds across N seeded attacks, never guarantee the outcome (a +5-point evasion buff is 5%, not 20/20 dodges). See `DifferentialTests.cs`.
 
 ---
 
@@ -108,3 +110,13 @@ A code review surfaced four defects, all rooted in effect never being asserted �
 4. **`blind` was a silent no-op.** Now a documented gap (§3): present but inert, pending an attacker-accuracy model.
 
 The meta-fix is the **differential-assertion law** (§5): the goldens asserted status *presence*, never *effect*, which is what let #1 through. Every status/modifier now has a with-versus-without test.
+
+### v0.1.2 — the units round
+
+The v0.1.1 aggregation fix was correct but incomplete: it made all base-0 stats additive without declaring what unit "additive" meant, and Evasion/CritChance/Resist are *consumed* as fractions clamped to [0,1]/[0,0.95]. So a +5-point evasion buff clamped to a guaranteed dodge, +5 crit to 100%, +10 resist to 95% — all reachable from oracle JSON via `modifyStat`. Corrections:
+
+1. **Fraction-consumed stats no longer saturate.** One declared currency per `StatKind` (`StatUnits`, §2.5) — additive stats in points — and the single `GetStatFraction` accessor converts at the three consumers (`clamp(pts/100, …)`).
+2. **No mixed units on a stat.** Base stats for additive kinds are points too (the test's `CritChance = 1.0` fraction became `100`), so base + modifier is always points + points.
+3. **Law sharpened to per verb-reachable stat** (§5) with a saturation differential, closing the `modifyStat`-onto-Evasion/Crit/Resist hole.
+4. **README count dropped** — the runner owns that truth.
+5. **Units named once** (§2.5) — the meta-fix, so the "undeclared unit at a boundary" bug species has a single home instead of being patched instance by instance.
