@@ -1,0 +1,18 @@
+{
+  "id": "blink-strike",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": { "resource": "mana", "amount": "moderate" },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": { "type": "projectile", "speed": "fast" },
+  "clauses": [
+    { "verb": "displace", "subject": "caster", "mode": "teleport", "to": "impact" },
+    { "verb": "damage", "element": "shadow", "share": 0.6 },
+    { "verb": "applyStatus", "status": "blind", "share": 0.4, "duration": "short" }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spellcraft/schema/spell-compiled.schema.json",
+  "title": "Spell — compiled stage",
+  "description": "The engine-facing descriptor the sim consumes. Per the v0.2 amendment it carries the proposal bands/shares ALONGSIDE the resolved numbers the compiler produced (so shares remain re-resolvable at runtime, e.g. for castSpell's cross-tier re-resolve). Root carries id + tier so shares are priced. In this slice the compile step is in-memory (SpellCompiler); this schema is the normative wire shape for a serialized compiled descriptor.",
+  "type": "object",
+  "required": ["id", "tier", "compiled", "clauses"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "tier": { "type": "integer", "minimum": 1 },
+    "compiled": { "const": true },
+    "cast": { "$ref": "#/$defs/cast" },
+    "delivery": { "$ref": "#/$defs/delivery" },
+    "clauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } }
+  },
+  "$defs": {
+    "element": { "enum": ["fire", "water", "earth", "air", "light", "shadow", "nature", "arcane"] },
+    "status": {
+      "enum": ["burn", "poison", "bleed", "chill", "freeze", "shock", "stun", "root", "slow", "silence",
+               "disarm", "blind", "fear", "weaken", "vulnerable", "haste", "regen", "stealth", "unstoppable", "invulnerable"]
+    },
+    "verb": {
+      "enum": ["damage", "heal", "shield", "applyStatus", "dispel", "modifyStat", "displace", "spawnZone",
+               "summon", "mark", "detonate", "drainResource", "createBarrier", "reveal", "taunt", "reflect",
+               "modifyAbility", "tether", "transform", "lifeLink", "absorb", "charm", "banish", "commandMinions",
+               "resurrect", "terraform", "timeDilate", "possess", "castSpell"]
+    },
+    "templateKind": { "enum": ["onHit", "onKill", "onCrit", "ifStatus", "delayed", "repeating", "onExpire", "hpThreshold"] },
+    "seconds": { "type": "number", "minimum": 0 },
+    "magnitude": { "type": "number" },
+
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resource": { "enum": ["mana", "stamina", "health"] },
+        "amount": { "type": "string" },
+        "amountValue": { "$ref": "#/$defs/magnitude" }
+      }
+    },
+    "cast": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode"],
+      "properties": {
+        "mode": { "enum": ["instant", "cast", "channel", "charge", "passive", "reactive", "aura"] },
+        "castTime": { "type": "string" },
+        "castTimeSeconds": { "$ref": "#/$defs/seconds" },
+        "cooldown": { "type": "string" },
+        "cooldownSeconds": { "$ref": "#/$defs/seconds" },
+        "cost": { "$ref": "#/$defs/cost" },
+        "interruptible": { "type": "boolean" },
+        "moveWhileCasting": { "type": "boolean" }
+      }
+    },
+    "delivery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": { "enum": ["self", "melee", "targetUnit", "projectile", "groundAoE", "nova", "beam", "chain", "atPoint"] },
+        "shape": { "enum": ["circle", "cone", "line", "ring"] },
+        "size": { "type": "string" }, "sizeValue": { "$ref": "#/$defs/magnitude" },
+        "range": { "type": "string" }, "rangeValue": { "$ref": "#/$defs/magnitude" },
+        "speed": { "type": "string" }, "speedValue": { "$ref": "#/$defs/magnitude" },
+        "telegraph": { "type": "boolean" }
+      }
+    },
+    "template": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind"],
+      "properties": {
+        "kind": { "$ref": "#/$defs/templateKind" },
+        "status": { "$ref": "#/$defs/status" },
+        "consume": { "type": "boolean" },
+        "amplify": { "type": "string" }, "amplifyValue": { "$ref": "#/$defs/magnitude" },
+        "delay": { "type": "string" }, "delaySeconds": { "$ref": "#/$defs/seconds" },
+        "times": { "type": "integer", "minimum": 1 },
+        "interval": { "type": "string" }, "intervalSeconds": { "$ref": "#/$defs/seconds" },
+        "pct": { "type": "number" },
+        "side": { "enum": ["above", "below"] },
+        "also": { "type": "array", "items": { "$ref": "#/$defs/clause" } },
+        "clauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } }
+      }
+    },
+    "clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verb"],
+      "properties": {
+        "verb": { "$ref": "#/$defs/verb" },
+        "template": { "$ref": "#/$defs/template" },
+        "element": { "$ref": "#/$defs/element" },
+        "status": { "$ref": "#/$defs/status" },
+        "share": { "type": "number" },
+        "amount": { "$ref": "#/$defs/magnitude" },
+        "potency": { "$ref": "#/$defs/magnitude" },
+        "duration": { "type": "string" }, "durationSeconds": { "$ref": "#/$defs/seconds" },
+        "size": { "type": "string" }, "sizeValue": { "$ref": "#/$defs/magnitude" },
+        "distance": { "type": "string" }, "distanceValue": { "$ref": "#/$defs/magnitude" },
+        "speed": { "type": "string" }, "speedValue": { "$ref": "#/$defs/magnitude" },
+        "tickInterval": { "type": "string" }, "tickIntervalSeconds": { "$ref": "#/$defs/seconds" },
+        "mode": { "enum": ["teleport", "dash", "push", "pull", "launch", "swap"] },
+        "subject": { "enum": ["caster", "target"] },
+        "to": { "enum": ["point", "impact", "caster", "behindTarget"] },
+        "shape": { "enum": ["circle", "cone", "line", "ring"] },
+        "affects": { "enum": ["enemies", "allies", "all"] },
+        "category": { "enum": ["buff", "debuff", "dot", "all"] },
+        "order": { "enum": ["newest", "oldest", "strongest"] },
+        "count": { "type": "integer", "minimum": 1 },
+        "stat": { "type": "string" },
+        "direction": { "enum": ["buff", "debuff"] },
+        "amountPct": { "type": "number" },
+        "canCrit": { "type": "boolean" },
+        "canOverhealToShield": { "type": "boolean" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "leechPct": { "type": "number" },
+        "stacks": { "type": "integer", "minimum": 1 },
+        "tickClauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } },
+        "onEnterClauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } },
+        "onExitClauses": { "type": "array", "items": { "$ref": "#/$defs/clause" } }
+      }
+    }
+  }
+}

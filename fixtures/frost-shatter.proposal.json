@@ -1,0 +1,28 @@
+{
+  "id": "frost-shatter",
+  "tier": 1,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "short",
+    "cost": { "resource": "mana", "amount": "low" },
+    "interruptible": false,
+    "moveWhileCasting": true
+  },
+  "delivery": { "type": "targetUnit", "range": "medium" },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "water",
+      "share": 0.5,
+      "template": {
+        "kind": "ifStatus",
+        "status": "freeze",
+        "consume": true,
+        "amplify": "major",
+        "also": [
+          { "verb": "applyStatus", "status": "vulnerable", "duration": "short", "share": 0.2 }
+        ]
+      }
+    }
+  ]
+}

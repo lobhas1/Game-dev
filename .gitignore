@@ -1,0 +1,22 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# .NET
+*.user
+*.suo
+project.lock.json
+artifacts/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+# IDE / editor
+.vs/
+.idea/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store

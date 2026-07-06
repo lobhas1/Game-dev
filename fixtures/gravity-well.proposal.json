@@ -1,0 +1,27 @@
+{
+  "id": "gravity-well",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": { "resource": "mana", "amount": "moderate" },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": { "type": "groundAoE", "shape": "circle", "size": "medium", "telegraph": true },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "medium",
+      "tickInterval": "fast",
+      "affects": "enemies",
+      "tickClauses": [
+        { "verb": "displace", "subject": "target", "mode": "pull", "distance": "tiny" },
+        { "verb": "damage", "element": "arcane", "share": 0.1 }
+      ]
+    }
+  ]
+}
