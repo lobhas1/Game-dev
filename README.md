@@ -14,11 +14,15 @@ executing the spec's own §8 composition proofs from their JSON descriptors.
 |---|---|
 | [verbs.md](verbs.md) | The spell verb specification (source of truth) |
 | [docs/specs/](docs/specs/) | The slice design spec |
+| [docs/specs/2026-07-07-oracle-naming-doctrine.md](docs/specs/2026-07-07-oracle-naming-doctrine.md) | Oracle naming doctrine — the single authority for the fusion-naming prompt |
 | [schema/](schema/) | Normative two-stage JSON Schema (proposal → compiled) |
 | [fixtures/](fixtures/) | The §8 composition proofs as proposal-stage descriptors |
+| [prototype/spellcraft-oracle.html](prototype/spellcraft-oracle.html) | Single-file combination-oracle prototype (the LLM that names two-spell fusions) |
 | `src/Spellcraft/CombatModel.cs` | Nouns: value types, closed vocabulary, `WorldState`, catalog, balance tables |
 | `src/Spellcraft/CombatSim.cs` | Verbs + interpreter: parser, compiler, pipeline, clock, triggers |
 | `tests/Spellcraft.Tests/` | xUnit golden + unit tests |
+
+The oracle's naming prompt has one home — the naming-doctrine spec — and any file embedding it (the prototype today, a C# oracle bridge later) must carry the doctrine's load-bearing sentences verbatim; `OracleDoctrineSyncTests` fails the build if they drift.
 
 ## Build & test
 
