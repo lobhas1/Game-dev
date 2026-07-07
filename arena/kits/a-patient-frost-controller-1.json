@@ -1,0 +1,80 @@
+[
+  {
+    "id": "frost-lance",
+    "tier": 1,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "water",
+        "share": 0.6
+      },
+      {
+        "verb": "applyStatus",
+        "status": "chill",
+        "duration": "medium",
+        "share": 0.4
+      }
+    ]
+  },
+  {
+    "id": "shatter-burst",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "freeze",
+        "duration": "short",
+        "share": 0.35
+      },
+      {
+        "verb": "damage",
+        "element": "water",
+        "share": 0.65,
+        "template": {
+          "kind": "ifStatus",
+          "status": "chill",
+          "consume": true,
+          "amplify": "major",
+          "also": [
+            {
+              "verb": "applyStatus",
+              "status": "freeze",
+              "duration": "medium",
+              "share": 0.0
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
