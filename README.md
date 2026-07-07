@@ -60,7 +60,7 @@ Modes: `generate --brief "…" --tier N --kit-size 3 --count M [--model …] [--
 · `fight <kitA> <kitB> --seed S` · `tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds A..B`
 · `sweep <kitsDir> --seeds A..B --hp-scales 3,4,5,6,8` · `evaluate <kitsDir>`.
 
-**The engine phase begins only when a committed verdict doc (`docs/experiments/<date>-phase-a-verdict.md`) reads `OVERALL: PASS`.** v1 was FAIL (median 1.7s); v3 recalibrates arena HP to `hpScale × tier budget` and scores only same-tier fights — see [the v3 spec](docs/specs/2026-07-09-phase-a-v3.md).
+**The engine phase begins only when a committed verdict doc (`docs/experiments/<timestamp>-phase-a-verdict-v3.md`) reads `OVERALL: PASS`.** v1 was FAIL (median 1.7s); v3 recalibrates arena HP to `hpScale × tier budget` and scores only same-tier fights — see [the v3 spec](docs/specs/2026-07-09-phase-a-v3.md).
 
 ### Phase A v3 verdict run (human)
 
@@ -78,7 +78,7 @@ dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/e
    ```
    dotnet run --project src/Arena -- sweep arena/kits-v1-archive --seeds 1..5 --hp-scales 3,4,5,6,8
    ```
-   Read `docs/experiments/2026-07-09-calibration-sweep.md` and write the chosen scale into the v3 spec, replacing `TBD — filled after sweep review`.
+   Read `docs/experiments/2026-07-09-calibration-sweep.md`; the human picked **hpScale = 8** from it, now registered in the [v3 spec](docs/specs/2026-07-09-phase-a-v3.md). The sweep is already committed — this step is complete; the tournament commands below carry `--hp-scale 8`.
 3. **Set a spend-capped key** (never in code, args, logs, or commits):
    ```
    $env:ANTHROPIC_API_KEY="…"          # bash: export ANTHROPIC_API_KEY=…
@@ -93,16 +93,16 @@ dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/e
    ```
 5. **Ladder** (informational, full corpus — capture the printed T×vT× table):
    ```
-   dotnet run --project src/Arena -- tournament arena/kits --hp-scale <registered> --seeds 1..5
+   dotnet run --project src/Arena -- tournament arena/kits --hp-scale 8 --seeds 1..5
    ```
 6. **Criterion corpus** (same-tier only — this is the `results.csv` that `evaluate` scores; run it LAST so the full-corpus run above does not clobber it):
    ```
-   dotnet run --project src/Arena -- tournament arena/kits --same-tier --hp-scale <registered> --seeds 1..5
+   dotnet run --project src/Arena -- tournament arena/kits --same-tier --hp-scale 8 --seeds 1..5
    ```
 7. **Render the verdict:**
    ```
    dotnet run --project src/Arena -- evaluate arena/kits
    ```
-   Read `docs/experiments/<date>-phase-a-verdict.md`.
+   Read the written `docs/experiments/<timestamp>-phase-a-verdict-v3.md` (timestamped, never overwrites history).
 8. **Commit everything** — fresh kits, `arena/generation.log`, `arena/rejections.log`, `arena/results.csv`, the sweep doc, the verdict doc, and the spec with the filled `hpScale` — with a commit message that **states the OVERALL result** (v1 shipped a `<what evaluate printed>` placeholder in its message; do not repeat that). Push.
 9. `OVERALL: PASS` → the engine gate opens. `FAIL` → tune nothing; the doc's data-only diagnosis plus raw data go to review. `INCOMPLETE` → the doc names what is missing (an unrecorded kit, or no generation rows matching the current prompt hash).
