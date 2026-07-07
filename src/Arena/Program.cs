@@ -10,6 +10,7 @@ try
         case "generate": return await RunGenerate(args);
         case "fight": return RunFight(args);
         case "tournament": return RunTournament(args);
+        case "evaluate": return RunEvaluate(args);
         default: PrintUsage(); return 2;
     }
 }
@@ -29,8 +30,14 @@ static async Task<int> RunGenerate(string[] args)
     string outDir = Opt(args, "--out") ?? Path.Combine(PromptTemplate.ArenaDir(), "kits");
 
     IOracle oracle = new LiveAnthropicOracle(model); // reads ANTHROPIC_API_KEY; throws if unset
-    await KitGenerator.RunGenerateAsync(oracle, brief, tier, kitSize, count, outDir, Console.Out);
+    await KitGenerator.RunGenerateAsync(oracle, model, brief, tier, kitSize, count, outDir, Console.Out);
     return 0;
+}
+
+static int RunEvaluate(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: evaluate <kitsDir>"); return 2; }
+    return Evaluator.RunEvaluate(args[1], Console.Out);
 }
 
 static int RunFight(string[] args)
@@ -92,4 +99,5 @@ static void PrintUsage()
     Console.WriteLine("  generate --brief \"…\" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out arena/kits/]");
     Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S");
     Console.WriteLine("  tournament <kitsDir> --seeds 1..5");
+    Console.WriteLine("  evaluate <kitsDir>");
 }

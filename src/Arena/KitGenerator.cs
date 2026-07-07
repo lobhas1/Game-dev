@@ -65,18 +65,19 @@ public static class KitGenerator
 
     /// <summary>generate mode: gate `count` kits, persist accepted kits, append rejections.log, and
     /// print first-pass / post-repair validity and verb marginals.</summary>
-    public static async Task RunGenerateAsync(IOracle oracle, string brief, int tier, int kitSize,
-        int count, string outDir, TextWriter outw)
+    public static async Task RunGenerateAsync(IOracle oracle, string model, string brief, int tier,
+        int kitSize, int count, string outDir, TextWriter outw)
     {
         string template = PromptTemplate.LoadPrompt();
         Directory.CreateDirectory(outDir);
-        string rejectionsPath = Path.Combine(PromptTemplate.ArenaDir(), "rejections.log");
         Directory.CreateDirectory(PromptTemplate.ArenaDir());
+        string rejectionsPath = Path.Combine(PromptTemplate.ArenaDir(), "rejections.log");
         string slug = Slug(brief);
 
         int totalGenerated = 0, totalFirstPass = 0, totalAccepted = 0;
         var verbMarginals = new SortedDictionary<string, int>(StringComparer.Ordinal);
         var allRejections = new List<RejectionRecord>();
+        var writtenKits = new List<string>();
 
         for (int k = 0; k < count; k++)
         {
@@ -99,6 +100,7 @@ public static class KitGenerator
                 foreach (var n in outcome.AcceptedJson) arr.Add(n);
                 string kitPath = Path.Combine(outDir, $"{slug}-{k + 1}.json");
                 File.WriteAllText(kitPath, arr.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+                writtenKits.Add(Path.GetRelativePath(PromptTemplate.RepoRoot(), kitPath).Replace('\\', '/'));
                 outw.WriteLine($"wrote {kitPath} ({outcome.AcceptedJson.Count} spells)");
             }
         }
@@ -123,6 +125,15 @@ public static class KitGenerator
             : string.Join(", ", verbMarginals.Select(kv => $"{kv.Key}={kv.Value}"))));
         if (allRejections.Count > 0)
             outw.WriteLine($"rejections logged:    {allRejections.Count} → {rejectionsPath}");
+
+        // Append one auditable line per run (prompt-sha keyed; never any key material).
+        var entry = new GenerationLogEntry(
+            DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+            Evaluator.Sha256Hex(template), model, brief, tier, kitSize,
+            totalGenerated, totalFirstPass, totalAccepted, writtenKits, verbMarginals.ToList());
+        string genLogPath = Path.Combine(PromptTemplate.ArenaDir(), "generation.log");
+        File.AppendAllText(genLogPath, GenerationLog.Format(entry) + Environment.NewLine);
+        outw.WriteLine($"generation.log ←     {genLogPath}");
     }
 
     // The gate: strict parse (vocabulary: verbs/statuses/elements/fields) THEN compile (band
