@@ -88,6 +88,16 @@ public class EvaluateTests
     }
 
     [Fact]
+    public void PromptSha_IsLineEndingInvariant()
+    {
+        const string lf = "vocab line one\nline two\nline three\n";
+        string crlf = lf.Replace("\n", "\r\n");
+        string cr = lf.Replace("\n", "\r");
+        Assert.Equal(Evaluator.Sha256Hex(lf), Evaluator.Sha256Hex(crlf));
+        Assert.Equal(Evaluator.Sha256Hex(lf), Evaluator.Sha256Hex(cr));
+    }
+
+    [Fact]
     public void GenerationLogLine_RoundTrips()
     {
         var e = new GenerationLogEntry(

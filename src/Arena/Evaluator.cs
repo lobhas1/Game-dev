@@ -41,8 +41,14 @@ public sealed record EvaluationResult
 /// interpretations are immutable (spec §9.2); a live failure gets a written diagnosis, not a tweak.</summary>
 public static class Evaluator
 {
-    public static string Sha256Hex(string text) =>
-        Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text))).ToLowerInvariant();
+    // Hash the LINE-ENDING-NORMALIZED text (CRLF and lone CR → LF): a Windows autocrlf checkout and
+    // an LF checkout of the same committed prompt must hash identically, or generation.log entries
+    // minted on one machine read as INCOMPLETE on another — defeating independent re-derivation.
+    public static string Sha256Hex(string text)
+    {
+        string normalized = text.Replace("\r\n", "\n").Replace("\r", "\n");
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(normalized))).ToLowerInvariant();
+    }
 
     public static EvaluationResult Evaluate(
         string generationLog, string resultsCsv, string promptText, IEnumerable<string> kitFilenames)

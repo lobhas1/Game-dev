@@ -183,8 +183,10 @@ these interpretations are **pre-registered and immutable**.
 ```
 
 Console output is unchanged, and no key material ever enters the log. `promptSha` is the SHA-256
-of the UTF-8 text of the prompt as it stands on disk — the key that ties a run to the exact
-vocabulary it was generated under, so stale-prompt runs can be excluded.
+of the **line-ending-normalized (LF)** UTF-8 text of the prompt — so a Windows (CRLF, autocrlf)
+checkout and an LF checkout of the same committed prompt hash identically, keeping the key
+reproducible across machines. It ties a run to the exact vocabulary it was generated under, so
+stale-prompt runs are excluded.
 
 ### 9.2 Evaluate mode and the pinned rule
 
