@@ -165,3 +165,51 @@ An audit of the first live run surfaced fixes folded in here:
 4. **Bidirectional band guard.** The sync test also asserts every band the prompt *declares* exists in the reflected tables (an invented band would otherwise pass and only fail live).
 5. **Recursive verb marginals.** `generate` counts verbs inside `tickClauses` and template clauses, not just top-level — so zone and setup archetypes aren't undercounted in the baseline.
 6. **`spawnZone` has no `share`** is stated in the prompt (the second observed rejection class), and a stray root duplicate of the prototype HTML was removed (canonical copy under `prototype/`).
+
+---
+
+## 9. Phase A close-out — persisted stats and the verdict generator
+
+Generate-mode stats must be auditable, and the pre-registered rule must be evaluable from
+committed data alone — not from console output. Two additions; the rule, its thresholds, and
+these interpretations are **pre-registered and immutable**.
+
+### 9.1 Generation log
+
+`generate` appends **one line per run** to `arena/generation.log`:
+
+```
+<utcTimestamp> | promptSha=<sha256 of prompts/proposal-oracle.md> | model=<model> | brief="<brief>" | tier=<t> | kitSize=<k> | generated=<n> | firstPass=<n> | accepted=<n> | kits=<comma-separated written kit paths> | marginals=<verb=count,...>
+```
+
+Console output is unchanged, and no key material ever enters the log. `promptSha` is the SHA-256
+of the UTF-8 text of the prompt as it stands on disk — the key that ties a run to the exact
+vocabulary it was generated under, so stale-prompt runs can be excluded.
+
+### 9.2 Evaluate mode and the pinned rule
+
+`evaluate <kitsDir>` reads `arena/generation.log`, `arena/results.csv`, and
+`prompts/proposal-oracle.md`, and renders a verdict against the rule — verbatim:
+
+> first-pass validity ≥70%; median fight duration 15–90s sim-time; ≥3 distinct verbs firing per
+> fight; ≥50% of fights show a lead change or status-driven swing (sign flip of the HP
+> difference, sampled 1/s).
+
+Pinned interpretations (pre-registered):
+
+- **C1** — first-pass-accepted spells ÷ spells generated, over ALL `generation.log` rows whose
+  `promptSha` equals `sha256(prompts/proposal-oracle.md)` as committed. ≥70% passes.
+- **C2** — median over all fights in `results.csv` as run (mirrors and seed replicates included;
+  distinct-outcome count disclosed alongside). 15–90s passes.
+- **C3** — EVERY fight has ≥3 distinct verbs firing.
+- **C4** — ≥50% of fights have `leadChanges ≥ 1`.
+- **OVERALL** — PASS iff C1–C4 all PASS. **INCOMPLETE** if C1 has no matching-hash data, or any
+  kit in the evaluated corpus lacks a matching-hash generation record.
+
+`evaluate` writes `docs/experiments/<yyyy-MM-dd>-phase-a-verdict.md` — date, model(s), prompt sha,
+per-brief validity table, aggregate C1, verb marginals, fight count + distinct outcomes,
+per-criterion PASS/FAIL with the numbers, the pinned interpretations, and OVERALL — and prints the
+scorecard. Every number is computed from files; nothing is hand-authored. On `FAIL`, the doc gains
+a **Diagnosis (data only)** template — candidate causes (oracle composition; pricing, e.g.
+`ifStatus` amplify; arena constants) with evidence rows to be filled by review; the tool makes no
+fixes. The engine phase opens only when a committed verdict doc reads `OVERALL: PASS`.
