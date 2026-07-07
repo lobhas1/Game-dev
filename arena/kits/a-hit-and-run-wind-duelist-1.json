@@ -1,10 +1,9 @@
 [
   {
-    "id": "glacial-bolt",
-    "tier": 1,
+    "id": "gust-slash",
+    "tier": 2,
     "cast": {
-      "mode": "cast",
-      "castTime": "normal",
+      "mode": "instant",
       "cooldown": "short",
       "cost": {
         "resource": "mana",
@@ -20,24 +19,24 @@
     "clauses": [
       {
         "verb": "damage",
-        "element": "water",
+        "element": "air",
         "share": 0.6
       },
       {
         "verb": "applyStatus",
-        "status": "chill",
-        "duration": "medium",
+        "status": "slow",
+        "duration": "short",
         "share": 0.4
       }
     ]
   },
   {
-    "id": "shatter-freeze",
-    "tier": 1,
+    "id": "cyclone-burst",
+    "tier": 2,
     "cast": {
       "mode": "cast",
-      "castTime": "long",
-      "cooldown": "long",
+      "castTime": "quick",
+      "cooldown": "medium",
       "cost": {
         "resource": "mana",
         "amount": "moderate"
@@ -46,41 +45,41 @@
       "moveWhileCasting": false
     },
     "delivery": {
-      "type": "targetUnit",
-      "range": "medium"
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "small"
     },
     "clauses": [
       {
-        "verb": "applyStatus",
-        "status": "freeze",
-        "duration": "short",
-        "share": 0.3
-      },
-      {
         "verb": "damage",
-        "element": "water",
+        "element": "air",
         "share": 0.7,
         "template": {
           "kind": "ifStatus",
-          "status": "chill",
+          "status": "slow",
           "consume": true,
           "amplify": "major",
           "also": [
             {
-              "verb": "modifyStat",
-              "stat": "moveSpeed",
-              "direction": "debuff",
-              "share": 0.3,
-              "duration": "medium"
+              "verb": "applyStatus",
+              "status": "stun",
+              "duration": "short",
+              "share": 0.3
             }
           ]
         }
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "small"
       }
     ]
   },
   {
-    "id": "frost-warden-shell",
-    "tier": 1,
+    "id": "wind-step",
+    "tier": 2,
     "cast": {
       "mode": "instant",
       "cooldown": "medium",
@@ -96,26 +95,23 @@
     },
     "clauses": [
       {
-        "verb": "shield",
-        "element": "water",
-        "share": 0.6,
-        "duration": "medium"
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
       },
       {
-        "verb": "spawnZone",
-        "shape": "circle",
-        "size": "small",
-        "duration": "medium",
-        "tickInterval": "slow",
-        "affects": "enemies",
-        "tickClauses": [
-          {
-            "verb": "applyStatus",
-            "status": "chill",
-            "duration": "short",
-            "share": 0.4
-          }
-        ]
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "direction": "buff",
+        "share": 0.5,
+        "duration": "short"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "haste",
+        "duration": "short",
+        "share": 0.5
       }
     ]
   }

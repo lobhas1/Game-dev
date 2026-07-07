@@ -1,0 +1,132 @@
+[
+  {
+    "id": "gust-strike",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.6
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "short",
+        "share": 0.4
+      }
+    ]
+  },
+  {
+    "id": "cyclone-burst",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "small"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.5,
+        "template": {
+          "kind": "ifStatus",
+          "status": "slow",
+          "consume": true,
+          "amplify": "major",
+          "also": [
+            {
+              "verb": "displace",
+              "subject": "target",
+              "mode": "push",
+              "distance": "medium"
+            }
+          ]
+        }
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "debuff",
+        "share": 0.3,
+        "duration": "short"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "weaken",
+        "duration": "short",
+        "share": 0.2
+      }
+    ]
+  },
+  {
+    "id": "wind-step",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "direction": "buff",
+        "share": 0.5,
+        "duration": "short"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "short"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "haste",
+        "duration": "short",
+        "share": 0.2
+      }
+    ]
+  }
+]

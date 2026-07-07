@@ -1,0 +1,133 @@
+[
+  {
+    "id": "ignition-dash",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "haste",
+        "duration": "short",
+        "share": 0.6
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "small",
+        "duration": "short",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "short",
+            "share": 0.4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "searing-bolt",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.7,
+        "template": {
+          "kind": "onHit",
+          "clauses": [
+            {
+              "verb": "applyStatus",
+              "status": "burn",
+              "duration": "medium",
+              "share": 0.3
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "flashfire-burst",
+    "tier": 1,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.5,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": true,
+          "amplify": "major",
+          "also": [
+            {
+              "verb": "modifyStat",
+              "stat": "moveSpeed",
+              "share": 0.3,
+              "direction": "debuff",
+              "duration": "short"
+            }
+          ]
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "vulnerable",
+        "duration": "short",
+        "share": 0.2
+      }
+    ]
+  }
+]

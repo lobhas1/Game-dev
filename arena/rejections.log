@@ -1,2 +1,6 @@
 a patient frost controller | spell #2 | repaired: no (Unknown field(s) in clause 'SpawnZone': share.) | error: Unknown stat 'speed'.
 a patient frost controller | spell #2 | repaired: yes (repaired) | error: Unknown field(s) in clause 'SpawnZone': share.
+a hit-and-run wind duelist | spell #1 | repaired: yes (repaired) | error: Unknown field(s) in clause 'Displace': share.
+a hit-and-run wind duelist | spell #2 | repaired: yes (repaired) | error: Unknown field(s) in clause 'Displace': share.
+a shadow assassin built on setup and burst | spell #1 | repaired: yes (repaired) | error: Unknown field(s) in clause 'Displace': share.
+a shadow assassin built on setup and burst | spell #2 | repaired: yes (repaired) | error: Unknown field(s) in clause 'Displace': share.

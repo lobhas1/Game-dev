@@ -1,0 +1,126 @@
+[
+  {
+    "id": "shadow-mark",
+    "tier": 3,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "large"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "vulnerable",
+        "duration": "medium",
+        "share": 0.4
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "medium",
+        "share": 0.3
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "direction": "debuff",
+        "share": 0.3,
+        "duration": "medium"
+      }
+    ]
+  },
+  {
+    "id": "umbral-detonation",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "high"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "shadow",
+        "share": 0.7,
+        "template": {
+          "kind": "ifStatus",
+          "status": "vulnerable",
+          "consume": true,
+          "amplify": "extreme",
+          "also": [
+            {
+              "verb": "applyStatus",
+              "status": "bleed",
+              "duration": "medium",
+              "share": 0.2
+            }
+          ]
+        }
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "damageOut",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "short"
+      }
+    ]
+  },
+  {
+    "id": "shadow-step",
+    "tier": 3,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "stealth",
+        "duration": "short",
+        "share": 0.5
+      },
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "teleport",
+        "distance": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "buff",
+        "share": 0.5,
+        "duration": "short"
+      }
+    ]
+  }
+]
