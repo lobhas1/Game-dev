@@ -10,6 +10,7 @@ try
         case "generate": return await RunGenerate(args);
         case "fight": return RunFight(args);
         case "tournament": return RunTournament(args);
+        case "sweep": return RunSweep(args);
         case "evaluate": return RunEvaluate(args);
         default: PrintUsage(); return 2;
     }
@@ -65,11 +66,30 @@ static int RunFight(string[] args)
 
 static int RunTournament(string[] args)
 {
-    if (args.Length < 2) { Console.Error.WriteLine("usage: tournament <kitsDir> --seeds A..B"); return 2; }
+    if (args.Length < 2) { Console.Error.WriteLine("usage: tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds A..B"); return 2; }
     var seeds = ParseSeeds(Opt(args, "--seeds") ?? "1..5");
-    Tournament.Run(args[1], seeds, Console.Out);
+    var config = new FightConfig
+    {
+        HpScale = float.Parse(Opt(args, "--hp-scale") ?? "0", CultureInfo.InvariantCulture),
+        Mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture)
+    };
+    Tournament.Run(args[1], seeds, config, HasFlag(args, "--same-tier"), Console.Out);
     return 0;
 }
+
+static int RunSweep(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: sweep <kitsDir> --seeds A..B --hp-scales 3,4,5,6,8 [--mana N]"); return 2; }
+    var seeds = ParseSeeds(Opt(args, "--seeds") ?? "1..5");
+    var scales = (Opt(args, "--hp-scales") ?? "3,4,5,6,8")
+        .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+        .Select(s => float.Parse(s, CultureInfo.InvariantCulture));
+    float mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture);
+    Sweep.Run(args[1], seeds, scales, mana, Console.Out);
+    return 0;
+}
+
+static bool HasFlag(string[] args, string name) => Array.IndexOf(args, name) >= 0;
 
 static string? Opt(string[] args, string name)
 {
@@ -98,6 +118,7 @@ static void PrintUsage()
     Console.WriteLine("Arena — the oracle → sim bridge");
     Console.WriteLine("  generate --brief \"…\" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out arena/kits/]");
     Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S");
-    Console.WriteLine("  tournament <kitsDir> --seeds 1..5");
+    Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds 1..5");
+    Console.WriteLine("  sweep <kitsDir> --seeds 1..5 --hp-scales 3,4,5,6,8 [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");
 }

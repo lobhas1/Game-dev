@@ -1,0 +1,116 @@
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E1 ice-lance
+damage E2 amt=40 Water crit=False killed=False absorbed=0
+status E2 Freeze dur=2 stacks=1 refreshed=False
+cast E2 scorch
+castFailed E2 scorch stunned
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E1 mending-rime
+heal E1 eff=42.5 over=25.5
+cast E2 flame-ward
+castFailed E2 flame-ward stunned
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E2 scorch
+castFailed E2 scorch stunned
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+cast E2 flame-ward
+castFailed E2 flame-ward stunned
+statusRemoved E2 Freeze
+cast E2 scorch
+damage E1 amt=60 Fire crit=False killed=False absorbed=0
+cast E2 flame-ward
+shield E2 amt=68 dur=5
+statusRemoved E2 Chill
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+statusRemoved E2 Chill
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E1 mending-rime
+heal E1 eff=68 over=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+cast E2 flame-ward
+shield E2 amt=68 dur=5
+statusRemoved E2 Chill
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E1 ice-lance
+damage E2 amt=40 Water crit=False killed=False absorbed=0
+status E2 Freeze dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+statusRemoved E2 Freeze
+cast E2 scorch
+damage E1 amt=60 Fire crit=False killed=False absorbed=0
+cast E1 mending-rime
+heal E1 eff=68 over=0
+statusRemoved E2 Chill
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+cast E2 flame-ward
+shield E2 amt=68 dur=5
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+statusRemoved E2 Chill
+cast E1 frost-bolt
+damage E2 amt=34 Water crit=False killed=False absorbed=0
+status E2 Chill dur=5 stacks=1 refreshed=False
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+statusRemoved E2 Chill
+cast E2 flame-ward
+shield E2 amt=68 dur=5
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=False absorbed=0
+status E1 Burn dur=2 stacks=1 refreshed=False
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+damage E1 amt=4.25 Fire crit=False killed=False absorbed=0
+statusRemoved E1 Burn
+cast E2 fireball
+damage E1 amt=34 Fire crit=False killed=True absorbed=0

@@ -10,6 +10,9 @@ public sealed class Kit
     public string Name { get; }
     public IReadOnlyList<Spell> Spells { get; }
 
+    /// <summary>The kit's tier (kits are generated at a single tier; max is a safe fold).</summary>
+    public int Tier => Spells.Count == 0 ? 1 : Spells.Max(s => s.Tier);
+
     public Kit(string name, IReadOnlyList<Spell> spells)
     {
         Name = name;

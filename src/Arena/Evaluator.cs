@@ -35,6 +35,9 @@ public sealed record EvaluationResult
     public bool C4Pass { get; init; }
     public required IReadOnlyList<string> UnrecordedKits { get; init; }
     public Verdict Overall { get; init; }
+    public required IReadOnlyList<string> ConfigKeys { get; init; }
+    public bool ConfigMixed => ConfigKeys.Count > 1;
+    public string ConfigDisplay { get; init; } = "";
 }
 
 /// <summary>Renders the pre-registered decision rule from committed data. The rule and these
@@ -86,6 +89,11 @@ public static class Evaluator
 
         // C2–C4 from results.csv, exactly as run.
         var fights = ParseFights(resultsCsv);
+        var configKeys = fights.Select(f => f.ConfigKey).Distinct(StringComparer.Ordinal)
+            .OrderBy(k => k, StringComparer.Ordinal).ToList();
+        string configDisplay = configKeys.Count == 0 ? "(no fights)"
+            : configKeys.Count == 1 ? DescribeConfig(configKeys[0])
+            : "MIXED — " + string.Join(" ; ", configKeys.Select(DescribeConfig));
         int fightCount = fights.Count;
         int distinct = fights.Select(f => f.OutcomeKey).Distinct(StringComparer.Ordinal).Count();
         double median = Median(fights.Select(f => f.Duration).OrderBy(x => x).ToList());
@@ -114,7 +122,9 @@ public static class Evaluator
             C3MinVerbs = c3Min, C3FightsOk = c3Ok, C3Pass = c3,
             C4Swings = swings, C4Pct = c4Pct, C4Pass = c4,
             UnrecordedKits = unrecorded,
-            Overall = overall
+            Overall = overall,
+            ConfigKeys = configKeys,
+            ConfigDisplay = configDisplay
         };
     }
 
@@ -130,6 +140,12 @@ public static class Evaluator
             : new List<string>();
 
         var result = Evaluate(genLog, results, prompt, kits);
+        if (result.ConfigMixed)
+        {
+            outw.WriteLine("ERROR: results.csv mixes fight configs — refusing to render a verdict over incommensurate fights:");
+            foreach (var k in result.ConfigKeys) outw.WriteLine("  " + DescribeConfig(k));
+            return 4;
+        }
 
         string date = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         string docDir = Path.Combine(PromptTemplate.RepoRoot(), "docs", "experiments");
@@ -149,6 +165,7 @@ public static class Evaluator
         var sb = new StringBuilder();
         sb.AppendLine("=== PHASE A VERDICT — pre-registered decision rule ===");
         sb.AppendLine($"prompt sha: {r.PromptSha}");
+        sb.AppendLine($"config: {r.ConfigDisplay}");
         sb.AppendLine(r.C1HasData
             ? $"  [{Mark(r.C1Pass)}] C1 first-pass validity >=70%   {Pct(r.C1Pct)} ({r.C1FirstPass}/{r.C1Generated}, matching-hash runs)"
             : "  [----] C1 first-pass validity >=70%   NO matching-hash generation rows");
@@ -173,6 +190,7 @@ public static class Evaluator
         sb.AppendLine($"- **Date:** {date}");
         sb.AppendLine($"- **Model(s):** {(r.Models.Count == 0 ? "(none)" : string.Join(", ", r.Models))}");
         sb.AppendLine($"- **Prompt sha:** `{r.PromptSha}`");
+        sb.AppendLine($"- **Config:** {r.ConfigDisplay}");
         sb.AppendLine($"- **OVERALL:** {r.Overall.ToString().ToUpperInvariant()}");
         sb.AppendLine();
         sb.AppendLine("Generated from `arena/generation.log`, `arena/results.csv`, and the committed prompt. No number here is hand-authored.");
@@ -255,7 +273,7 @@ public static class Evaluator
 
     // ── results.csv parsing ──
 
-    private sealed record FightRow(double Duration, int DistinctVerbs, int LeadChanges, string OutcomeKey);
+    private sealed record FightRow(double Duration, int DistinctVerbs, int LeadChanges, string OutcomeKey, string ConfigKey);
 
     private static List<FightRow> ParseFights(string csv)
     {
@@ -271,9 +289,19 @@ public static class Evaluator
             int lc = ParseInt(c[10]);
             // outcome key = every column except the seed (index 2)
             string key = string.Join("|", c.Where((_, i) => i != 2));
-            rows.Add(new FightRow(dur, dv, lc, key));
+            // config key = hpScale|mana; a 13-column legacy row is the legacy config (flat 300 / 250).
+            string configKey = c.Length >= 17 ? $"{c[13]}|{c[16]}" : "0|250";
+            rows.Add(new FightRow(dur, dv, lc, key, configKey));
         }
         return rows;
+    }
+
+    private static string DescribeConfig(string key)
+    {
+        var p = key.Split('|');
+        string scale = p.Length > 0 ? p[0] : "0";
+        string mana = p.Length > 1 ? p[1] : "250";
+        return scale is "0" or "0.0" ? $"legacy flat 300 HP, mana {mana}" : $"hpScale {scale}, mana {mana}";
     }
 
     private static int ParseInt(string s) =>

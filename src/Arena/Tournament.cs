@@ -7,7 +7,7 @@ namespace Arena;
 /// pre-registered decision rule.</summary>
 public static class Tournament
 {
-    public static void Run(string kitsDir, IEnumerable<long> seeds, TextWriter outw)
+    public static void Run(string kitsDir, IEnumerable<long> seeds, FightConfig config, bool sameTier, TextWriter outw)
     {
         var kitPaths = Directory.GetFiles(kitsDir, "*.json").OrderBy(p => p, StringComparer.Ordinal).ToList();
         if (kitPaths.Count < 2)
@@ -18,34 +18,48 @@ public static class Tournament
         var kits = kitPaths.Select(Kit.Load).ToList();
         var seedList = seeds.ToList();
 
-        // Play BOTH orderings per pair — first-mover advantage is decisive (frost-first and
-        // ember-first give different winner/duration/end reason), so a single ordering biases the
-        // decision rule's raw material by filename.
-        var results = new List<FightResult>();
-        for (int i = 0; i < kits.Count; i++)
-            for (int j = i + 1; j < kits.Count; j++)
-                foreach (var s in seedList)
-                {
-                    results.Add(FightEngine.Run(kits[i], kits[j], s));
-                    results.Add(FightEngine.Run(kits[j], kits[i], s));
-                }
+        var results = Rounds.RoundRobin(kits, seedList, config, sameTier);
 
         string arenaDir = PromptTemplate.ArenaDir();
         Directory.CreateDirectory(arenaDir);
         string csvPath = Path.Combine(arenaDir, "results.csv");
 
         var csv = new StringBuilder();
-        csv.AppendLine("kitA,kitB,seed,duration,endReason,winner,castsA,castsB,distinctVerbs,statuses,leadChanges,dmgToA,dmgToB");
+        csv.AppendLine("kitA,kitB,seed,duration,endReason,winner,castsA,castsB,distinctVerbs,statuses,leadChanges,dmgToA,dmgToB,hpScale,hpA,hpB,mana");
         foreach (var r in results)
             csv.AppendLine(string.Join(",",
                 r.KitA, r.KitB, r.Seed, F(r.DurationSeconds), r.EndReason, r.Winner,
                 r.CastsA, r.CastsB, r.DistinctVerbs, r.StatusesApplied, r.LeadChanges,
-                F(r.DamageToA), F(r.DamageToB)));
+                F(r.DamageToA), F(r.DamageToB), F(r.HpScale), F(r.HpA), F(r.HpB), F(r.Mana)));
         File.WriteAllText(csvPath, csv.ToString());
 
-        outw.WriteLine($"wrote {csvPath} ({results.Count} fights over {kits.Count} kits × {seedList.Count} seeds)");
+        string scope = sameTier ? "same-tier" : "full-corpus";
+        outw.WriteLine($"wrote {csvPath} ({results.Count} {scope} fights over {kits.Count} kits × {seedList.Count} seeds; hpScale={F(config.HpScale)}, mana={F(config.Mana)})");
         outw.WriteLine();
         Scorecard(results, outw);
+
+        var cross = results.Where(r => !r.SameTier).ToList();
+        if (cross.Count > 0)
+        {
+            outw.WriteLine();
+            Ladder(cross, outw);
+        }
+    }
+
+    // Informational only (spec §9 protocol a): cross-tier medians per tier-matchup. Never scored.
+    private static void Ladder(List<FightResult> cross, TextWriter outw)
+    {
+        outw.WriteLine("=== LADDER (informational — cross-tier pairings, not scored) ===");
+        var groups = cross
+            .GroupBy(r => (Lo: Math.Min(r.TierA, r.TierB), Hi: Math.Max(r.TierA, r.TierB)))
+            .OrderBy(g => g.Key.Lo).ThenBy(g => g.Key.Hi);
+        foreach (var g in groups)
+        {
+            var durs = g.Select(r => r.DurationSeconds).OrderBy(x => x).ToList();
+            var ends = g.GroupBy(r => r.EndReason).OrderBy(e => e.Key, StringComparer.Ordinal)
+                .Select(e => $"{e.Key}:{e.Count()}");
+            outw.WriteLine($"  T{g.Key.Lo}vT{g.Key.Hi}  fights={g.Count()}  median={F(Median(durs))}s  ends=[{string.Join(" ", ends)}]");
+        }
     }
 
     private static void Scorecard(List<FightResult> results, TextWriter outw)

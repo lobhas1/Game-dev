@@ -2,12 +2,27 @@ using Spellcraft;
 
 namespace Arena;
 
+/// <summary>Arena configuration. HpScale = 0 means legacy flat 300 HP; otherwise each fighter's HP
+/// is HpScale × its own tier budget. Defaults reproduce today's fights exactly.</summary>
+public sealed record FightConfig
+{
+    public float HpScale { get; init; } = 0f;
+    public float Mana { get; init; } = 250f;
+    public static readonly FightConfig Legacy = new();
+}
+
 public sealed record FightResult(
     string KitA, string KitB, long Seed,
     string EndReason, string Winner, float DurationSeconds,
     int CastsA, int CastsB, int DistinctVerbs, int StatusesApplied, int LeadChanges,
     float DamageToA, float DamageToB,
-    IReadOnlyList<string> Projection);
+    float HpScale, float HpA, float HpB, float Mana,
+    IReadOnlyList<string> Projection)
+{
+    public int TierA { get; init; } = 1;
+    public int TierB { get; init; } = 1;
+    public bool SameTier => TierA == TierB;
+}
 
 /// <summary>One headless duel between two kits, seeded and deterministic. Fixed arena constants; a
 /// dumb rotation policy identical for both fighters (see the spec §3.1).</summary>
@@ -28,13 +43,16 @@ public static class FightEngine
         public int Pointer;
     }
 
-    public static FightResult Run(Kit a, Kit b, long seed)
+    public static FightResult Run(Kit a, Kit b, long seed) => Run(a, b, seed, FightConfig.Legacy);
+
+    public static FightResult Run(Kit a, Kit b, long seed, FightConfig config)
     {
         var sim = new Sim(seed);
-        var eA = sim.State.AddEntity(a.Name, Faction.Player, StartHp, new Vec3(0, 0, 0));
-        eA.Resources[ResourceKind.Mana] = StartMana;
-        var eB = sim.State.AddEntity(b.Name, Faction.Enemy, StartHp, new Vec3(SpawnDistance, 0, 0));
-        eB.Resources[ResourceKind.Mana] = StartMana;
+        float startHpA = HpFor(a, config), startHpB = HpFor(b, config);
+        var eA = sim.State.AddEntity(a.Name, Faction.Player, startHpA, new Vec3(0, 0, 0));
+        eA.Resources[ResourceKind.Mana] = config.Mana;
+        var eB = sim.State.AddEntity(b.Name, Faction.Enemy, startHpB, new Vec3(SpawnDistance, 0, 0));
+        eB.Resources[ResourceKind.Mana] = config.Mana;
 
         var sideA = new Side { Kit = a, Self = eA.Ref, Enemy = eB.Ref };
         var sideB = new Side { Kit = b, Self = eB.Ref, Enemy = eA.Ref };
@@ -82,8 +100,13 @@ public static class FightEngine
 
         return new FightResult(a.Name, b.Name, seed, endReason, winner, sim.State.Now,
             castsA, castsB, distinctVerbs, statuses, leadChanges, dmgToA, dmgToB,
-            sim.Events.Projection());
+            config.HpScale, startHpA, startHpB, config.Mana,
+            sim.Events.Projection())
+        { TierA = a.Tier, TierB = b.Tier };
     }
+
+    private static float HpFor(Kit k, FightConfig config) =>
+        config.HpScale <= 0f ? StartHp : config.HpScale * BalanceTables.TierBudget(k.Tier);
 
     private static bool CanAffordAny(Sim sim, Side side)
     {
