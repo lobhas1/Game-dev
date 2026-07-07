@@ -56,28 +56,34 @@ tests) needs no network and no key; only `generate` calls the API, with the key 
 [prompts/proposal-oracle.md](prompts/proposal-oracle.md) is the single vocabulary authority —
 `PromptVocabularySyncTests` fails the build if it drifts from the C# verbs/deliveries/bands.
 
-Modes: `generate --brief "…" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out …]`
-· `fight <kitA.json> <kitB.json> --seed S` · `tournament <kitsDir> --seeds A..B` · `evaluate <kitsDir>`.
+Modes: `generate --brief "…" --tier N --kit-size 3 --count M [--model …] [--out …]`
+· `fight <kitA> <kitB> --seed S` · `tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds A..B`
+· `sweep <kitsDir> --seeds A..B --hp-scales 3,4,5,6,8` · `evaluate <kitsDir>`.
 
-**The engine phase begins only when a committed verdict doc (`docs/experiments/<date>-phase-a-verdict.md`) reads `OVERALL: PASS`.**
+**The engine phase begins only when a committed verdict doc (`docs/experiments/<date>-phase-a-verdict.md`) reads `OVERALL: PASS`.** v1 was FAIL (median 1.7s); v3 recalibrates arena HP to `hpScale × tier budget` and scores only same-tier fights — see [the v3 spec](docs/specs/2026-07-09-phase-a-v3.md).
 
-### Phase A verdict run (human)
+### Phase A v3 verdict run (human)
 
-Offline sanity first — `dotnet test` all green, and an offline duel reads as an exchange:
+Offline sanity first — `dotnet test` all green, and the fixture duel still reads as an exchange:
 ```
 dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/ember.json --seed 1
 ```
-(Red flags: a kill in under 5 s, or an endless nothing-castable loop.) Then the live run:
 
-1. Archive the pre-fix corpus so it isn't mixed in:
+1. **Archive the v1 corpus** with its results, out of the way:
    ```
-   git mv arena/kits arena/kits-prefix-archive
+   git mv arena/kits arena/kits-v1-archive
+   cp arena/results.csv arena/kits-v1-archive/results.csv      # PowerShell: copy
    ```
-2. Set a spend-capped key (never in code, args, logs, or commits):
+2. **Sweep for the health constant** (EXPLORATORY — no verdict), then pick `hpScale` with the reviewer:
+   ```
+   dotnet run --project src/Arena -- sweep arena/kits-v1-archive --seeds 1..5 --hp-scales 3,4,5,6,8
+   ```
+   Read `docs/experiments/2026-07-09-calibration-sweep.md` and write the chosen scale into the v3 spec, replacing `TBD — filled after sweep review`.
+3. **Set a spend-capped key** (never in code, args, logs, or commits):
    ```
    $env:ANTHROPIC_API_KEY="…"          # bash: export ANTHROPIC_API_KEY=…
    ```
-3. Generate ~30 spells — `--count 2 --kit-size 3` per brief (cost on the order of cents):
+4. **Generate ~30 fresh v3 spells** — the two new prompt sentences changed the hash, so v1 rows no longer match (intended):
    ```
    dotnet run --project src/Arena -- generate --brief "a patient frost controller"                --tier 1 --kit-size 3 --count 2
    dotnet run --project src/Arena -- generate --brief "a reckless fire skirmisher"                 --tier 1 --kit-size 3 --count 2
@@ -85,15 +91,18 @@ dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/e
    dotnet run --project src/Arena -- generate --brief "a hit-and-run wind duelist"                 --tier 2 --kit-size 3 --count 2
    dotnet run --project src/Arena -- generate --brief "a shadow assassin built on setup and burst" --tier 3 --kit-size 3 --count 2
    ```
-   Watch the printed first-pass validity; on surprises read `arena/rejections.log`. Each run appends one line to `arena/generation.log`.
-4. Tournament (both orderings per pair, seeds 1–5):
+5. **Ladder** (informational, full corpus — capture the printed T×vT× table):
    ```
-   dotnet run --project src/Arena -- tournament arena/kits --seeds 1..5
+   dotnet run --project src/Arena -- tournament arena/kits --hp-scale <registered> --seeds 1..5
    ```
-5. Render the verdict:
+6. **Criterion corpus** (same-tier only — this is the `results.csv` that `evaluate` scores; run it LAST so the full-corpus run above does not clobber it):
+   ```
+   dotnet run --project src/Arena -- tournament arena/kits --same-tier --hp-scale <registered> --seeds 1..5
+   ```
+7. **Render the verdict:**
    ```
    dotnet run --project src/Arena -- evaluate arena/kits
    ```
-   Then read `docs/experiments/<date>-phase-a-verdict.md`.
-6. Commit **everything** — kits, `arena/generation.log`, `arena/rejections.log`, `arena/results.csv`, and the verdict doc — with real commit messages, then push.
-7. `OVERALL: PASS` → the engine gate is open. `FAIL` → tune nothing; the doc's "Diagnosis (data only)" section plus the raw data go to review first. `INCOMPLETE` → the doc names exactly what is missing (an unrecorded kit, or no generation rows matching the current prompt hash — usually a prompt edit made after generating).
+   Read `docs/experiments/<date>-phase-a-verdict.md`.
+8. **Commit everything** — fresh kits, `arena/generation.log`, `arena/rejections.log`, `arena/results.csv`, the sweep doc, the verdict doc, and the spec with the filled `hpScale` — with a commit message that **states the OVERALL result** (v1 shipped a `<what evaluate printed>` placeholder in its message; do not repeat that). Push.
+9. `OVERALL: PASS` → the engine gate opens. `FAIL` → tune nothing; the doc's data-only diagnosis plus raw data go to review. `INCOMPLETE` → the doc names what is missing (an unrecorded kit, or no generation rows matching the current prompt hash).
