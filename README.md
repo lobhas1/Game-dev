@@ -57,37 +57,43 @@ tests) needs no network and no key; only `generate` calls the API, with the key 
 `PromptVocabularySyncTests` fails the build if it drifts from the C# verbs/deliveries/bands.
 
 Modes: `generate --brief "…" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out …]`
-· `fight <kitA.json> <kitB.json> --seed S` · `tournament <kitsDir> --seeds A..B`.
+· `fight <kitA.json> <kitB.json> --seed S` · `tournament <kitsDir> --seeds A..B` · `evaluate <kitsDir>`.
 
-### Runbook
+**The engine phase begins only when a committed verdict doc (`docs/experiments/<date>-phase-a-verdict.md`) reads `OVERALL: PASS`.**
 
-1. `dotnet test` → expect all green (the live-API test skips when `ANTHROPIC_API_KEY` is unset). If
-   not, stop; nothing else is trustworthy.
-2. **Offline duel** — no key, no network:
+### Phase A verdict run (human)
+
+Offline sanity first — `dotnet test` all green, and an offline duel reads as an exchange:
+```
+dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/ember.json --seed 1
+```
+(Red flags: a kill in under 5 s, or an endless nothing-castable loop.) Then the live run:
+
+1. Archive the pre-fix corpus so it isn't mixed in:
    ```
-   dotnet run --project src/Arena -- fight fixtures/kits/frost.json fixtures/kits/ember.json --seed 1
+   git mv arena/kits arena/kits-prefix-archive
    ```
-   A healthy log shows casts resolving, damage/status events, and a clean ending. Red flags: a kill
-   in under 5 s, or an endless nothing-castable loop.
-3. **Generate** ~10 kits with a spend-capped key (cost on the order of cents):
+2. Set a spend-capped key (never in code, args, logs, or commits):
    ```
-   export ANTHROPIC_API_KEY=…                     # PowerShell: $env:ANTHROPIC_API_KEY="…"
-   dotnet run --project src/Arena -- generate --brief "a patient frost controller" --tier 1 --kit-size 3 --count 2
-   dotnet run --project src/Arena -- generate --brief "a reckless fire skirmisher"  --tier 2 --kit-size 3 --count 2
-   # also try: "a defensive earth warden", "a hit-and-run wind duelist",
-   #           "a shadow assassin built on setup and burst" — tiers 1–3
+   $env:ANTHROPIC_API_KEY="…"          # bash: export ANTHROPIC_API_KEY=…
    ```
-   Kits land in `arena/kits/`. Watch the printed first-pass validity; if it is low, read
-   `arena/rejections.log` before blaming anything else.
-4. **Tournament + scorecard:**
+3. Generate ~30 spells — `--count 2 --kit-size 3` per brief (cost on the order of cents):
+   ```
+   dotnet run --project src/Arena -- generate --brief "a patient frost controller"                --tier 1 --kit-size 3 --count 2
+   dotnet run --project src/Arena -- generate --brief "a reckless fire skirmisher"                 --tier 1 --kit-size 3 --count 2
+   dotnet run --project src/Arena -- generate --brief "a defensive earth warden"                   --tier 2 --kit-size 3 --count 2
+   dotnet run --project src/Arena -- generate --brief "a hit-and-run wind duelist"                 --tier 2 --kit-size 3 --count 2
+   dotnet run --project src/Arena -- generate --brief "a shadow assassin built on setup and burst" --tier 3 --kit-size 3 --count 2
+   ```
+   Watch the printed first-pass validity; on surprises read `arena/rejections.log`. Each run appends one line to `arena/generation.log`.
+4. Tournament (both orderings per pair, seeds 1–5):
    ```
    dotnet run --project src/Arena -- tournament arena/kits --seeds 1..5
    ```
-   Open `arena/results.csv` and read the scorecard against the four criteria.
-5. Eyeball 2–3 full fight logs: do fights read as exchanges (a status applied, then exploited) or as
-   noise?
-6. Interpreting failure: validity < 40 % ⇒ the vocabulary prompt is broken, not the premise —
-   classify rejections first. Degenerate fights ⇒ suspect the arena constants and the dumb policy
-   before the oracle.
-7. Push everything — code, kits, `arena/rejections.log`, `arena/results.csv`. The data is part of
-   the deliverable, not a byproduct.
+5. Render the verdict:
+   ```
+   dotnet run --project src/Arena -- evaluate arena/kits
+   ```
+   Then read `docs/experiments/<date>-phase-a-verdict.md`.
+6. Commit **everything** — kits, `arena/generation.log`, `arena/rejections.log`, `arena/results.csv`, and the verdict doc — with real commit messages, then push.
+7. `OVERALL: PASS` → the engine gate is open. `FAIL` → tune nothing; the doc's "Diagnosis (data only)" section plus the raw data go to review first. `INCOMPLETE` → the doc names exactly what is missing (an unrecorded kit, or no generation rows matching the current prompt hash — usually a prompt edit made after generating).
