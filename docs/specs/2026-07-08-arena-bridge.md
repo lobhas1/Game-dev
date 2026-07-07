@@ -152,3 +152,16 @@ None redesign the fixed decisions; these are implementation clarifications requi
    together are the sim's strict front door. No separate hand-rolled validator is added.
 
 No `src/Spellcraft`, `schema/`, `fixtures/*.proposal.json`, or existing test is modified.
+
+---
+
+## 8. Post-audit refinements
+
+An audit of the first live run surfaced fixes folded in here:
+
+1. **`modifyStat` stat names + drift guard.** The prompt now names every legal stat (`moveSpeed`, `castSpeed`, `damageOut`, `damageIn`, `armor`, `resist`, `critChance`, `critMult`, `evasion`, `lifesteal`), and `PromptVocabularySyncTests` asserts every `StatKind` name appears. Without it the oracle guessed `speed`/`attackSpeed` — hard failures that also bias the verb marginals Phase B baselines on.
+2. **Both orderings per pair.** First-mover advantage is decisive, so the tournament plays (A,B) and (B,A) for every pair and seed; winner / duration / end-reason no longer depend on filename order.
+3. **Distinct-outcome count.** The scorecard reports distinct outcomes (ignoring seed) beside the fight count — with crit/evasion at zero, replicate seeds produce byte-identical fights and must not inflate the read. All rows stay in the CSV.
+4. **Bidirectional band guard.** The sync test also asserts every band the prompt *declares* exists in the reflected tables (an invented band would otherwise pass and only fail live).
+5. **Recursive verb marginals.** `generate` counts verbs inside `tickClauses` and template clauses, not just top-level — so zone and setup archetypes aren't undercounted in the baseline.
+6. **`spawnZone` has no `share`** is stated in the prompt (the second observed rejection class), and a stray root duplicate of the prototype HTML was removed (canonical copy under `prototype/`).

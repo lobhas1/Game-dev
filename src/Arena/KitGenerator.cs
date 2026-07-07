@@ -87,9 +87,9 @@ public static class KitGenerator
             allRejections.AddRange(outcome.Rejections);
 
             foreach (var sp in outcome.Accepted)
-                foreach (var cl in sp.Clauses)
+                foreach (var verb in sp.Clauses.SelectMany(WalkVerbs))
                 {
-                    string v = JsonVerb(cl.Verb);
+                    string v = JsonVerb(verb);
                     verbMarginals[v] = verbMarginals.GetValueOrDefault(v) + 1;
                 }
 
@@ -180,6 +180,35 @@ public static class KitGenerator
         string n = v.ToString();
         return char.ToLowerInvariant(n[0]) + n.Substring(1);
     }
+
+    // Every verb a clause fires, recursing into spawnZone tick/enter/exit clauses and template
+    // clauses — so the Phase B marginal baseline counts zone and setup archetypes, not just the
+    // top-level verb.
+    private static IEnumerable<VerbId> WalkVerbs(Clause c)
+    {
+        yield return c.Verb;
+        if (c.Params is SpawnZoneParams z)
+            foreach (var v in Nested(z.TickClauses).Concat(Nested(z.OnEnterClauses)).Concat(Nested(z.OnExitClauses)))
+                yield return v;
+        foreach (var v in Nested(TemplateClauses(c.Template)))
+            yield return v;
+    }
+
+    private static IEnumerable<VerbId> Nested(IEnumerable<Clause>? clauses) =>
+        clauses is null ? Enumerable.Empty<VerbId>() : clauses.SelectMany(WalkVerbs);
+
+    private static IEnumerable<Clause> TemplateClauses(TemplateSpec? t) => t switch
+    {
+        IfStatusTemplate ifs => ifs.Also ?? Enumerable.Empty<Clause>(),
+        OnHitTemplate o => o.Clauses,
+        OnKillTemplate o => o.Clauses,
+        OnCritTemplate o => o.Clauses,
+        DelayedTemplate o => o.Clauses,
+        RepeatingTemplate o => o.Clauses,
+        OnExpireTemplate o => o.Clauses,
+        HpThresholdTemplate o => o.Clauses,
+        _ => Enumerable.Empty<Clause>()
+    };
 
     private static string Slug(string s)
     {

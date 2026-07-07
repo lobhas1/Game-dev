@@ -37,9 +37,9 @@ Return ONLY a JSON array of {{KIT_SIZE}} spell objects — no prose, no markdown
 - **shield** — grant a temporary damage-absorbing pool. Fields: `share`, `duration`, optional `element`.
 - **applyStatus** — apply a status for a duration. Fields: `status`, `duration`, `share` (its potency), optional `stacks`.
 - **dispel** — remove statuses from the target. Fields: `category` (buff, debuff, dot, or all), optional `count`.
-- **modifyStat** — buff or debuff a stat by a percentage for a duration. Fields: `stat`, `share`, `direction` (buff or debuff), `duration`.
+- **modifyStat** — buff or debuff a stat by a percentage for a duration. Fields: `stat` (exactly one of `moveSpeed`, `castSpeed`, `damageOut`, `damageIn`, `armor`, `critChance`, `critMult`, `evasion`, `lifesteal`, or `resist` paired with an `element`), `share`, `direction` (buff or debuff), `duration`. Use these names exactly — no others (e.g. there is no `speed` or `attackSpeed`).
 - **displace** — move a subject. Fields: `subject` (caster or target), `mode` (teleport, dash, push, or pull), optional `distance`.
-- **spawnZone** — create a ground zone that ticks its clauses each interval. Fields: `shape`, `size`, `duration`, `tickInterval`, `affects` (enemies, allies, or all), and `tickClauses` (an array of clauses).
+- **spawnZone** — create a ground zone that ticks its clauses each interval. Fields: `shape`, `size`, `duration`, `tickInterval`, `affects` (enemies, allies, or all), and `tickClauses` (an array of clauses). It has **no `share` of its own** — the magnitude lives in the `share`s inside its `tickClauses`.
 
 ## Deliveries — choose exactly one per spell
 
