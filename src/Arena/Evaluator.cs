@@ -44,6 +44,9 @@ public sealed record EvaluationResult
 /// interpretations are immutable (spec §9.2); a live failure gets a written diagnosis, not a tweak.</summary>
 public static class Evaluator
 {
+    public const string ProtocolVersion = "v3";
+    public const string ProtocolSpec = "docs/specs/2026-07-09-phase-a-v3.md";
+
     // Hash the LINE-ENDING-NORMALIZED text (CRLF and lone CR → LF): a Windows autocrlf checkout and
     // an LF checkout of the same committed prompt must hash identically, or generation.log entries
     // minted on one machine read as INCOMPLETE on another — defeating independent re-derivation.
@@ -128,6 +131,56 @@ public static class Evaluator
         };
     }
 
+    // ── corpus-integrity guard (spec §9 protocol a): the criterion corpus is same-tier by
+    //    definition, so scoring anything else must be impossible — not merely avoided by ordering ──
+
+    /// <summary>A kit is a single-tier unit; a kit whose spells span more than one tier is malformed.</summary>
+    public static bool KitMixesTiers(Kit kit) => kit.Spells.Select(s => s.Tier).Distinct().Count() > 1;
+
+    /// <summary>Map every results.csv row to (tierA, tierB) via the corpus tier map and return a
+    /// description of each row that is NOT same-tier — or references a kit outside the corpus (whose
+    /// tier cannot be verified). Empty list ⇒ the CSV is a clean same-tier corpus.</summary>
+    public static List<string> FindCrossTierRows(IReadOnlyDictionary<string, int> kitTiers, string resultsCsv)
+    {
+        var offending = new List<string>();
+        int lineNo = 0;
+        foreach (var raw in resultsCsv.Split('\n'))
+        {
+            lineNo++;
+            string line = raw.TrimEnd('\r');
+            if (line.Length == 0 || line.StartsWith("kitA", StringComparison.Ordinal)) continue;
+            var c = line.Split(',');
+            if (c.Length < 13) continue;
+            string kitA = c[0], kitB = c[1];
+            bool haveA = kitTiers.TryGetValue(kitA, out int ta);
+            bool haveB = kitTiers.TryGetValue(kitB, out int tb);
+            if (!haveA || !haveB)
+                offending.Add($"line {lineNo}: {kitA} vs {kitB} — references a kit not in the corpus (tier unverifiable)");
+            else if (ta != tb)
+                offending.Add($"line {lineNo}: {kitA} (T{ta}) vs {kitB} (T{tb})");
+        }
+        return offending;
+    }
+
+    // ── verdict-file I/O: unique, timestamped, protocol-tagged names that never clobber history ──
+
+    /// <summary>Verdict filename: `yyyy-MM-dd-HHmmss-phase-a-verdict-<protocol>.md`. The timestamp
+    /// makes same-day reruns land on distinct files instead of overwriting one another.</summary>
+    public static string VerdictFileName(DateTime tsUtc) =>
+        $"{tsUtc.ToString("yyyy-MM-dd-HHmmss", CultureInfo.InvariantCulture)}-phase-a-verdict-{ProtocolVersion}.md";
+
+    /// <summary>Write the verdict doc, REFUSING to overwrite any existing file (history is
+    /// append-only). Returns the path written.</summary>
+    public static string WriteVerdictDoc(string docDir, DateTime tsUtc, string content)
+    {
+        Directory.CreateDirectory(docDir);
+        string docPath = Path.Combine(docDir, VerdictFileName(tsUtc));
+        if (File.Exists(docPath))
+            throw new IOException($"refusing to overwrite an existing verdict file: {docPath}");
+        File.WriteAllText(docPath, content);
+        return docPath;
+    }
+
     // ── mode wrapper: read files, evaluate, write the verdict doc, print the scorecard ──
     public static int RunEvaluate(string kitsDir, TextWriter outw)
     {
@@ -135,11 +188,38 @@ public static class Evaluator
         string genLog = ReadIfExists(Path.Combine(arenaDir, "generation.log"));
         string results = ReadIfExists(Path.Combine(arenaDir, "results.csv"));
         string prompt = PromptTemplate.LoadPrompt();
-        var kits = Directory.Exists(kitsDir)
-            ? Directory.GetFiles(kitsDir, "*.json").Select(p => Path.GetFileName(p)!).ToList()
+        var kitPaths = Directory.Exists(kitsDir)
+            ? Directory.GetFiles(kitsDir, "*.json").OrderBy(p => p, StringComparer.Ordinal).ToList()
             : new List<string>();
 
-        var result = Evaluate(genLog, results, prompt, kits);
+        // ── corpus-integrity guard: derive each kit's tier from its spells, then refuse any results.csv
+        //    row that is not same-tier. A cross-tier corpus is unscorable, full stop. ──
+        var kitTiers = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var mixedTier = new List<string>();
+        foreach (var path in kitPaths)
+        {
+            var kit = Kit.Load(path);
+            if (KitMixesTiers(kit))
+                mixedTier.Add($"{Path.GetFileName(path)} (spell tiers {string.Join(",", kit.Spells.Select(s => s.Tier).Distinct().OrderBy(t => t))})");
+            kitTiers[kit.Name] = kit.Spells.Max(s => s.Tier);
+        }
+        if (mixedTier.Count > 0)
+        {
+            outw.WriteLine("ERROR: kit mixes tiers (a kit is a single-tier unit) — refusing to score:");
+            foreach (var m in mixedTier) outw.WriteLine("  " + m);
+            return 5;
+        }
+        var crossTier = FindCrossTierRows(kitTiers, results);
+        if (crossTier.Count > 0)
+        {
+            outw.WriteLine($"ERROR: results.csv has {crossTier.Count} cross-tier row(s) — the v3 criterion corpus is same-tier by definition; refusing to score:");
+            foreach (var r in crossTier.Take(20)) outw.WriteLine("  " + r);
+            if (crossTier.Count > 20) outw.WriteLine($"  … and {crossTier.Count - 20} more");
+            return 5;
+        }
+
+        var kitNames = kitPaths.Select(p => Path.GetFileName(p)!).ToList();
+        var result = Evaluate(genLog, results, prompt, kitNames);
         if (result.ConfigMixed)
         {
             outw.WriteLine("ERROR: results.csv mixes fight configs — refusing to render a verdict over incommensurate fights:");
@@ -147,11 +227,10 @@ public static class Evaluator
             return 4;
         }
 
-        string date = DateTime.UtcNow.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+        var now = DateTime.UtcNow;
+        string date = now.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
         string docDir = Path.Combine(PromptTemplate.RepoRoot(), "docs", "experiments");
-        Directory.CreateDirectory(docDir);
-        string docPath = Path.Combine(docDir, $"{date}-phase-a-verdict.md");
-        File.WriteAllText(docPath, FormatVerdictDoc(result, date));
+        string docPath = WriteVerdictDoc(docDir, now, FormatVerdictDoc(result, date));
 
         outw.WriteLine(FormatScorecard(result));
         outw.WriteLine($"verdict doc: {docPath}");
@@ -190,6 +269,7 @@ public static class Evaluator
         sb.AppendLine($"- **Date:** {date}");
         sb.AppendLine($"- **Model(s):** {(r.Models.Count == 0 ? "(none)" : string.Join(", ", r.Models))}");
         sb.AppendLine($"- **Prompt sha:** `{r.PromptSha}`");
+        sb.AppendLine($"- **Protocol:** {ProtocolVersion}, spec {ProtocolSpec}");
         sb.AppendLine($"- **Config:** {r.ConfigDisplay}");
         sb.AppendLine($"- **OVERALL:** {r.Overall.ToString().ToUpperInvariant()}");
         sb.AppendLine();
