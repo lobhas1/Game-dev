@@ -1,0 +1,121 @@
+[
+  {
+    "id": "gust-slash",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.6
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "short",
+        "share": 0.4
+      }
+    ]
+  },
+  {
+    "id": "cyclone-burst",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.5,
+        "template": {
+          "kind": "onHit",
+          "clauses": [
+            {
+              "verb": "displace",
+              "subject": "target",
+              "mode": "push",
+              "distance": "small"
+            }
+          ]
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "vulnerable",
+        "duration": "short",
+        "share": 0.3
+      },
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "small"
+      }
+    ]
+  },
+  {
+    "id": "wind-step",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.4,
+        "direction": "buff",
+        "duration": "short"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "share": 0.3,
+        "direction": "buff",
+        "duration": "short"
+      }
+    ]
+  }
+]

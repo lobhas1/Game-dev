@@ -1,0 +1,123 @@
+[
+  {
+    "id": "stone-bastion",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "element": "earth",
+        "share": 0.7,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "armor",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "medium"
+      }
+    ]
+  },
+  {
+    "id": "earthen-snare",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "small"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "root",
+        "duration": "short",
+        "share": 0.5
+      },
+      {
+        "verb": "applyStatus",
+        "status": "weaken",
+        "duration": "medium",
+        "share": 0.3
+      },
+      {
+        "verb": "damage",
+        "element": "earth",
+        "share": 0.2,
+        "template": {
+          "kind": "ifStatus",
+          "status": "root",
+          "consume": false,
+          "amplify": "major",
+          "also": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "tectonic-ward",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "long",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "high"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "ring",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "long",
+        "tickInterval": "slow",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "applyStatus",
+            "status": "slow",
+            "duration": "short",
+            "share": 0.4
+          },
+          {
+            "verb": "damage",
+            "element": "earth",
+            "share": 0.6
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "gust-strike",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.6
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "short",
+        "share": 0.25
+      },
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "small"
+      }
+    ]
+  },
+  {
+    "id": "wind-shear",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "cone",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "air",
+        "share": 0.5,
+        "template": {
+          "kind": "onHit",
+          "clauses": [
+            {
+              "verb": "applyStatus",
+              "status": "vulnerable",
+              "duration": "medium",
+              "share": 0.2
+            }
+          ]
+        }
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "small"
+      }
+    ]
+  },
+  {
+    "id": "cyclone-veil",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "element": "air",
+        "share": 0.45,
+        "duration": "short"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "short"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "direction": "buff",
+        "share": 0.25,
+        "duration": "short"
+      }
+    ]
+  }
+]
