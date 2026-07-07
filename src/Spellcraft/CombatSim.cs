@@ -71,7 +71,7 @@ public static class Geometry
 
 public static class SpellCompiler
 {
-    public static Spell Compile(Spell s)
+    public static Spell Compile(Spell s, BalanceOverrides? overrides = null)
     {
         if (s.Compiled) return s;
         float dMult = BalanceTables.DeliveryMultiplier(s.Delivery.Type);
@@ -92,12 +92,18 @@ public static class SpellCompiler
             Speed = s.Delivery.SpeedBand is not null ? BalanceTables.Speed(s.Delivery.SpeedBand) : 0f
         };
 
-        var clauses = s.Clauses.Select(c => CompileClause(c, s.Tier, dMult, cMult)).ToArray();
+        var clauses = s.Clauses.Select(c => CompileClause(c, s.Tier, dMult, cMult, overrides)).ToArray();
         return s with { Cast = cast, Delivery = delivery, Clauses = clauses, Compiled = true };
     }
 
     private static float Magnitude(int tier, float share, float dMult, float cMult) =>
         BalanceTables.TierBudget(tier) * share * dMult * cMult;
+
+    /// <summary>Resolve the ifStatus amplify multiplier for a band. Only 'major' consults the
+    /// per-run override; 'minor'/'extreme' and a null override fall through to BalanceTables, so
+    /// null overrides reproduce the committed pricing exactly.</summary>
+    private static float ResolveAmplify(string band, BalanceOverrides? overrides) =>
+        band == "major" && overrides?.AmplifyMajor is float m ? m : BalanceTables.Multiplier(band);
 
     /// <summary>Status potency resolves per category. Stat-mod potency is a bounded percentage
     /// (tier-independent, clamped) — not the exponential damage budget. DoT/HoT potency IS
@@ -107,7 +113,7 @@ public static class SpellCompiler
             ? MathF.Min(share * 100f, BalanceTables.StatModPotencyCap)
             : Magnitude(tier, share, dMult, cMult);
 
-    private static Clause CompileClause(Clause c, int tier, float dMult, float cMult)
+    private static Clause CompileClause(Clause c, int tier, float dMult, float cMult, BalanceOverrides? overrides)
     {
         VerbParams p = c.Params switch
         {
@@ -138,9 +144,9 @@ public static class SpellCompiler
                 Size = BalanceTables.Size(z.SizeBand),
                 Duration = BalanceTables.Duration(z.DurationBand),
                 TickInterval = BalanceTables.Interval(z.TickIntervalBand),
-                TickClauses = z.TickClauses.Select(tc => CompileClause(tc, tier, dMult, cMult)).ToArray(),
-                OnEnterClauses = z.OnEnterClauses?.Select(tc => CompileClause(tc, tier, dMult, cMult)).ToArray(),
-                OnExitClauses = z.OnExitClauses?.Select(tc => CompileClause(tc, tier, dMult, cMult)).ToArray()
+                TickClauses = z.TickClauses.Select(tc => CompileClause(tc, tier, dMult, cMult, overrides)).ToArray(),
+                OnEnterClauses = z.OnEnterClauses?.Select(tc => CompileClause(tc, tier, dMult, cMult, overrides)).ToArray(),
+                OnExitClauses = z.OnExitClauses?.Select(tc => CompileClause(tc, tier, dMult, cMult, overrides)).ToArray()
             },
             _ => c.Params // DispelParams and any param with no resolvable fields
         };
@@ -149,24 +155,24 @@ public static class SpellCompiler
         {
             IfStatusTemplate ifs => ifs with
             {
-                Amplify = BalanceTables.Multiplier(ifs.AmplifyBand),
-                Also = ifs.Also?.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray()
+                Amplify = ResolveAmplify(ifs.AmplifyBand, overrides),
+                Also = ifs.Also?.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray()
             },
-            OnHitTemplate oh => oh with { Clauses = oh.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray() },
-            OnKillTemplate ok => ok with { Clauses = ok.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray() },
-            OnCritTemplate oc => oc with { Clauses = oc.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray() },
+            OnHitTemplate oh => oh with { Clauses = oh.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray() },
+            OnKillTemplate ok => ok with { Clauses = ok.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray() },
+            OnCritTemplate oc => oc with { Clauses = oc.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray() },
             DelayedTemplate dl => dl with
             {
                 Delay = BalanceTables.Duration(dl.DelayBand),
-                Clauses = dl.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray()
+                Clauses = dl.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray()
             },
             RepeatingTemplate rp => rp with
             {
                 Interval = BalanceTables.Interval(rp.IntervalBand),
-                Clauses = rp.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray()
+                Clauses = rp.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray()
             },
-            OnExpireTemplate oe => oe with { Clauses = oe.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray() },
-            HpThresholdTemplate hp => hp with { Clauses = hp.Clauses.Select(a => CompileClause(a, tier, dMult, cMult)).ToArray() },
+            OnExpireTemplate oe => oe with { Clauses = oe.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray() },
+            HpThresholdTemplate hp => hp with { Clauses = hp.Clauses.Select(a => CompileClause(a, tier, dMult, cMult, overrides)).ToArray() },
             _ => c.Template
         };
 
@@ -831,15 +837,20 @@ public sealed class Sim
     public IWorldApi World { get; } = new HeadlessWorldApi();
 
     private readonly long _baseSeed;
+    private readonly BalanceOverrides? _overrides;
     private float _accumulator;
     private int _castSeq;
 
-    public Sim(long seed = 0x5EED) => _baseSeed = seed;
+    public Sim(long seed = 0x5EED, BalanceOverrides? overrides = null)
+    {
+        _baseSeed = seed;
+        _overrides = overrides;
+    }
 
     // ── §2 resolution pipeline ──
     public CastReport Cast(EntityRef caster, Spell spell, EntityRef target = default, Vec3? point = null)
     {
-        spell = SpellCompiler.Compile(spell);
+        spell = SpellCompiler.Compile(spell, _overrides);
         var castRng = SeededRng.FromSeed(_baseSeed).Fork($"cast:{caster.Value}:{spell.Id}:{_castSeq++}");
         Events.Emit(new CastStarted(caster, spell.Id));
 

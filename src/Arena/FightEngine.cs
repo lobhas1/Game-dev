@@ -8,7 +8,15 @@ public sealed record FightConfig
 {
     public float HpScale { get; init; } = 0f;
     public float Mana { get; init; } = 250f;
+    /// <summary>ifStatus 'major' amplify multiplier for this run; null ⇒ engine default (2.5).</summary>
+    public float? AmplifyMajor { get; init; } = null;
     public static readonly FightConfig Legacy = new();
+
+    /// <summary>Explicit compile override built from this config — null when at the engine default,
+    /// so the default path is bit-for-bit identical to today.</summary>
+    public BalanceOverrides? Overrides => AmplifyMajor is float m ? new BalanceOverrides { AmplifyMajor = m } : null;
+    /// <summary>The effective 'major' multiplier recorded to results.csv (default resolves to 2.5).</summary>
+    public float EffectiveAmplifyMajor => AmplifyMajor ?? BalanceTables.Multiplier("major");
 }
 
 public sealed record FightResult(
@@ -16,7 +24,7 @@ public sealed record FightResult(
     string EndReason, string Winner, float DurationSeconds,
     int CastsA, int CastsB, int DistinctVerbs, int StatusesApplied, int LeadChanges,
     float DamageToA, float DamageToB,
-    float HpScale, float HpA, float HpB, float Mana,
+    float HpScale, float HpA, float HpB, float Mana, float AmplifyMajor,
     IReadOnlyList<string> Projection)
 {
     public int TierA { get; init; } = 1;
@@ -47,7 +55,7 @@ public static class FightEngine
 
     public static FightResult Run(Kit a, Kit b, long seed, FightConfig config)
     {
-        var sim = new Sim(seed);
+        var sim = new Sim(seed, config.Overrides);
         float startHpA = HpFor(a, config), startHpB = HpFor(b, config);
         var eA = sim.State.AddEntity(a.Name, Faction.Player, startHpA, new Vec3(0, 0, 0));
         eA.Resources[ResourceKind.Mana] = config.Mana;
@@ -100,7 +108,7 @@ public static class FightEngine
 
         return new FightResult(a.Name, b.Name, seed, endReason, winner, sim.State.Now,
             castsA, castsB, distinctVerbs, statuses, leadChanges, dmgToA, dmgToB,
-            config.HpScale, startHpA, startHpB, config.Mana,
+            config.HpScale, startHpA, startHpB, config.Mana, config.EffectiveAmplifyMajor,
             sim.Events.Projection())
         { TierA = a.Tier, TierB = b.Tier };
     }

@@ -43,12 +43,13 @@ static int RunEvaluate(string[] args)
 
 static int RunFight(string[] args)
 {
-    if (args.Length < 3) { Console.Error.WriteLine("usage: fight <kitA.json> <kitB.json> --seed S"); return 2; }
-    var a = Kit.Load(args[1]);
-    var b = Kit.Load(args[2]);
+    if (args.Length < 3) { Console.Error.WriteLine("usage: fight <kitA.json> <kitB.json> --seed S [--amplify-major f]"); return 2; }
+    var config = new FightConfig { AmplifyMajor = OptFloatNullable(args, "--amplify-major") };
+    var a = Kit.Load(args[1], config.Overrides);
+    var b = Kit.Load(args[2], config.Overrides);
     long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
 
-    var r = FightEngine.Run(a, b, seed);
+    var r = FightEngine.Run(a, b, seed, config);
     Console.WriteLine($"=== FIGHT  {a.Name} (E1) vs {b.Name} (E2)  seed={seed} ===");
     foreach (var line in r.Projection) Console.WriteLine("  " + line);
     Console.WriteLine();
@@ -71,7 +72,8 @@ static int RunTournament(string[] args)
     var config = new FightConfig
     {
         HpScale = float.Parse(Opt(args, "--hp-scale") ?? "0", CultureInfo.InvariantCulture),
-        Mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture)
+        Mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture),
+        AmplifyMajor = OptFloatNullable(args, "--amplify-major")
     };
     Tournament.Run(args[1], seeds, config, HasFlag(args, "--same-tier"), Console.Out);
     return 0;
@@ -79,12 +81,25 @@ static int RunTournament(string[] args)
 
 static int RunSweep(string[] args)
 {
-    if (args.Length < 2) { Console.Error.WriteLine("usage: sweep <kitsDir> --seeds A..B --hp-scales 3,4,5,6,8 [--mana N]"); return 2; }
+    if (args.Length < 2) { Console.Error.WriteLine("usage: sweep <kitsDir> --seeds A..B [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]"); return 2; }
     var seeds = ParseSeeds(Opt(args, "--seeds") ?? "1..5");
+    float mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture);
+
+    // v4 amplify axis: fixed --hp-scale, vary --amplify-majors. Otherwise the v3 hpScale axis.
+    string? amplifyList = Opt(args, "--amplify-majors");
+    if (amplifyList is not null)
+    {
+        float hpScale = float.Parse(Opt(args, "--hp-scale") ?? "8", CultureInfo.InvariantCulture);
+        var amps = amplifyList
+            .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(s => float.Parse(s, CultureInfo.InvariantCulture));
+        Sweep.RunAmplify(args[1], seeds, hpScale, mana, amps, Console.Out);
+        return 0;
+    }
+
     var scales = (Opt(args, "--hp-scales") ?? "3,4,5,6,8")
         .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
         .Select(s => float.Parse(s, CultureInfo.InvariantCulture));
-    float mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture);
     Sweep.Run(args[1], seeds, scales, mana, Console.Out);
     return 0;
 }
@@ -96,6 +111,13 @@ static string? Opt(string[] args, string name)
     for (int i = 0; i < args.Length - 1; i++)
         if (args[i] == name) return args[i + 1];
     return null;
+}
+
+// null when the flag is absent — so FightConfig stays at the engine default (bit-for-bit today).
+static float? OptFloatNullable(string[] args, string name)
+{
+    var s = Opt(args, name);
+    return s is null ? null : float.Parse(s, CultureInfo.InvariantCulture);
 }
 
 static IEnumerable<long> ParseSeeds(string spec)
@@ -117,8 +139,8 @@ static void PrintUsage()
 {
     Console.WriteLine("Arena — the oracle → sim bridge");
     Console.WriteLine("  generate --brief \"…\" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out arena/kits/]");
-    Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S");
-    Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds 1..5");
-    Console.WriteLine("  sweep <kitsDir> --seeds 1..5 --hp-scales 3,4,5,6,8 [--mana N]");
+    Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S [--amplify-major f]");
+    Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] [--amplify-major f] --seeds 1..5");
+    Console.WriteLine("  sweep <kitsDir> --seeds 1..5 [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");
 }

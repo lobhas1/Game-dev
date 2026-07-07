@@ -449,6 +449,17 @@ public static class StatUnits
 // Durations / sizes / rates resolve from their own bands (not budget-scaled).
 // ─────────────────────────────────────────────────────────────────────────────
 
+/// <summary>Optional per-run pricing overrides, threaded EXPLICITLY through compile (never global
+/// state — parallel tests and determinism forbid a mutable singleton). A null field falls back to
+/// the committed <see cref="BalanceTables"/>; a null override object reproduces today's tables
+/// bit-for-bit. This round's only lever is the ifStatus 'major' amplify multiplier.</summary>
+public sealed record BalanceOverrides
+{
+    /// <summary>Overrides the resolved multiplier for the ifStatus 'major' amplify band ONLY
+    /// (committed default 2.5). 'minor' (1.5) and 'extreme' (4.0) are unaffected.</summary>
+    public float? AmplifyMajor { get; init; }
+}
+
 public static class BalanceTables
 {
     // tierBudget(t) = 100 × 1.6^(t-1)

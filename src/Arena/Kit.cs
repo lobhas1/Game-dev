@@ -19,7 +19,7 @@ public sealed class Kit
         Spells = spells;
     }
 
-    public static Kit Load(string path)
+    public static Kit Load(string path, BalanceOverrides? overrides = null)
     {
         string name = Path.GetFileNameWithoutExtension(path);
         var arr = JsonNode.Parse(File.ReadAllText(path)) as JsonArray
@@ -28,7 +28,7 @@ public sealed class Kit
         foreach (var el in arr)
         {
             if (el is null) continue;
-            spells.Add(SpellCompiler.Compile(SpellJson.Parse(el.ToJsonString())));
+            spells.Add(SpellCompiler.Compile(SpellJson.Parse(el.ToJsonString()), overrides));
         }
         if (spells.Count == 0)
             throw new InvalidOperationException($"Kit '{path}' contained no spells.");

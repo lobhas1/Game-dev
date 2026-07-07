@@ -15,7 +15,7 @@ public static class Tournament
             outw.WriteLine($"need at least 2 kits in {kitsDir}, found {kitPaths.Count}.");
             return;
         }
-        var kits = kitPaths.Select(Kit.Load).ToList();
+        var kits = kitPaths.Select(p => Kit.Load(p, config.Overrides)).ToList();
         var seedList = seeds.ToList();
 
         var results = Rounds.RoundRobin(kits, seedList, config, sameTier);
@@ -25,16 +25,16 @@ public static class Tournament
         string csvPath = Path.Combine(arenaDir, "results.csv");
 
         var csv = new StringBuilder();
-        csv.AppendLine("kitA,kitB,seed,duration,endReason,winner,castsA,castsB,distinctVerbs,statuses,leadChanges,dmgToA,dmgToB,hpScale,hpA,hpB,mana");
+        csv.AppendLine("kitA,kitB,seed,duration,endReason,winner,castsA,castsB,distinctVerbs,statuses,leadChanges,dmgToA,dmgToB,hpScale,hpA,hpB,mana,amplifyMajor");
         foreach (var r in results)
             csv.AppendLine(string.Join(",",
                 r.KitA, r.KitB, r.Seed, F(r.DurationSeconds), r.EndReason, r.Winner,
                 r.CastsA, r.CastsB, r.DistinctVerbs, r.StatusesApplied, r.LeadChanges,
-                F(r.DamageToA), F(r.DamageToB), F(r.HpScale), F(r.HpA), F(r.HpB), F(r.Mana)));
+                F(r.DamageToA), F(r.DamageToB), F(r.HpScale), F(r.HpA), F(r.HpB), F(r.Mana), FA(r.AmplifyMajor)));
         File.WriteAllText(csvPath, csv.ToString());
 
         string scope = sameTier ? "same-tier" : "full-corpus";
-        outw.WriteLine($"wrote {csvPath} ({results.Count} {scope} fights over {kits.Count} kits × {seedList.Count} seeds; hpScale={F(config.HpScale)}, mana={F(config.Mana)})");
+        outw.WriteLine($"wrote {csvPath} ({results.Count} {scope} fights over {kits.Count} kits × {seedList.Count} seeds; hpScale={F(config.HpScale)}, mana={F(config.Mana)}, amplifyMajor={FA(config.EffectiveAmplifyMajor)})");
         outw.WriteLine();
         Scorecard(results, outw);
 
@@ -100,4 +100,6 @@ public static class Tournament
         : (xs[xs.Count / 2 - 1] + xs[xs.Count / 2]) / 2f;
 
     private static string F(float x) => x.ToString("0.0", CultureInfo.InvariantCulture);
+    // Amplify values can be two-decimal (2.25, 1.75); record them faithfully in results.csv.
+    private static string FA(float x) => x.ToString("0.0#", CultureInfo.InvariantCulture);
 }

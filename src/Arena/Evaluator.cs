@@ -38,14 +38,17 @@ public sealed record EvaluationResult
     public required IReadOnlyList<string> ConfigKeys { get; init; }
     public bool ConfigMixed => ConfigKeys.Count > 1;
     public string ConfigDisplay { get; init; } = "";
+    /// <summary>Every matching-hash generation.log entry, one per invocation, oldest first — the
+    /// per-run disclosure. C1 pools these; the same prompt hash pools successive verdict runs.</summary>
+    public required IReadOnlyList<GenerationLogEntry> MatchingRuns { get; init; }
 }
 
 /// <summary>Renders the pre-registered decision rule from committed data. The rule and these
 /// interpretations are immutable (spec §9.2); a live failure gets a written diagnosis, not a tweak.</summary>
 public static class Evaluator
 {
-    public const string ProtocolVersion = "v3";
-    public const string ProtocolSpec = "docs/specs/2026-07-09-phase-a-v3.md";
+    public const string ProtocolVersion = "v4";
+    public const string ProtocolSpec = "docs/specs/2026-07-10-phase-a-v4.md";
 
     // Hash the LINE-ENDING-NORMALIZED text (CRLF and lone CR → LF): a Windows autocrlf checkout and
     // an LF checkout of the same committed prompt must hash identically, or generation.log entries
@@ -127,7 +130,8 @@ public static class Evaluator
             UnrecordedKits = unrecorded,
             Overall = overall,
             ConfigKeys = configKeys,
-            ConfigDisplay = configDisplay
+            ConfigDisplay = configDisplay,
+            MatchingRuns = matching.OrderBy(e => e.Timestamp, StringComparer.Ordinal).ToList()
         };
     }
 
@@ -287,6 +291,19 @@ public static class Evaluator
             : "| **aggregate** | — | — | **no matching-hash data** |");
         sb.AppendLine();
 
+        sb.AppendLine("## First-pass validity by generation run (C1 disclosure)");
+        sb.AppendLine();
+        sb.AppendLine("C1 pools every `generation.log` row under the current prompt hash; because the prompt is unchanged across rounds, successive verdict runs are pooled. Each row below is one generation invocation (oldest first).");
+        sb.AppendLine();
+        sb.AppendLine("| timestamp | brief | generated | first-pass | validity |");
+        sb.AppendLine("|---|---|---:|---:|---:|");
+        if (r.MatchingRuns.Count == 0)
+            sb.AppendLine("| — | (no matching-hash runs) | — | — | — |");
+        else
+            foreach (var e in r.MatchingRuns)
+                sb.AppendLine($"| {e.Timestamp} | {e.Brief} | {e.Generated} | {e.FirstPass} | {Pct(e.Generated == 0 ? 0 : 100.0 * e.FirstPass / e.Generated)} |");
+        sb.AppendLine();
+
         sb.AppendLine("## Verb marginals (matching-hash runs, recursive)");
         sb.AppendLine();
         sb.AppendLine(r.Marginals.Count == 0 ? "(none)" : string.Join(", ", r.Marginals.Select(kv => $"{kv.Key}={kv.Value}")));
@@ -369,8 +386,12 @@ public static class Evaluator
             int lc = ParseInt(c[10]);
             // outcome key = every column except the seed (index 2)
             string key = string.Join("|", c.Where((_, i) => i != 2));
-            // config key = hpScale|mana; a 13-column legacy row is the legacy config (flat 300 / 250).
-            string configKey = c.Length >= 17 ? $"{c[13]}|{c[16]}" : "0|250";
+            // config key = hpScale|mana|amplifyMajor. 18-col carries amplifyMajor; a 17-col v3 CSV
+            // implies the 2.5 default; a 13-col legacy row is flat 300 / 250 / 2.5.
+            string configKey =
+                c.Length >= 18 ? $"{c[13]}|{c[16]}|{c[17]}" :
+                c.Length >= 17 ? $"{c[13]}|{c[16]}|2.5" :
+                "0|250|2.5";
             rows.Add(new FightRow(dur, dv, lc, key, configKey));
         }
         return rows;
@@ -381,7 +402,9 @@ public static class Evaluator
         var p = key.Split('|');
         string scale = p.Length > 0 ? p[0] : "0";
         string mana = p.Length > 1 ? p[1] : "250";
-        return scale is "0" or "0.0" ? $"legacy flat 300 HP, mana {mana}" : $"hpScale {scale}, mana {mana}";
+        string amp = p.Length > 2 ? p[2] : "2.5";
+        string head = scale is "0" or "0.0" ? $"legacy flat 300 HP, mana {mana}" : $"hpScale {scale}, mana {mana}";
+        return $"{head}, amplifyMajor {amp}";
     }
 
     private static int ParseInt(string s) =>

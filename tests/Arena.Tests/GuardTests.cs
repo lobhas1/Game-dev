@@ -15,7 +15,7 @@ public class GuardTests
     public void VerdictFileName_CarriesTimestampAndProtocol()
     {
         var ts = new DateTime(2026, 7, 7, 13, 5, 9, DateTimeKind.Utc);
-        Assert.Equal("2026-07-07-130509-phase-a-verdict-v3.md", Evaluator.VerdictFileName(ts));
+        Assert.Equal("2026-07-07-130509-phase-a-verdict-v4.md", Evaluator.VerdictFileName(ts));
     }
 
     [Fact]
