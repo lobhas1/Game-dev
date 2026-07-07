@@ -1,0 +1,30 @@
+[
+  {
+    "id": "fireball",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "projectile", "speed": "fast" },
+    "clauses": [
+      { "verb": "damage", "element": "fire", "share": 0.4 },
+      { "verb": "applyStatus", "status": "burn", "duration": "short", "share": 0.05 }
+    ]
+  },
+  {
+    "id": "scorch",
+    "tier": 1,
+    "cast": { "mode": "cast", "castTime": "quick", "cooldown": "long", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": true, "moveWhileCasting": false },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "damage", "element": "fire", "share": 0.6 }
+    ]
+  },
+  {
+    "id": "flame-ward",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "shield", "element": "fire", "share": 1.0, "duration": "medium" }
+    ]
+  }
+]

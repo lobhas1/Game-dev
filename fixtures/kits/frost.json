@@ -1,0 +1,31 @@
+[
+  {
+    "id": "frost-bolt",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "projectile", "speed": "fast" },
+    "clauses": [
+      { "verb": "damage", "element": "water", "share": 0.4 },
+      { "verb": "applyStatus", "status": "chill", "duration": "medium", "share": 0.6 }
+    ]
+  },
+  {
+    "id": "ice-lance",
+    "tier": 1,
+    "cast": { "mode": "cast", "castTime": "quick", "cooldown": "long", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": true, "moveWhileCasting": false },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "damage", "element": "water", "share": 0.4 },
+      { "verb": "applyStatus", "status": "freeze", "duration": "short", "share": 0.6 }
+    ]
+  },
+  {
+    "id": "mending-rime",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "heal", "share": 1.0 }
+    ]
+  }
+]
