@@ -1,0 +1,4 @@
+kitA,kitB,seed,duration,endReason,winner,castsA,castsB,distinctVerbs,statuses,leadChanges,dmgToA,dmgToB
+ember,frost,1,32.5,oom,frost,13,11,4,14,1,284.0,486.0
+ember,frost,2,32.5,oom,frost,13,11,4,14,1,284.0,486.0
+ember,frost,3,32.5,oom,frost,13,11,4,14,1,284.0,486.0
