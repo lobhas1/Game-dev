@@ -189,4 +189,35 @@ public class DifferentialTests
         Assert.Equal(80f, resisted, 3);        // not 5 — the 95%-saturation bug
         Assert.True(resisted > 0f && resisted < baseline);
     }
+
+    // Evasion is the third fraction-consumed stat; its only path is modifyStat too. Same saturation
+    // guard as crit, in the suite (not just a harness), so a dodge-specific regression is caught.
+    [Fact]
+    public void SmallEvasionBuff_ShiftsOddsWithoutSaturating()
+    {
+        Assert.Equal(0, CountEvades(evasionPoints: 0f, n: 200));   // no buff ⇒ never dodges
+        int buffed = CountEvades(evasionPoints: 20f, n: 200);      // +20 points via modifyStat ⇒ ~20%
+        Assert.True(buffed > 0, "a +20 evasion buff must produce some dodges");
+        Assert.True(buffed < 200, "a +20 evasion buff must NOT guarantee dodge (the saturation bug)");
+        Assert.InRange(buffed, 10, 100);                           // ≈ 20% of 200, generously bounded
+    }
+
+    private static int CountEvades(float evasionPoints, int n)
+    {
+        var sim = new Sim();
+        var c = sim.State.AddEntity("c", Faction.Player, 100, new Vec3(0, 0, 0));
+        var e = sim.State.AddEntity("e", Faction.Enemy, 1_000_000, new Vec3(1, 0, 0));
+        if (evasionPoints != 0f)
+            SpellVerbs.ModifyStat(Ctx(sim, c.Ref), e.Ref,
+                new ModifyStatParams { Stat = StatId.Evasion, AmountPct = evasionPoints, Duration = float.PositiveInfinity }, 1f);
+        int evades = 0;
+        for (int i = 0; i < n; i++)
+        {
+            var ctx = Ctx(sim, c.Ref) with { Rng = SeededRng.FromSeed(1).Fork($"attack:{i}") };
+            if (SpellVerbs.Damage(ctx, e.Ref,
+                    new DamageParams { Element = Element.Arcane, Amount = 1f, CanCrit = false }, 1f).Evaded)
+                evades++;
+        }
+        return evades;
+    }
 }
