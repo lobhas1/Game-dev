@@ -1,0 +1,1387 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "frost",
+    "kitB": "ember",
+    "kitAPath": "fixtures/kits/frost.json",
+    "kitBPath": "fixtures/kits/ember.json",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 250,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 37.59971237182617,
+    "winner": "ember",
+    "endReason": "death",
+    "entities": [
+      {
+        "id": 1,
+        "name": "frost",
+        "maxHp": 300,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "ember",
+        "maxHp": 300,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 0,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 0,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.5000000596046448,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastStarted",
+      "canonical": "cast E1 ice-lance",
+      "payload": {
+        "caster": 1,
+        "spell": "ice-lance"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=40 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 40,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatusApplied",
+      "canonical": "status E2 Freeze dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Freeze",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastStarted",
+      "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastFailed",
+      "canonical": "castFailed E2 scorch stunned",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch",
+        "reason": "stunned"
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "CastStarted",
+      "canonical": "cast E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "Healed",
+      "canonical": "heal E1 eff=42.5 over=25.5",
+      "payload": {
+        "target": 1,
+        "effective": 42.5,
+        "overheal": 25.5
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "CastFailed",
+      "canonical": "castFailed E2 flame-ward stunned",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward",
+        "reason": "stunned"
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "CastStarted",
+      "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "CastFailed",
+      "canonical": "castFailed E2 scorch stunned",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch",
+        "reason": "stunned"
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "CastFailed",
+      "canonical": "castFailed E2 flame-ward stunned",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward",
+        "reason": "stunned"
+      }
+    },
+    {
+      "t": 2.899998426437378,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Freeze",
+      "payload": {
+        "target": 2,
+        "status": "Freeze"
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "CastStarted",
+      "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=60 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 60.000003814697266,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=68 dur=5",
+      "payload": {
+        "target": 2,
+        "amount": 68,
+        "duration": 5
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 6.300005912780762,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 7.300009727478027,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 7.300009727478027,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "CastStarted",
+      "canonical": "cast E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "Healed",
+      "canonical": "heal E1 eff=68 over=0",
+      "payload": {
+        "target": 1,
+        "effective": 68,
+        "overheal": 0
+      }
+    },
+    {
+      "t": 11.30002498626709,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 11.800026893615723,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 12.300028800964355,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 12.300028800964355,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 12.800030708312988,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 12.800030708312988,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=68 dur=5",
+      "payload": {
+        "target": 2,
+        "amount": 68,
+        "duration": 5
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 15.800042152404785,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "CastStarted",
+      "canonical": "cast E1 ice-lance",
+      "payload": {
+        "caster": 1,
+        "spell": "ice-lance"
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=40 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 40,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "StatusApplied",
+      "canonical": "status E2 Freeze dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Freeze",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 16.700031280517578,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 17.200023651123047,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 17.700016021728516,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 17.700016021728516,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 18.200008392333984,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Freeze",
+      "payload": {
+        "target": 2,
+        "status": "Freeze"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "CastStarted",
+      "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=60 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 60.000003814697266,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 20.099979400634766,
+      "type": "CastStarted",
+      "canonical": "cast E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 20.099979400634766,
+      "type": "Healed",
+      "canonical": "heal E1 eff=68 over=0",
+      "payload": {
+        "target": 1,
+        "effective": 68,
+        "overheal": 0
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 21.099964141845703,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 21.599956512451172,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 22.09994888305664,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 22.09994888305664,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 22.09994888305664,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=68 dur=5",
+      "payload": {
+        "target": 2,
+        "amount": 68,
+        "duration": 5
+      }
+    },
+    {
+      "t": 22.59994125366211,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 22.59994125366211,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 25.599895477294922,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "CastStarted",
+      "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 34,
+        "element": "Water",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 26.59988021850586,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 27.099872589111328,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 27.599864959716797,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 28.099857330322266,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 28.099857330322266,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 31.099811553955078,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 31.599803924560547,
+      "type": "CastStarted",
+      "canonical": "cast E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 31.599803924560547,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=68 dur=5",
+      "payload": {
+        "target": 2,
+        "amount": 68,
+        "duration": 5
+      }
+    },
+    {
+      "t": 32.099796295166016,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 32.099796295166016,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 32.099796295166016,
+      "type": "StatusApplied",
+      "canonical": "status E1 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 32.599788665771484,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 33.09978103637695,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 33.59977340698242,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 34.09976577758789,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 4.25,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 34.09976577758789,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Burn",
+      "payload": {
+        "target": 1,
+        "status": "Burn"
+      }
+    },
+    {
+      "t": 37.59971237182617,
+      "type": "CastStarted",
+      "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 37.59971237182617,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=34 Fire crit=False killed=True absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 34,
+        "element": "Fire",
+        "crit": false,
+        "killed": true,
+        "absorbed": 0,
+        "evaded": false
+      }
+    }
+  ]
+}

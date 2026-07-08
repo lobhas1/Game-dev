@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using Arena;
 
 if (args.Length == 0) { PrintUsage(); return 2; }
@@ -17,6 +18,7 @@ try
         case "evaluate-fusions": return RunEvaluateFusions(args);
         case "quiz": return RunQuiz(args);
         case "record-f3": return RunRecordF3(args);
+        case "replay-verify": return RunReplayVerify(args);
         default: PrintUsage(); return 2;
     }
 }
@@ -89,13 +91,20 @@ static int? ParseTier(string? s) => s is null || s == "auto" ? null : int.Parse(
 
 static int RunFight(string[] args)
 {
-    if (args.Length < 3) { Console.Error.WriteLine("usage: fight <kitA.json> <kitB.json> --seed S [--amplify-major f]"); return 2; }
-    var config = new FightConfig { AmplifyMajor = OptFloatNullable(args, "--amplify-major") };
+    if (args.Length < 3) { Console.Error.WriteLine("usage: fight <kitA.json> <kitB.json> --seed S [--hp-scale k] [--mana N] [--amplify-major f] [--replay-out file.json]"); return 2; }
+    var config = new FightConfig
+    {
+        HpScale = float.Parse(Opt(args, "--hp-scale") ?? "0", CultureInfo.InvariantCulture),
+        Mana = float.Parse(Opt(args, "--mana") ?? "250", CultureInfo.InvariantCulture),
+        AmplifyMajor = OptFloatNullable(args, "--amplify-major")
+    };
     var a = Kit.Load(args[1], config.Overrides);
     var b = Kit.Load(args[2], config.Overrides);
     long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
+    string? replayOut = Opt(args, "--replay-out");
+    var recorder = replayOut is null ? null : new ReplayRecorder();
 
-    var r = FightEngine.Run(a, b, seed, config);
+    var r = FightEngine.Run(a, b, seed, config, recorder);
     Console.WriteLine($"=== FIGHT  {a.Name} (E1) vs {b.Name} (E2)  seed={seed} ===");
     foreach (var line in r.Projection) Console.WriteLine("  " + line);
     Console.WriteLine();
@@ -108,7 +117,22 @@ static int RunFight(string[] args)
     Console.WriteLine($"statuses applied:{r.StatusesApplied}");
     Console.WriteLine($"lead changes:    {r.LeadChanges}");
     Console.WriteLine($"damage taken:    {r.KitA}={r.DamageToA.ToString("0.0", CultureInfo.InvariantCulture)}  {r.KitB}={r.DamageToB.ToString("0.0", CultureInfo.InvariantCulture)}");
+
+    if (replayOut is not null)
+    {
+        var json = Replay.Export(r, recorder!, args[1], args[2]);
+        string full = Path.GetFullPath(replayOut);
+        Directory.CreateDirectory(Path.GetDirectoryName(full)!);
+        File.WriteAllText(full, json.ToJsonString(new JsonSerializerOptions { WriteIndented = true }));
+        Console.WriteLine($"replay:          {replayOut} ({recorder!.Events.Count} events, schema {Replay.SchemaVersion})");
+    }
     return 0;
+}
+
+static int RunReplayVerify(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: replay-verify <file.json> [--diff-against-live]"); return 2; }
+    return Replay.RunVerify(args[1], HasFlag(args, "--diff-against-live"), Console.Out);
 }
 
 static int RunTournament(string[] args)
@@ -185,7 +209,8 @@ static void PrintUsage()
 {
     Console.WriteLine("Arena — the oracle → sim bridge");
     Console.WriteLine("  generate --brief \"…\" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out arena/kits/]");
-    Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S [--amplify-major f]");
+    Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S [--hp-scale k] [--mana N] [--amplify-major f] [--replay-out file.json]");
+    Console.WriteLine("  replay-verify <file.json> [--diff-against-live]");
     Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] [--amplify-major f] --seeds 1..5");
     Console.WriteLine("  sweep <kitsDir> --seeds 1..5 [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");

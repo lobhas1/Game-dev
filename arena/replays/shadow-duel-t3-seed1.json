@@ -1,0 +1,1425 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "a-shadow-assassin-built-on-setup-and-burst-1",
+    "kitB": "a-shadow-assassin-built-on-setup-and-burst-2",
+    "kitAPath": "arena/kits/a-shadow-assassin-built-on-setup-and-burst-1.json",
+    "kitBPath": "arena/kits/a-shadow-assassin-built-on-setup-and-burst-2.json",
+    "seed": 1,
+    "config": {
+      "hpScale": 8,
+      "mana": 250,
+      "amplifyMajor": 1.75
+    },
+    "durationSeconds": 19.599987030029297,
+    "winner": "a-shadow-assassin-built-on-setup-and-burst-1",
+    "endReason": "death",
+    "entities": [
+      {
+        "id": 1,
+        "name": "a-shadow-assassin-built-on-setup-and-burst-1",
+        "maxHp": 2048.000244140625,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "a-shadow-assassin-built-on-setup-and-burst-2",
+        "maxHp": 2048.000244140625,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ]
+  },
+  "events": [
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E1 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=-30 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": -30.000001907348633,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastStarted",
+      "canonical": "cast E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=293.22 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 293.2160339355469,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatusApplied",
+      "canonical": "status E2 Bleed dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Bleed",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "Displaced",
+      "canonical": "displace E1 Dash to=(3,0,0) blocked=False",
+      "payload": {
+        "subject": 1,
+        "mode": "Dash",
+        "from": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 3,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastStarted",
+      "canonical": "cast E2 void-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "void-burst"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=439.04 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 439.0400390625,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Vulnerable",
+      "payload": {
+        "target": 1,
+        "status": "Vulnerable"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatusApplied",
+      "canonical": "status E1 Bleed dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Bleed",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 DamageOut pct=30 dur=2",
+      "payload": {
+        "target": 1,
+        "statKind": "DamageOut",
+        "statElement": null,
+        "amountPct": 30.000001907348633,
+        "duration": 2
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "CastStarted",
+      "canonical": "cast E1 umbral-shroud",
+      "payload": {
+        "caster": 1,
+        "spell": "umbral-shroud"
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=92.16 dur=5",
+      "payload": {
+        "target": 1,
+        "amount": 92.1600112915039,
+        "duration": 5
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatusApplied",
+      "canonical": "status E1 Stealth dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Stealth",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "CastStarted",
+      "canonical": "cast E2 shroud-step",
+      "payload": {
+        "caster": 2,
+        "spell": "shroud-step"
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "Displaced",
+      "canonical": "displace E2 Teleport to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Teleport",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=60.93 dur=2",
+      "payload": {
+        "target": 2,
+        "amount": 60.928009033203125,
+        "duration": 2
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Blind",
+      "payload": {
+        "target": 1,
+        "status": "Blind"
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 4.2999982833862305,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.2999982833862305,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Vulnerable",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastStarted",
+      "canonical": "cast E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusApplied",
+      "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Bleed",
+      "payload": {
+        "target": 2,
+        "status": "Bleed"
+      }
+    },
+    {
+      "t": 6.300005912780762,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 51.200008392333984,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 6.300005912780762,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Bleed",
+      "payload": {
+        "target": 1,
+        "status": "Bleed"
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Stealth",
+      "payload": {
+        "target": 1,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 7.300009727478027,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "CastStarted",
+      "canonical": "cast E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "StatusApplied",
+      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "StatusApplied",
+      "canonical": "status E1 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=-30 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": -30.000001907348633,
+        "duration": 5
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "CastStarted",
+      "canonical": "cast E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=293.22 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 293.2160339355469,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatusApplied",
+      "canonical": "status E2 Bleed dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Bleed",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "Displaced",
+      "canonical": "displace E1 Dash to=(6,0,0) blocked=False",
+      "payload": {
+        "subject": 1,
+        "mode": "Dash",
+        "from": {
+          "x": 3,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 6,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Vulnerable",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "CastStarted",
+      "canonical": "cast E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusApplied",
+      "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "CastStarted",
+      "canonical": "cast E2 shroud-step",
+      "payload": {
+        "caster": 2,
+        "spell": "shroud-step"
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "Displaced",
+      "canonical": "displace E2 Teleport to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Teleport",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "ShieldGranted",
+      "canonical": "shield E2 amt=60.93 dur=2",
+      "payload": {
+        "target": 2,
+        "amount": 60.928009033203125,
+        "duration": 2
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 11.30002498626709,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 11.30002498626709,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Blind",
+      "payload": {
+        "target": 1,
+        "status": "Blind"
+      }
+    },
+    {
+      "t": 11.800026893615723,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 12.300028800964355,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 12.300028800964355,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 12.800030708312988,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 12.800030708312988,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 13.300032615661621,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 13.800034523010254,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 14.300036430358887,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 14.300036430358887,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Vulnerable",
+      "payload": {
+        "target": 1,
+        "status": "Vulnerable"
+      }
+    },
+    {
+      "t": 14.80003833770752,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 14.80003833770752,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Bleed",
+      "payload": {
+        "target": 2,
+        "status": "Bleed"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Vulnerable",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "CastStarted",
+      "canonical": "cast E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusApplied",
+      "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=25 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 2
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "CastStarted",
+      "canonical": "cast E2 void-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "void-burst"
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "DamageDealt",
+      "canonical": "damage E1 amt=179.2 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 1,
+        "amount": 179.20001220703125,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 DamageOut pct=30 dur=2",
+      "payload": {
+        "target": 1,
+        "statKind": "DamageOut",
+        "statElement": null,
+        "amountPct": 30.000001907348633,
+        "duration": 2
+      }
+    },
+    {
+      "t": 17.100025177001953,
+      "type": "CastStarted",
+      "canonical": "cast E1 umbral-shroud",
+      "payload": {
+        "caster": 1,
+        "spell": "umbral-shroud"
+      }
+    },
+    {
+      "t": 17.100025177001953,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=92.16 dur=5",
+      "payload": {
+        "target": 1,
+        "amount": 92.1600112915039,
+        "duration": 5
+      }
+    },
+    {
+      "t": 17.100025177001953,
+      "type": "StatusApplied",
+      "canonical": "status E1 Stealth dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Stealth",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 17.100025177001953,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 17.600017547607422,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "CastStarted",
+      "canonical": "cast E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "StatusApplied",
+      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "StatusApplied",
+      "canonical": "status E1 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=-30 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": -30.000001907348633,
+        "duration": 5
+      }
+    },
+    {
+      "t": 19.099994659423828,
+      "type": "CastStarted",
+      "canonical": "cast E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 19.099994659423828,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=586.43 Shadow crit=True killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 586.4320678710938,
+        "element": "Shadow",
+        "crit": true,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 19.099994659423828,
+      "type": "StatusApplied",
+      "canonical": "status E2 Bleed dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Bleed",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 19.099994659423828,
+      "type": "Displaced",
+      "canonical": "displace E1 Dash to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 1,
+        "mode": "Dash",
+        "from": {
+          "x": 6,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 19.599987030029297,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=43.52 Arcane crit=False killed=True absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 43.5200080871582,
+        "element": "Arcane",
+        "crit": false,
+        "killed": true,
+        "absorbed": 0,
+        "evaded": false
+      }
+    }
+  ]
+}

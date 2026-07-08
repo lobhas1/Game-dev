@@ -53,7 +53,7 @@ public static class FightEngine
 
     public static FightResult Run(Kit a, Kit b, long seed) => Run(a, b, seed, FightConfig.Legacy);
 
-    public static FightResult Run(Kit a, Kit b, long seed, FightConfig config)
+    public static FightResult Run(Kit a, Kit b, long seed, FightConfig config, ReplayRecorder? recorder = null)
     {
         var sim = new Sim(seed, config.Overrides);
         float startHpA = HpFor(a, config), startHpB = HpFor(b, config);
@@ -61,6 +61,11 @@ public static class FightEngine
         eA.Resources[ResourceKind.Mana] = config.Mana;
         var eB = sim.State.AddEntity(b.Name, Faction.Enemy, startHpB, new Vec3(SpawnDistance, 0, 0));
         eB.Resources[ResourceKind.Mana] = config.Mana;
+        // Additive, null-safe replay capture: reads sim state only, never mutates — so the fight is
+        // byte-for-byte identical with recorder == null (pinned by the defaults-regression golden).
+        recorder?.Init(
+            new ReplayEntity(eA.Ref.Value, a.Name, startHpA, new Vec3(0, 0, 0)),
+            new ReplayEntity(eB.Ref.Value, b.Name, startHpB, new Vec3(SpawnDistance, 0, 0)));
 
         var sideA = new Side { Kit = a, Self = eA.Ref, Enemy = eB.Ref };
         var sideB = new Side { Kit = b, Self = eB.Ref, Enemy = eA.Ref };
@@ -79,7 +84,9 @@ public static class FightEngine
             if (TryCast(sim, sideB)) castsB++;
             if (sim.State.IsDead(eA.Ref)) { endReason = "death"; break; }
 
+            recorder?.Mark(sim); // cast-phase events at this quantum's start
             sim.Tick(DecisionQuantum);
+            recorder?.Mark(sim); // tick-phase events at this quantum's end
 
             int sec = (int)MathF.Floor(sim.State.Now);
             if (sec > lastSecond)
@@ -97,6 +104,7 @@ public static class FightEngine
             if (sim.State.IsDead(eA.Ref) || sim.State.IsDead(eB.Ref)) { endReason = "death"; break; }
         }
 
+        recorder?.Mark(sim); // stamp any events emitted right before a killing-blow break
         float hpA = sim.State.Get(eA.Ref).Hp, hpB = sim.State.Get(eB.Ref).Hp;
         string winner = hpA > hpB ? a.Name : hpB > hpA ? b.Name : "draw";
 
