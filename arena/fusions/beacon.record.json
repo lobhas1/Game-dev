@@ -1,0 +1,75 @@
+{
+  "name": "beacon",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Glimmer",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Beacon",
+    "emoji": "\uD83D\uDD25",
+    "element": "light",
+    "tags": [
+      "damage",
+      "perceive"
+    ],
+    "flavor": "A fire that says: here, come here, look here.",
+    "why": "Ember\u0027s heat directed by Glimmer\u0027s purposeful, guiding visibility."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:32:45Z",
+  "spell": {
+    "id": "beacon",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "large"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.5
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "vulnerable",
+        "duration": "medium",
+        "share": 0.2
+      }
+    ]
+  }
+}

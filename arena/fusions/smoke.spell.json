@@ -1,0 +1,45 @@
+{
+  "id": "smoke",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "large",
+      "duration": "medium",
+      "tickInterval": "medium",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "applyStatus",
+          "status": "blind",
+          "duration": "short",
+          "share": 0.6
+        },
+        {
+          "verb": "modifyStat",
+          "stat": "evasion",
+          "direction": "buff",
+          "share": 0.4,
+          "duration": "short"
+        }
+      ]
+    }
+  ]
+}

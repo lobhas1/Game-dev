@@ -1,0 +1,33 @@
+{
+  "id": "penumbra",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "stealth",
+      "duration": "medium",
+      "share": 0.5
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.5,
+      "direction": "buff",
+      "duration": "medium"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "drift",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Glimmer",
+    "b": "Gust",
+    "aPath": "fixtures/seeds/glimmer.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Drift",
+    "emoji": "\uD83C\uDF43",
+    "element": "air",
+    "tags": [
+      "movement",
+      "perceive"
+    ],
+    "flavor": "Carried on the wind, the faint glow finds its way.",
+    "why": "Light given direction by air; a guided, wandering shimmer."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:33:15Z",
+  "spell": {
+    "id": "drift",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.4,
+        "direction": "buff",
+        "duration": "short"
+      }
+    ]
+  }
+}

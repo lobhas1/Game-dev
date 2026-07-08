@@ -1,0 +1,15 @@
+fixtures/seeds/droplet.seed.json fixtures/seeds/ember.seed.json
+fixtures/seeds/droplet.seed.json fixtures/seeds/glimmer.seed.json
+fixtures/seeds/droplet.seed.json fixtures/seeds/gust.seed.json
+fixtures/seeds/droplet.seed.json fixtures/seeds/pebble.seed.json
+fixtures/seeds/droplet.seed.json fixtures/seeds/umbra.seed.json
+fixtures/seeds/ember.seed.json fixtures/seeds/glimmer.seed.json
+fixtures/seeds/ember.seed.json fixtures/seeds/gust.seed.json
+fixtures/seeds/ember.seed.json fixtures/seeds/pebble.seed.json
+fixtures/seeds/ember.seed.json fixtures/seeds/umbra.seed.json
+fixtures/seeds/glimmer.seed.json fixtures/seeds/gust.seed.json
+fixtures/seeds/glimmer.seed.json fixtures/seeds/pebble.seed.json
+fixtures/seeds/glimmer.seed.json fixtures/seeds/umbra.seed.json
+fixtures/seeds/gust.seed.json fixtures/seeds/pebble.seed.json
+fixtures/seeds/gust.seed.json fixtures/seeds/umbra.seed.json
+fixtures/seeds/pebble.seed.json fixtures/seeds/umbra.seed.json

@@ -1,0 +1,103 @@
+{
+  "name": "blaze",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Gust",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Blaze",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "damage",
+      "movement",
+      "area"
+    ],
+    "flavor": "Wind breathed life into a coal; now nothing stands.",
+    "why": "Ember ignited by Gust becomes a full, spreading blaze."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:32:53Z",
+  "spell": {
+    "id": "blaze",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "cone",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.45,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": false,
+          "amplify": "major"
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "burn",
+        "duration": "medium",
+        "share": 0.25
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "medium"
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "short",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "fire",
+            "share": 0.15
+          },
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "short",
+            "share": 0.15
+          }
+        ]
+      }
+    ]
+  }
+}

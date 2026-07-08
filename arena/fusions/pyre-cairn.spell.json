@@ -1,0 +1,59 @@
+{
+  "id": "pyre-cairn",
+  "tier": 3,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "high"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "shield",
+      "share": 0.30,
+      "duration": "long"
+    },
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.25,
+      "template": {
+        "kind": "ifStatus",
+        "status": "burn",
+        "consume": false,
+        "amplify": "major"
+      }
+    },
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "medium",
+      "tickInterval": "slow",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "damage",
+          "element": "fire",
+          "share": 0.25
+        },
+        {
+          "verb": "applyStatus",
+          "status": "burn",
+          "duration": "short",
+          "share": 0.20
+        }
+      ]
+    }
+  ]
+}

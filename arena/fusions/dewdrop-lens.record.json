@@ -1,0 +1,74 @@
+{
+  "name": "dewdrop-lens",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Droplet",
+    "b": "Glimmer",
+    "aPath": "fixtures/seeds/droplet.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Dewdrop Lens",
+    "emoji": "\uD83D\uDD0D",
+    "element": "water",
+    "tags": [
+      "perceive",
+      "heal"
+    ],
+    "flavor": "A drop of water bends light into a clear truth.",
+    "why": "Water refracts light; tiny lens reveals what was hidden"
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:32:14Z",
+  "spell": {
+    "id": "dewdrop-lens",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "heal",
+        "share": 0.5
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.3,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.2,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

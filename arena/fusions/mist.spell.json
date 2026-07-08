@@ -1,0 +1,41 @@
+{
+  "id": "mist",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "medium",
+      "tickInterval": "medium",
+      "affects": "allies",
+      "tickClauses": [
+        {
+          "verb": "heal",
+          "share": 0.55
+        },
+        {
+          "verb": "applyStatus",
+          "status": "slow",
+          "duration": "short",
+          "share": 0.45
+        }
+      ]
+    }
+  ]
+}

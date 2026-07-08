@@ -1,0 +1,66 @@
+{
+  "id": "lighthouse",
+  "tier": 3,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "large",
+      "duration": "long",
+      "tickInterval": "slow",
+      "affects": "all",
+      "tickClauses": [
+        {
+          "verb": "heal",
+          "share": 0.35
+        },
+        {
+          "verb": "damage",
+          "element": "light",
+          "share": 0.25,
+          "template": {
+            "kind": "onHit",
+            "clauses": [
+              {
+                "verb": "applyStatus",
+                "status": "vulnerable",
+                "duration": "medium",
+                "share": 0.15
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.15,
+      "direction": "buff",
+      "duration": "long"
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "evasion",
+      "share": 0.1,
+      "direction": "buff",
+      "duration": "long"
+    }
+  ]
+}

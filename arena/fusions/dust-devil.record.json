@@ -1,0 +1,80 @@
+{
+  "name": "dust-devil",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Gust",
+    "b": "Pebble",
+    "aPath": "fixtures/seeds/gust.seed.json",
+    "bPath": "fixtures/seeds/pebble.seed.json"
+  },
+  "concept": {
+    "name": "Dust Devil",
+    "emoji": "\uD83C\uDF2A\uFE0F",
+    "element": "air",
+    "tags": [
+      "movement",
+      "area"
+    ],
+    "flavor": "The desert\u0027s oldest argument with the wind.",
+    "why": "Air moves earth into a spinning, wandering column."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:33:33Z",
+  "spell": {
+    "id": "dust-devil",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "displace",
+            "subject": "target",
+            "mode": "push",
+            "distance": "small"
+          },
+          {
+            "verb": "applyStatus",
+            "status": "slow",
+            "duration": "short",
+            "share": 0.35
+          }
+        ]
+      }
+    ]
+  }
+}

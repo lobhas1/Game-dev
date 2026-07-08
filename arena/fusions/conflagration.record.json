@@ -1,0 +1,115 @@
+{
+  "name": "conflagration",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Beacon",
+    "b": "Blaze",
+    "aPath": "arena/fusions/beacon.record.json",
+    "bPath": "arena/fusions/blaze.record.json"
+  },
+  "concept": {
+    "name": "Conflagration",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "damage",
+      "area",
+      "movement"
+    ],
+    "flavor": "It does not burn. It devours, and moves, and does not stop.",
+    "why": "Beacon draws all eyes; Blaze consumes all \u2014 conflagration is the result"
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:34:02Z",
+  "spell": {
+    "id": "conflagration",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "high"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.35,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": false,
+          "amplify": "major"
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "burn",
+        "duration": "medium",
+        "share": 0.15
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "medium"
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "fire",
+            "share": 0.2,
+            "template": {
+              "kind": "ifStatus",
+              "status": "burn",
+              "consume": false,
+              "amplify": "minor"
+            }
+          },
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "short",
+            "share": 0.1
+          },
+          {
+            "verb": "displace",
+            "subject": "target",
+            "mode": "push",
+            "distance": "small"
+          }
+        ]
+      }
+    ]
+  }
+}

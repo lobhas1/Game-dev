@@ -1,0 +1,103 @@
+{
+  "name": "lighthouse",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Dewdrop Lens",
+    "b": "Beacon",
+    "aPath": "arena/fusions/dewdrop-lens.record.json",
+    "bPath": "arena/fusions/beacon.record.json"
+  },
+  "concept": {
+    "name": "Lighthouse",
+    "emoji": "\uD83C\uDFEE",
+    "element": "light",
+    "tags": [
+      "perceive",
+      "heal",
+      "damage"
+    ],
+    "flavor": "Steady beam cuts fog; ships find shore, storms find focus.",
+    "why": "Focused water-bent light becomes a guiding, warning beacon on shore."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:34:40Z",
+  "spell": {
+    "id": "lighthouse",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "long",
+        "tickInterval": "slow",
+        "affects": "all",
+        "tickClauses": [
+          {
+            "verb": "heal",
+            "share": 0.35
+          },
+          {
+            "verb": "damage",
+            "element": "light",
+            "share": 0.25,
+            "template": {
+              "kind": "onHit",
+              "clauses": [
+                {
+                  "verb": "applyStatus",
+                  "status": "vulnerable",
+                  "duration": "medium",
+                  "share": 0.15
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.15,
+        "direction": "buff",
+        "duration": "long"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.1,
+        "direction": "buff",
+        "duration": "long"
+      }
+    ]
+  }
+}

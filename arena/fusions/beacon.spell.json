@@ -1,0 +1,39 @@
+{
+  "id": "beacon",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "large"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.5
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "direction": "buff",
+      "share": 0.3,
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "vulnerable",
+      "duration": "medium",
+      "share": 0.2
+    }
+  ]
+}

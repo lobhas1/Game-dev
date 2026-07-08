@@ -1,0 +1,75 @@
+{
+  "name": "mudstone-mirror",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Cinder Rock",
+    "b": "Dewdrop Lens",
+    "aPath": "arena/fusions/cinder-rock.record.json",
+    "bPath": "arena/fusions/dewdrop-lens.record.json"
+  },
+  "concept": {
+    "name": "Mudstone Mirror",
+    "emoji": "\uD83E\uDEA8",
+    "element": "earth",
+    "tags": [
+      "perceive",
+      "ward"
+    ],
+    "flavor": "Still water caught in stone reflects what approaches unseen.",
+    "why": "Earth\u0027s memory plus water\u0027s clarity yields reflective stone surface"
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:34:34Z",
+  "spell": {
+    "id": "mudstone-mirror",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.45,
+        "duration": "long"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.30,
+        "direction": "buff",
+        "duration": "long"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.25,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

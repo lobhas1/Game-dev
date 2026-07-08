@@ -1,0 +1,81 @@
+{
+  "name": "smoke",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Umbra",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Smoke",
+    "emoji": "\uD83C\uDF2B\uFE0F",
+    "element": "shadow",
+    "tags": [
+      "conceal",
+      "area"
+    ],
+    "flavor": "It hides what burned and blurs what stands.",
+    "why": "Ember\u0027s heat meets Umbra\u0027s darkness; combustion\u0027s veil results."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:33:08Z",
+  "spell": {
+    "id": "smoke",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "applyStatus",
+            "status": "blind",
+            "duration": "short",
+            "share": 0.6
+          },
+          {
+            "verb": "modifyStat",
+            "stat": "evasion",
+            "direction": "buff",
+            "share": 0.4,
+            "duration": "short"
+          }
+        ]
+      }
+    ]
+  }
+}

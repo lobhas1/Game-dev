@@ -1,0 +1,96 @@
+{
+  "name": "pyre-cairn",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Blaze",
+    "b": "Cairn",
+    "aPath": "arena/fusions/blaze.record.json",
+    "bPath": "arena/fusions/cairn.record.json"
+  },
+  "concept": {
+    "name": "Pyre Cairn",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "damage",
+      "ward",
+      "area"
+    ],
+    "flavor": "The stones hold heat long after the fire forgets its name.",
+    "why": "A warding monument consumed and repurposed by relentless fire."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:34:16Z",
+  "spell": {
+    "id": "pyre-cairn",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "high"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.30,
+        "duration": "long"
+      },
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.25,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": false,
+          "amplify": "major"
+        }
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "medium",
+        "tickInterval": "slow",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "fire",
+            "share": 0.25
+          },
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "short",
+            "share": 0.20
+          }
+        ]
+      }
+    ]
+  }
+}

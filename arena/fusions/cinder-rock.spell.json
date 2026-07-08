@@ -1,0 +1,37 @@
+{
+  "id": "cinder-rock",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "projectile",
+    "speed": "fast"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.45
+    },
+    {
+      "verb": "shield",
+      "share": 0.4,
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "burn",
+      "duration": "medium",
+      "share": 0.15
+    }
+  ]
+}

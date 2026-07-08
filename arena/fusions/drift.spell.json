@@ -1,0 +1,32 @@
+{
+  "id": "drift",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "displace",
+      "subject": "caster",
+      "mode": "dash",
+      "distance": "medium"
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.4,
+      "direction": "buff",
+      "duration": "short"
+    }
+  ]
+}

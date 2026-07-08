@@ -1,0 +1,73 @@
+{
+  "name": "cinder-rock",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Pebble",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/pebble.seed.json"
+  },
+  "concept": {
+    "name": "Cinder Rock",
+    "emoji": "\uD83E\uDEA8",
+    "element": "earth",
+    "tags": [
+      "damage",
+      "ward"
+    ],
+    "flavor": "Warmed by old fire, it remembers how to hurt.",
+    "why": "Ember\u0027s heat baked into Pebble\u0027s stubborn stone permanence."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:33:01Z",
+  "spell": {
+    "id": "cinder-rock",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.45
+      },
+      {
+        "verb": "shield",
+        "share": 0.4,
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "burn",
+        "duration": "medium",
+        "share": 0.15
+      }
+    ]
+  }
+}

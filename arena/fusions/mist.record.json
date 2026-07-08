@@ -1,0 +1,77 @@
+{
+  "name": "mist",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Droplet",
+    "b": "Gust",
+    "aPath": "fixtures/seeds/droplet.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Mist",
+    "emoji": "\uD83C\uDF2B\uFE0F",
+    "element": "air",
+    "tags": [
+      "movement",
+      "heal"
+    ],
+    "flavor": "Soft as forgetting, it settles where the wound waits.",
+    "why": "Water dispersed by air becomes mist \u2014 immediate, plain, emergent."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "26ac883f0d31e57b671afc3a7b97d55cffe2360cce9686ba7ab48f5f7bbf25fe",
+    "mechanics": "c6b12c63a67670affde4a5a5894766d29868385166f97ebe5030a5f5f1496b5a"
+  },
+  "timestamp": "2026-07-08T14:32:21Z",
+  "spell": {
+    "id": "mist",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "allies",
+        "tickClauses": [
+          {
+            "verb": "heal",
+            "share": 0.55
+          },
+          {
+            "verb": "applyStatus",
+            "status": "slow",
+            "duration": "short",
+            "share": 0.45
+          }
+        ]
+      }
+    ]
+  }
+}
