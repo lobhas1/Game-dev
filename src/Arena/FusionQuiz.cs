@@ -30,7 +30,8 @@ public static class FusionQuiz
 
     public static List<QuizTrial> BuildTrials(IReadOnlyList<FusionRecord> records, long seed)
     {
-        var gated = records.Where(r => r.Gated && r.Spell is not null)
+        // Only LIVE gated fusions are quizzable — a stub fusion is not genuine data.
+        var gated = records.Where(r => r.Gated && r.IsLive && r.Spell is not null)
             .OrderBy(r => r.Name, StringComparer.Ordinal).ToList();
         var rng = new Rng(seed);
         var trials = new List<QuizTrial>();

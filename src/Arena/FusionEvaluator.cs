@@ -15,6 +15,9 @@ public sealed record FusionEvalResult
     public required string MechanicsSha { get; init; }
     public int MatchingRecords { get; init; }
     public int ExcludedStale { get; init; }
+    /// <summary>Matching-sha records excluded from scoring because they are stub-sourced (or carry no
+    /// origin). Must be 0 for a live verdict — a Phase 2 precondition.</summary>
+    public int StubExcluded { get; init; }
     // F1
     public int MechProposals { get; init; }
     public int FirstPassOk { get; init; }
@@ -47,8 +50,13 @@ public static class FusionEvaluator
             string.Equals(r.MechanicsSha, mechanicsSha, StringComparison.Ordinal)).ToList();
         int excluded = records.Count - matching.Count;
 
-        // F1 — first-try gate rate over records that reached the mechanics gate (naming succeeded).
-        var mechProposals = matching.Where(r => r.Concept.Name != NamingFailedSentinel).ToList();
+        // Origin guard: stub records carry the same prompt shas as live ones, so the fingerprint
+        // cannot tell them apart. Score ONLY live records; a canned text file must never pass F1/F2.
+        var live = matching.Where(r => r.IsLive).ToList();
+        int stubExcluded = matching.Count - live.Count;
+
+        // F1 — first-try gate rate over LIVE records that reached the mechanics gate (naming succeeded).
+        var mechProposals = live.Where(r => r.Concept.Name != NamingFailedSentinel).ToList();
         int firstPass = mechProposals.Count(r => r.FirstPassOk);
         bool f1 = mechProposals.Count > 0 && 100.0 * firstPass / mechProposals.Count >= 70.0;
 
@@ -94,7 +102,7 @@ public static class FusionEvaluator
         return new FusionEvalResult
         {
             NamingSha = namingSha, MechanicsSha = mechanicsSha,
-            MatchingRecords = matching.Count, ExcludedStale = excluded,
+            MatchingRecords = matching.Count, ExcludedStale = excluded, StubExcluded = stubExcluded,
             MechProposals = mechProposals.Count, FirstPassOk = firstPass, F1Pass = f1,
             GatedCount = gated.Count, ScoredCount = scored.Count,
             MeanRealPct = 100.0 * meanReal, MeanDecoyPct = 100.0 * meanDecoy, F2Pass = f2,
@@ -142,6 +150,9 @@ public static class FusionEvaluator
         sb.AppendLine($"naming sha: {r.NamingSha}");
         sb.AppendLine($"mechanics sha: {r.MechanicsSha}");
         sb.AppendLine($"matching-sha records: {r.MatchingRecords}  (excluded stale: {r.ExcludedStale})");
+        sb.AppendLine(r.StubExcluded > 0
+            ? $"stub records EXCLUDED from scoring: {r.StubExcluded}  ⚠ corpus contaminated — a live verdict requires zero"
+            : "stub records excluded from scoring: 0");
         sb.AppendLine($"  [{Mark(r.F1Pass)}] F1 gate validity >=70% first-try   {Pct(r.F1Pct)} ({r.FirstPassOk}/{r.MechProposals})");
         sb.AppendLine($"  [{Mark(r.F2Pass)}] F2 coverage >=70% AND > decoy       real={Pct(r.MeanRealPct)}  decoy={Pct(r.MeanDecoyPct)}  ({r.ScoredCount} scored)");
         sb.AppendLine($"  [PEND] F3 human blind match >=14/20           PENDING");
@@ -165,9 +176,16 @@ public static class FusionEvaluator
         sb.AppendLine("Computed from `arena/fusions/*.record.json` (matching both prompt shas). No number hand-authored.");
         sb.AppendLine();
 
+        sb.AppendLine("## Corpus origin");
+        sb.AppendLine();
+        sb.AppendLine(r.StubExcluded > 0
+            ? $"⚠ **{r.StubExcluded} stub record(s) excluded from scoring.** Stub records carry the same prompt shas as live ones, so origin — not the fingerprint — is the guard; they never count toward F1/F2. A live verdict requires **zero stub records** (Phase 2 precondition) — this corpus is contaminated."
+            : "All scored records are live-sourced; 0 stub records in the corpus.");
+        sb.AppendLine();
+
         sb.AppendLine("## F1 — gate validity (first-try)");
         sb.AppendLine();
-        sb.AppendLine($"{r.FirstPassOk}/{r.MechProposals} = {Pct(r.F1Pct)} — **{Mark(r.F1Pass)}** (threshold ≥70%). Excluded {r.ExcludedStale} stale-sha record(s).");
+        sb.AppendLine($"{r.FirstPassOk}/{r.MechProposals} = {Pct(r.F1Pct)} — **{Mark(r.F1Pass)}** (threshold ≥70%, live records only). Excluded {r.ExcludedStale} stale-sha and {r.StubExcluded} stub record(s).");
         sb.AppendLine();
 
         sb.AppendLine("## F2 — semantic coverage");

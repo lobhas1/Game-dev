@@ -43,6 +43,8 @@ public class FusionTests
         Assert.Equal("steam", rec.Name);
         Assert.Equal(2, rec.Tier);            // T1 + T1 → T2
         Assert.Equal(2, oracle.CallCount);    // naming + mechanics, no repair
+        Assert.Equal("stub", rec.Source);     // origin recorded — not scorable as live
+        Assert.False(rec.IsLive);
     }
 
     [Fact]
@@ -119,6 +121,32 @@ public class FusionTests
         Assert.Equal(1, r.FusionsWithUnmappable);
     }
 
+    // ── origin guard: stub records (same shas as live) are excluded from scoring, reported ──
+    [Fact]
+    public void StubRecords_ExcludedFromScoring_AndReported()
+    {
+        var recs = new[]
+        {
+            Rec("live1", new[] { "damage" }, Dmg, source: "live"),
+            Rec("stub1", new[] { "damage" }, Dmg, source: "stub"),
+        };
+        var r = FusionEvaluator.Evaluate(recs, "N", "M");
+        Assert.Equal(2, r.MatchingRecords);   // both carry matching shas
+        Assert.Equal(1, r.StubExcluded);      // the stub record is excluded from scoring
+        Assert.Equal(1, r.MechProposals);     // only the live record is a mechanics proposal
+        Assert.Single(r.PerFusion);           // only the live record is scored
+    }
+
+    [Fact]
+    public void Record_WithoutOrigin_ReadsAsStub_FailSafe()
+    {
+        var json = System.Text.Json.Nodes.JsonNode.Parse(
+            @"{""name"":""x"",""tier"":2,""concept"":{""name"":""X"",""tags"":[""damage""]},""gate"":{""firstPassOk"":true},""shas"":{""naming"":""N"",""mechanics"":""M""},""spell"":{""id"":""x"",""tier"":2,""delivery"":{""type"":""self""},""clauses"":[]}}");
+        var rec = FusionRecord.FromJson(json!);
+        Assert.False(rec.IsLive);             // no origin block → treated as stub → never scored
+        Assert.Equal("stub", rec.Source);
+    }
+
     // ── two-sha integrity: stale naming OR mechanics sha excludes a record ──
     [Fact]
     public void TwoShaFilter_ExcludesStaleRecords()
@@ -140,7 +168,7 @@ public class FusionTests
         var good = Rec("aaa", new[] { "damage" }, Dmg);
         var nf = new FusionRecord("nf", 2, "A", "B", "a", "b",
             new Concept(FusionEvaluator.NamingFailedSentinel, "", "", new List<string>(), "", ""),
-            null, false, false, true, "naming reply unparseable", "N", "M", "ts");
+            null, false, false, true, "naming reply unparseable", "N", "M", "live", "test-model", "ts");
         var r = FusionEvaluator.Evaluate(new[] { good, nf }, "N", "M");
         Assert.Equal(2, r.MatchingRecords);
         Assert.Equal(1, r.MechProposals);       // naming-failure is not a mechanics proposal
@@ -190,14 +218,14 @@ public class FusionTests
 
     private static Task<FusionRecord> Fuse(IOracle oracle, Seed a, Seed b) =>
         FusionPipeline.FuseAsync(oracle, a, b, null, "naming {{TIER}}", "mechanics {{TIER}}",
-            "N", "M", "2026-01-01T00:00:00Z", "fixtures/seeds/ember.seed.json", "fixtures/seeds/droplet.seed.json");
+            "N", "M", "stub", "stub:test", "2026-01-01T00:00:00Z", "fixtures/seeds/ember.seed.json", "fixtures/seeds/droplet.seed.json");
 
     private static FusionRecord Rec(string name, string[] tags, string clausesJson,
-        string nSha = "N", string mSha = "M", int tier = 2, bool firstPass = true)
+        string nSha = "N", string mSha = "M", int tier = 2, bool firstPass = true, string source = "live")
     {
         var spell = JsonNode.Parse($"{{\"id\":\"{name}\",\"tier\":{tier},\"delivery\":{{\"type\":\"self\"}},\"clauses\":{clausesJson}}}");
         var concept = new Concept(name, "", "fire", tags.ToList(), "flavor " + name, "why");
         return new FusionRecord(name, tier, "A", "B", "a.json", "b.json", concept, spell,
-            firstPass, false, false, null, nSha, mSha, "2026-01-01T00:00:00Z");
+            firstPass, false, false, null, nSha, mSha, source, "test-model", "2026-01-01T00:00:00Z");
     }
 }

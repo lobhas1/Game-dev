@@ -89,19 +89,34 @@ match the committed prompts today; records under a stale naming OR mechanics pro
 reported. This is the Phase-A prompt-sha gate, doubled — a fusion is a joint product of two prompts,
 so both must be current for its record to count.
 
+## Origin guard (the fingerprint is not enough)
+
+Stub runs use the *same* prompt files, so a stubbed fusion carries the *same* two shas as a live one
+— the fingerprint cannot tell canned data from real. So every record also carries **`source`**
+(`live` | `stub`) and **`model`**. `evaluate-fusions` scores only `source: live` records; stub
+records — and any record missing an `origin` block (the fail-safe default is `stub`) — are excluded
+from F1, F2, and the quiz, and reported separately. **Phase 2's live verdict requires zero stub
+records in the corpus.** Without this, anyone (including future-me, by accident) could pass the
+automatic criteria with a hand-written text file — the same class of hole the sha gate closes, one
+layer up. `source` is set by the pipeline from the oracle it used (a `StubOracle` from
+`--stub-responses` → `stub`; the live Anthropic oracle → `live`), never by the record's author.
+
 ## Machinery
 
 - **`fuse <parentA.json> <parentB.json> [--tier auto]`** — naming call → mechanics call → gate (one
   repair) → writes `arena/fusions/<name>.spell.json` (the gated proposal spell) and
-  `arena/fusions/<name>.record.json` (parents, concept, clauses, both shas, timestamps,
-  repair/discard notes), and appends `arena/fusions.log`. `--tier auto` (default) applies the tier
-  law; an explicit `--tier N` overrides.
+  `arena/fusions/<name>.record.json` (parents, concept, clauses, both shas, **origin: source
+  live|stub + model**, timestamps, repair/discard notes), and appends `arena/fusions.log`.
+  `--tier auto` (default) applies the tier law; an explicit `--tier N` overrides.
+  `--stub-responses <f>` (offline only) drives the pipeline from a canned-reply file and tags every
+  record `source: stub`.
 - **`fuse-batch --pairs-file <f>`** — one `fuse` per line (`parentA.json parentB.json`), a scripted
   run list. Rejections and discards are data — a pair is never rerun.
-- **`evaluate-fusions <fusionsDir>`** — computes F1 (first-try gate rate over matching-sha records),
-  F2 (mean coverage + decoy baseline + quantization-pressure report), renders F3 as PENDING, and
-  writes a timestamped verdict doc (`<ts>-phase-b-fusion-verdict.md`, same no-clobber + refuse-
-  overwrite rules as Phase A). OVERALL is INCOMPLETE until F3 is appended.
+- **`evaluate-fusions <fusionsDir>`** — computes F1 (first-try gate rate) and F2 (mean coverage +
+  decoy baseline + quantization-pressure report) over matching-sha, **`source: live`** records only;
+  stub records are excluded from scoring and reported (count must be 0 for a live verdict). Renders
+  F3 as PENDING and writes a timestamped verdict doc (`<ts>-phase-b-fusion-verdict.md`, same
+  no-clobber + refuse-overwrite rules as Phase A). OVERALL is INCOMPLETE until F3 is appended.
 - **`quiz <fusionsDir> --seed S`** — from the records, writes `docs/experiments/<ts>-phase-b-quiz.md`
   (20 trials max: concept + clause lists A/B in randomized sides, no answers) and a SEPARATE
   `<ts>-phase-b-answer-key.md`. Deterministic given `--seed`.
@@ -123,6 +138,8 @@ thresholds, prompts, seeds, and the mapping never move after the first live call
    seeds; both prompts; tests. Commit spec / seeds+prompts / pipeline+tests; STOP.
 2. **Phase 2 (live):** all 15 seed pairs + 5 fixed depth-2 fusions (the first five gated results
    alphabetically, paired round-robin), one `fuse-batch` run; `evaluate-fusions`; quiz + key; commit
-   with the real F1/F2 numbers; push. OVERALL stays INCOMPLETE (F3 pending).
+   with the real F1/F2 numbers; push. OVERALL stays INCOMPLETE (F3 pending). **Precondition: zero
+   stub records in the corpus** — `evaluate-fusions` reports the stub count and it must read 0 (delete
+   any offline stub fusions before the live run).
 3. **Phase 3 (human):** one stranger runs the quiz (never the key); `record-f3` appends F3 = n/20
    and the final OVERALL; commit. Same sitting runs the naming kill-test with the HTML prototype.

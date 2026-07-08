@@ -13,14 +13,20 @@ public sealed record FusionRecord(
     string ParentA, string ParentB, string ParentAPath, string ParentBPath,
     Concept Concept, JsonNode? Spell,
     bool FirstPassOk, bool Repaired, bool Discarded, string? GateError,
-    string NamingSha, string MechanicsSha, string Timestamp)
+    string NamingSha, string MechanicsSha, string Source, string Model, string Timestamp)
 {
     public bool Gated => !Discarded && Spell is not null;
+
+    /// <summary>A record is genuine data only if it came from a live oracle. Stub records carry the
+    /// same prompt shas as live ones (same prompt files), so origin — not the fingerprint — is what
+    /// keeps a canned text file from scoring as real. Anything not explicitly "live" is treated stub.</summary>
+    public bool IsLive => string.Equals(Source, "live", StringComparison.Ordinal);
 
     public JsonObject ToJson() => new()
     {
         ["name"] = Name,
         ["tier"] = Tier,
+        ["origin"] = new JsonObject { ["source"] = Source, ["model"] = Model },
         ["parents"] = new JsonObject { ["a"] = ParentA, ["b"] = ParentB, ["aPath"] = ParentAPath, ["bPath"] = ParentBPath },
         ["concept"] = new JsonObject
         {
@@ -57,6 +63,8 @@ public sealed record FusionRecord(
             n["gate"]?["discarded"]?.GetValue<bool>() ?? false,
             n["gate"]?["error"]?.GetValue<string>(),
             n["shas"]?["naming"]?.GetValue<string>() ?? "", n["shas"]?["mechanics"]?.GetValue<string>() ?? "",
+            // Absent origin (a hand-written or pre-fix record) is treated as stub, never scored.
+            n["origin"]?["source"]?.GetValue<string>() ?? "stub", n["origin"]?["model"]?.GetValue<string>() ?? "",
             n["timestamp"]?.GetValue<string>() ?? "");
     }
 }
@@ -68,7 +76,7 @@ public static class FusionPipeline
     public static async Task<FusionRecord> FuseAsync(
         IOracle oracle, Seed a, Seed b, int? tierOverride,
         string namingTemplate, string mechanicsTemplate,
-        string namingSha, string mechanicsSha, string timestamp, string aPath, string bPath)
+        string namingSha, string mechanicsSha, string source, string model, string timestamp, string aPath, string bPath)
     {
         int tier = tierOverride ?? TierLaw.Of(a.Tier, b.Tier);
         bool self = string.Equals(aPath, bPath, StringComparison.OrdinalIgnoreCase);
@@ -79,7 +87,7 @@ public static class FusionPipeline
         if (concept is null)
             return new FusionRecord(Kebab(a.Name + "-" + b.Name), tier, a.Name, b.Name, aPath, bPath,
                 new Concept("(naming failed)", "", "", new List<string>(), "", ""), null,
-                false, false, true, "naming reply unparseable", namingSha, mechanicsSha, timestamp);
+                false, false, true, "naming reply unparseable", namingSha, mechanicsSha, source, model, timestamp);
 
         string name = Kebab(concept.Name);
 
@@ -89,22 +97,22 @@ public static class FusionPipeline
         string? err1 = "mechanics reply unparseable";
         bool firstPass = node is not null && TryGate(node, out err1);
         if (firstPass)
-            return Rec(name, tier, a, b, aPath, bPath, concept, node!, true, false, false, null, namingSha, mechanicsSha, timestamp);
+            return Rec(name, tier, a, b, aPath, bPath, concept, node!, true, false, false, null, namingSha, mechanicsSha, source, model, timestamp);
 
         string repairPrompt = BuildRepair(mechPrompt, node, err1);
         JsonNode? node2 = KitGenerator.ExtractObject(await oracle.CompleteAsync(repairPrompt));
         string? err2 = "repair reply unparseable";
         bool repairedOk = node2 is not null && TryGate(node2, out err2);
         if (repairedOk)
-            return Rec(name, tier, a, b, aPath, bPath, concept, node2!, false, true, false, null, namingSha, mechanicsSha, timestamp);
+            return Rec(name, tier, a, b, aPath, bPath, concept, node2!, false, true, false, null, namingSha, mechanicsSha, source, model, timestamp);
 
-        return Rec(name, tier, a, b, aPath, bPath, concept, null, false, false, true, err2 ?? err1, namingSha, mechanicsSha, timestamp);
+        return Rec(name, tier, a, b, aPath, bPath, concept, null, false, false, true, err2 ?? err1, namingSha, mechanicsSha, source, model, timestamp);
     }
 
     private static FusionRecord Rec(string name, int tier, Seed a, Seed b, string aPath, string bPath,
         Concept concept, JsonNode? spell, bool firstPass, bool repaired, bool discarded, string? err,
-        string namingSha, string mechanicsSha, string ts) =>
-        new(name, tier, a.Name, b.Name, aPath, bPath, concept, spell, firstPass, repaired, discarded, err, namingSha, mechanicsSha, ts);
+        string namingSha, string mechanicsSha, string source, string model, string ts) =>
+        new(name, tier, a.Name, b.Name, aPath, bPath, concept, spell, firstPass, repaired, discarded, err, namingSha, mechanicsSha, source, model, ts);
 
     private static bool TryGate(JsonNode node, out string? error)
     {
@@ -143,15 +151,15 @@ public static class FusionPipeline
 
     public static async Task<int> RunFuse(string pathA, string pathB, int? tierOverride, string model, string? stubFile, TextWriter outw)
     {
-        var oracle = MakeOracle(model, stubFile);
-        var rec = await FuseOne(oracle, pathA, pathB, tierOverride);
+        var (oracle, source, mdl) = MakeOracle(model, stubFile);
+        var rec = await FuseOne(oracle, source, mdl, pathA, pathB, tierOverride);
         WriteRecord(rec, outw);
         return rec.Gated ? 0 : 3;
     }
 
     public static async Task<int> RunFuseBatch(string pairsFile, string model, string? stubFile, TextWriter outw)
     {
-        var oracle = MakeOracle(model, stubFile);
+        var (oracle, source, mdl) = MakeOracle(model, stubFile);
         int gated = 0, discarded = 0, total = 0;
         foreach (var raw in File.ReadAllLines(pairsFile))
         {
@@ -160,15 +168,15 @@ public static class FusionPipeline
             var parts = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
             if (parts.Length < 2) { outw.WriteLine($"skip (need two paths): {line}"); continue; }
             total++;
-            var rec = await FuseOne(oracle, ResolvePath(parts[0]), ResolvePath(parts[1]), tierOverride: null);
+            var rec = await FuseOne(oracle, source, mdl, ResolvePath(parts[0]), ResolvePath(parts[1]), tierOverride: null);
             WriteRecord(rec, outw);
             if (rec.Gated) gated++; else discarded++;
         }
-        outw.WriteLine($"\nfuse-batch: {total} pairs → {gated} gated, {discarded} discarded.");
+        outw.WriteLine($"\nfuse-batch ({source}): {total} pairs → {gated} gated, {discarded} discarded.");
         return 0;
     }
 
-    private static async Task<FusionRecord> FuseOne(IOracle oracle, string pathA, string pathB, int? tierOverride)
+    private static async Task<FusionRecord> FuseOne(IOracle oracle, string source, string model, string pathA, string pathB, int? tierOverride)
     {
         var a = Seed.Load(pathA);
         var b = Seed.Load(pathB);
@@ -176,16 +184,18 @@ public static class FusionPipeline
         string mechTmpl = File.ReadAllText(PromptTemplate.LocateRepoFile("prompts/fusion-mechanics-oracle.md"));
         string ts = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture);
         return await FuseAsync(oracle, a, b, tierOverride, namingTmpl, mechTmpl,
-            Evaluator.Sha256Hex(namingTmpl), Evaluator.Sha256Hex(mechTmpl), ts,
+            Evaluator.Sha256Hex(namingTmpl), Evaluator.Sha256Hex(mechTmpl), source, model, ts,
             RelPath(pathA), RelPath(pathB));
     }
 
-    private static IOracle MakeOracle(string model, string? stubFile)
+    // A stub oracle is tagged source="stub" so evaluate-fusions can exclude it: stub records carry
+    // the same prompt shas as live ones, so origin — not the fingerprint — is the guard.
+    private static (IOracle Oracle, string Source, string Model) MakeOracle(string model, string? stubFile)
     {
-        if (stubFile is null) return new LiveAnthropicOracle(model); // reads ANTHROPIC_API_KEY
+        if (stubFile is null) return (new LiveAnthropicOracle(model), "live", model); // reads ANTHROPIC_API_KEY
         var blocks = File.ReadAllText(stubFile).Replace("\r\n", "\n").Split("\n===\n", StringSplitOptions.None)
             .Select(b => b.Trim()).Where(b => b.Length > 0).ToArray();
-        return new StubOracle(blocks);
+        return (new StubOracle(blocks), "stub", "stub:" + Path.GetFileName(stubFile));
     }
 
     public static void WriteRecord(FusionRecord rec, TextWriter outw)
@@ -202,13 +212,14 @@ public static class FusionPipeline
         File.AppendAllText(Path.Combine(PromptTemplate.ArenaDir(), "fusions.log"),
             string.Join(" | ",
                 rec.Timestamp, "name=" + rec.Name, "tier=" + rec.Tier,
+                "source=" + rec.Source, "model=" + rec.Model,
                 "parents=" + rec.ParentA + "+" + rec.ParentB,
                 "tags=[" + string.Join(",", rec.Concept.Tags) + "]",
                 "gate=" + status,
                 "namingSha=" + rec.NamingSha, "mechanicsSha=" + rec.MechanicsSha,
                 rec.GateError is null ? "" : "error=" + rec.GateError.Replace("|", "/").Replace("\n", " ")) + Environment.NewLine);
 
-        outw.WriteLine($"{status,-10} {rec.ParentA} + {rec.ParentB} → {rec.Concept.Name} (T{rec.Tier})  [{string.Join(",", rec.Concept.Tags)}]  → {rec.Name}.record.json");
+        outw.WriteLine($"{status,-10} [{rec.Source}] {rec.ParentA} + {rec.ParentB} → {rec.Concept.Name} (T{rec.Tier})  [{string.Join(",", rec.Concept.Tags)}]  → {rec.Name}.record.json");
     }
 
     private static string RelPath(string p)

@@ -90,3 +90,9 @@ load-bearing sentences of §2 verbatim, enforced mechanically by the drift-guard
 doctrine ever diverge on a load-bearing sentence, `dotnet test` goes red. The prompt text has
 exactly one home — this document. Edits happen HERE FIRST and then propagate to every embedding;
 never the reverse. The prototype and any future bridge are copies kept honest by the test.
+
+**Variant embedding (Phase B).** The fusion naming bridge `prompts/naming-oracle.md` carries the six
+load-bearing sentences verbatim but **omits** the visual-signature paragraph and the `vfx` JSON field
+— Phase B rules on mechanics, not visuals, so its naming oracle emits `{name, emoji, element, tags,
+flavor, why}` with no `vfx`. It is a third embedding, pinned across all three by
+`tests/Arena.Tests/NamingDoctrineSyncTests.cs`.
