@@ -71,9 +71,16 @@ duration`; `StatModified` → `target, statKind, statElement, amountPct, duratio
   `--replay-out`, the fight is byte-for-byte identical, pinned by the existing golden) and writes the
   replay JSON.
 - **`replay-verify <file> [--diff-against-live]`** — re-renders the projection purely from the file
-  (reconstruct events → `Canonical()`); prints the lines. `--diff-against-live` re-runs the same
-  fight live and diffs the live projection against the file-rendered projection, exiting nonzero on
-  any difference or on any reconstructed-vs-stored `canonical` mismatch.
+  (reconstruct events → `Canonical()`); prints the lines. It **strictly validates the header** first
+  (the JSON reader tolerates unknown keys, so a renamed/absent required field would otherwise sail
+  through and Unreal would trust it for health bars and the winner banner): every required field must
+  exist and be well-typed, and the header must **agree with the events** — every entity id an event
+  references must be in the manifest, `winner`/`endReason` must be legal labels, `durationSeconds`
+  must cover the last event's timestamp, and on a `death` the `winner` must be the entity that
+  survived the killing blow (there is no explicit fightEnd event; `DamageDealt killed=true` is the
+  fight-end evidence). `--diff-against-live` additionally re-runs the same fight and diffs the live
+  projection against the file-rendered projection. Exits nonzero on any header-validation failure,
+  any reconstructed-vs-stored `canonical` mismatch, or any live/replay difference.
 
 ## Demo set (`arena/replays/`)
 

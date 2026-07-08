@@ -68,6 +68,38 @@ public class ReplayTests
     }
 
     [Fact]
+    public void Verify_FailsLoudly_OnMissingHeaderField()
+    {
+        var (_, json) = Export();
+        ((JsonObject)json["header"]!).Remove("winner");   // the reviewer's repro: required key gone
+        var sw = new StringWriter();
+        Assert.NotEqual(0, Replay.Verify(json, diffAgainstLive: false, sw));
+        Assert.Contains("header.winner", sw.ToString(), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Verify_FailsLoudly_OnWrongWinner()
+    {
+        var (_, json) = Export();
+        var names = json["header"]!["entities"]!.AsArray().Select(e => e!["name"]!.GetValue<string>()).ToList();
+        string cur = json["header"]!["winner"]!.GetValue<string>();
+        json["header"]!["winner"] = names.First(n => n != cur);   // name the loser (killed) as winner
+        var sw = new StringWriter();
+        Assert.NotEqual(0, Replay.Verify(json, diffAgainstLive: false, sw));
+        Assert.Contains("winner", sw.ToString(), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Verify_FailsLoudly_OnManifestIdMismatch()
+    {
+        var (_, json) = Export();
+        ((JsonObject)json["header"]!["entities"]!.AsArray()[0]!)["id"] = 999; // events still reference the real id
+        var sw = new StringWriter();
+        Assert.NotEqual(0, Replay.Verify(json, diffAgainstLive: false, sw));
+        Assert.Contains("absent from the manifest", sw.ToString(), StringComparison.Ordinal);
+    }
+
+    [Fact]
     public void Verify_Clean_RendersEveryProjectionLine()
     {
         var (r, json) = Export();

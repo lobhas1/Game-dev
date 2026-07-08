@@ -138,16 +138,24 @@ public static class Replay
         string? ver = root["schemaVersion"]?.GetValue<string>();
         if (ver != SchemaVersion) { outw.WriteLine($"ERROR: unsupported schemaVersion '{ver}' (expected '{SchemaVersion}')."); return 2; }
 
+        // Strict header: the renderer will trust these fields for health bars and the winner banner,
+        // so a missing/garbage field must fail here, not silently in Unreal.
+        var (hdr, hErr) = ParseHeader(root);
+        if (hErr is not null) { outw.WriteLine("ERROR: " + hErr); return 2; }
+
         var lines = new List<string>();
+        var referenced = new HashSet<int>();
+        var killed = new List<int>();
+        double maxT = 0;
         foreach (var ev in Events(root))
         {
             if (ev is null) continue;
             string type = ev["type"]?.GetValue<string>() ?? "";
-            GameEvent reconstructed;
-            try { reconstructed = ReconstructEvent(type, ev["payload"] ?? new JsonObject()); }
+            GameEvent g;
+            try { g = ReconstructEvent(type, ev["payload"] ?? new JsonObject()); }
             catch (Exception ex) { outw.WriteLine($"ERROR: cannot reconstruct event '{type}': {ex.Message}"); return 3; }
 
-            string line = reconstructed.Canonical();
+            string line = g.Canonical();
             string? stored = ev["canonical"]?.GetValue<string>();
             if (stored is not null && !string.Equals(stored, line, StringComparison.Ordinal))
             {
@@ -157,7 +165,14 @@ public static class Replay
                 return 3;
             }
             lines.Add(line);
+            if (ev["t"] is JsonValue tv && tv.GetValueKind() == JsonValueKind.Number) maxT = Math.Max(maxT, tv.GetValue<double>());
+            foreach (var id in ReferencedIds(g)) referenced.Add(id);
+            if (g is DamageDealt { Killed: true } dk) killed.Add(dk.Target.Value);
         }
+
+        // Header must agree with the events it summarizes.
+        string? cErr = ValidateOutcome(hdr!, referenced, killed, maxT);
+        if (cErr is not null) { outw.WriteLine("ERROR: " + cErr); return 2; }
 
         if (!diffAgainstLive)
         {
@@ -165,11 +180,11 @@ public static class Replay
             return 0;
         }
 
-        var live = ReRunLive(root);
+        var live = ReRunLive(hdr!);
         var diff = Diff(live, lines);
         if (diff.Count == 0)
         {
-            outw.WriteLine($"OK: {lines.Count} projection lines — live == replay (byte-identical).");
+            outw.WriteLine($"OK: {lines.Count} projection lines — live == replay (byte-identical); header validated.");
             return 0;
         }
         outw.WriteLine($"DIFF: {diff.Count} differing line(s) (live | replay):");
@@ -177,22 +192,106 @@ public static class Replay
         return 1;
     }
 
-    private static IReadOnlyList<string> ReRunLive(JsonNode root)
+    private static IReadOnlyList<string> ReRunLive(HeaderInfo h)
     {
-        var h = root["header"] ?? throw new InvalidOperationException("replay has no header — cannot re-run live.");
-        var config = new FightConfig
-        {
-            HpScale = (float)(h["config"]?["hpScale"]?.GetValue<double>() ?? 0),
-            Mana = (float)(h["config"]?["mana"]?.GetValue<double>() ?? 250),
-            AmplifyMajor = (float?)(h["config"]?["amplifyMajor"]?.GetValue<double>())
-        };
-        string aPath = Resolve(h["kitAPath"]!.GetValue<string>());
-        string bPath = Resolve(h["kitBPath"]!.GetValue<string>());
-        long seed = h["seed"]!.GetValue<long>();
-        var a = Kit.Load(aPath, config.Overrides);
-        var b = Kit.Load(bPath, config.Overrides);
-        return FightEngine.Run(a, b, seed, config).Projection;
+        var config = new FightConfig { HpScale = h.HpScale, Mana = h.Mana, AmplifyMajor = h.AmplifyMajor };
+        var a = Kit.Load(Resolve(h.KitAPath), config.Overrides);
+        var b = Kit.Load(Resolve(h.KitBPath), config.Overrides);
+        return FightEngine.Run(a, b, h.Seed, config).Projection;
     }
+
+    // ── strict header validation ──
+
+    public sealed record HeaderInfo(string KitA, string KitB, string KitAPath, string KitBPath, long Seed,
+        float HpScale, float Mana, float AmplifyMajor, double Duration, string Winner, string EndReason,
+        IReadOnlyList<(int Id, string Name)> Entities);
+
+    private static bool IsStr(JsonNode? n) => n is JsonValue && n.GetValueKind() == JsonValueKind.String;
+    private static bool IsNum(JsonNode? n) => n is JsonValue && n.GetValueKind() == JsonValueKind.Number;
+
+    /// <summary>Every field the header promises must exist and be well-typed. Unknown-key tolerance
+    /// (the JSON reader ignoring extras) is exactly why a renamed required key must be caught here.</summary>
+    private static (HeaderInfo?, string?) ParseHeader(JsonNode root)
+    {
+        if (root["header"] is not JsonObject h) return (null, "header is missing or not an object.");
+        var errs = new List<string>();
+        foreach (var k in new[] { "kitA", "kitB", "kitAPath", "kitBPath", "winner", "endReason" })
+            if (!IsStr(h[k])) errs.Add($"header.{k} missing or not a string");
+        foreach (var k in new[] { "seed", "durationSeconds" })
+            if (!IsNum(h[k])) errs.Add($"header.{k} missing or not a number");
+        if (h["config"] is not JsonObject cfg) errs.Add("header.config missing or not an object");
+        else foreach (var k in new[] { "hpScale", "mana", "amplifyMajor" })
+            if (!IsNum(cfg[k])) errs.Add($"header.config.{k} missing or not a number");
+
+        var entities = new List<(int, string)>();
+        if (h["entities"] is not JsonArray ents || ents.Count == 0) errs.Add("header.entities missing, not an array, or empty");
+        else foreach (var e in ents)
+        {
+            if (e is not JsonObject eo || !IsNum(eo["id"]) || !IsStr(eo["name"]) || !IsNum(eo["maxHp"]))
+            { errs.Add("header.entities[] needs id(number), name(string), maxHp(number)"); continue; }
+            if (eo["spawn"] is not JsonObject sp || !IsNum(sp["x"]) || !IsNum(sp["y"]) || !IsNum(sp["z"]))
+            { errs.Add("header.entities[] spawn missing x/y/z numbers"); continue; }
+            entities.Add((eo["id"]!.GetValue<int>(), eo["name"]!.GetValue<string>()));
+        }
+
+        if (errs.Count > 0) return (null, "strict header validation failed — " + string.Join("; ", errs) + ".");
+
+        return (new HeaderInfo(
+            h["kitA"]!.GetValue<string>(), h["kitB"]!.GetValue<string>(),
+            h["kitAPath"]!.GetValue<string>(), h["kitBPath"]!.GetValue<string>(),
+            h["seed"]!.GetValue<long>(),
+            (float)h["config"]!["hpScale"]!.GetValue<double>(), (float)h["config"]!["mana"]!.GetValue<double>(),
+            (float)h["config"]!["amplifyMajor"]!.GetValue<double>(),
+            h["durationSeconds"]!.GetValue<double>(),
+            h["winner"]!.GetValue<string>(), h["endReason"]!.GetValue<string>(), entities), null);
+    }
+
+    /// <summary>The header must agree with the event stream: referenced entity ids exist in the
+    /// manifest; the outcome labels are legal; the duration covers the last event; and on a death the
+    /// winner is the entity that survived the killing blow (there is no explicit fightEnd event —
+    /// DamageDealt killed=true is the fight-end evidence).</summary>
+    private static string? ValidateOutcome(HeaderInfo h, HashSet<int> referenced, List<int> killed, double maxT)
+    {
+        var ids = h.Entities.Select(e => e.Id).ToHashSet();
+        foreach (var id in referenced)
+            if (id != 0 && !ids.Contains(id))
+                return $"an event references entity id {id}, absent from the manifest [{string.Join(",", ids)}].";
+        if (h.EndReason is not ("death" or "timeout" or "oom"))
+            return $"endReason '{h.EndReason}' is not death|timeout|oom.";
+        if (!string.Equals(h.Winner, "draw", StringComparison.Ordinal) && h.Entities.All(e => e.Name != h.Winner))
+            return $"winner '{h.Winner}' is neither \"draw\" nor a manifest entity name.";
+        if (h.Duration + 1e-4 < maxT)
+            return $"durationSeconds {N(h.Duration)} precedes the last event at t={N(maxT)}.";
+        if (h.EndReason == "death")
+        {
+            if (killed.Count == 0)
+                return "endReason is death but no killing-blow event (DamageDealt killed=true) is present.";
+            if (!string.Equals(h.Winner, "draw", StringComparison.Ordinal))
+            {
+                var winnerIds = h.Entities.Where(e => e.Name == h.Winner).Select(e => e.Id).ToList();
+                if (winnerIds.Count > 0 && winnerIds.All(killed.Contains))
+                    return $"header winner '{h.Winner}' is recorded as killed — the winner disagrees with the fight-end event.";
+            }
+        }
+        return null;
+    }
+
+    private static IEnumerable<int> ReferencedIds(GameEvent e) => e switch
+    {
+        DamageDealt d => new[] { d.Target.Value },
+        Healed h => new[] { h.Target.Value },
+        ShieldGranted s => new[] { s.Target.Value },
+        StatusApplied s => new[] { s.Target.Value },
+        StatusRemoved s => new[] { s.Target.Value },
+        StatModified m => new[] { m.Target.Value },
+        Dispelled d => new[] { d.Target.Value },
+        Displaced d => new[] { d.Subject.Value },
+        CastStarted c => new[] { c.Caster.Value },
+        CastFailed c => new[] { c.Caster.Value },
+        _ => Array.Empty<int>() // zone events reference no entity
+    };
+
+    private static string N(double d) => d.ToString("0.##", CultureInfo.InvariantCulture);
 
     private static List<string> Diff(IReadOnlyList<string> live, IReadOnlyList<string> replay)
     {
