@@ -5,17 +5,24 @@ using Spellcraft;
 
 namespace Arena.Tests;
 
-// Doctrine-style drift guard: the single-authority prompt must name every T0 verb, every slice
-// delivery, every band the C# balance tables define, and every StatKind name. The band guard is
-// bidirectional — the prompt must not declare a band the tables don't define (an invented band
-// would otherwise pass and only fail live). Declared bands are read from the comma-separated lists
-// under the prompt's "## Qualitative bands" section.
+// Doctrine-style drift guard: BOTH single-authority prompts (the proposal oracle and the fusion-
+// mechanics oracle, which duplicates the same closed vocabulary) must name every T0 verb, every
+// slice delivery, every band the C# balance tables define, and every StatKind name. The band guard
+// is bidirectional — a prompt must not declare a band the tables don't define. Declared bands are
+// read from the comma-separated lists under each prompt's "## Qualitative bands" section.
 public class PromptVocabularySyncTests
 {
-    [Fact]
-    public void Prompt_ContainsEveryVerb_Delivery_AndBand()
+    public static IEnumerable<object[]> Prompts()
     {
-        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile("prompts/proposal-oracle.md"));
+        yield return new object[] { "prompts/proposal-oracle.md" };
+        yield return new object[] { "prompts/fusion-mechanics-oracle.md" };
+    }
+
+    [Theory]
+    [MemberData(nameof(Prompts))]
+    public void Prompt_ContainsEveryVerb_Delivery_AndBand(string promptPath)
+    {
+        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile(promptPath));
 
         var verbs = T0VerbJsonNames().ToList();
         var bands = BandNamesFromTables().ToList();
@@ -49,12 +56,13 @@ public class PromptVocabularySyncTests
             .SelectMany(f => ((Dictionary<string, float>)f.GetValue(null)!).Keys)
             .Distinct();
 
-    // #1b: every legal stat name must appear in the prompt, or modifyStat is unusable (the oracle
-    // guesses names like "speed"/"attackSpeed" that hard-fail the parser and bias the marginals).
-    [Fact]
-    public void Prompt_NamesEveryStatKind()
+    // every legal stat name must appear in the prompt, or modifyStat is unusable (the oracle guesses
+    // names like "speed"/"attackSpeed" that hard-fail the parser and bias the marginals).
+    [Theory]
+    [MemberData(nameof(Prompts))]
+    public void Prompt_NamesEveryStatKind(string promptPath)
     {
-        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile("prompts/proposal-oracle.md"));
+        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile(promptPath));
         var stats = Enum.GetValues<StatKind>()
             .Select(s => { string n = s.ToString(); return char.ToLowerInvariant(n[0]) + n.Substring(1); })
             .ToList();
@@ -63,16 +71,17 @@ public class PromptVocabularySyncTests
             Assert.Contains(stat, prompt, StringComparison.Ordinal);
     }
 
-    // #4: the reverse direction — the prompt must not declare a band the tables don't define.
-    [Fact]
-    public void Prompt_DeclaresNoBandOutsideTheTables()
+    // the reverse direction — a prompt must not declare a band the tables don't define.
+    [Theory]
+    [MemberData(nameof(Prompts))]
+    public void Prompt_DeclaresNoBandOutsideTheTables(string promptPath)
     {
-        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile("prompts/proposal-oracle.md"));
+        string prompt = File.ReadAllText(PromptTemplate.LocateRepoFile(promptPath));
         var tableBands = BandNamesFromTables().ToHashSet(StringComparer.Ordinal);
         var declared = DeclaredBandsInPrompt(prompt).ToList();
         Assert.NotEmpty(declared); // guard against a vacuous pass if the section moves/renames
         foreach (var b in declared)
-            Assert.True(tableBands.Contains(b), $"prompt lists band '{b}' that BalanceTables does not define");
+            Assert.True(tableBands.Contains(b), $"{promptPath} lists band '{b}' that BalanceTables does not define");
     }
 
     // Bands are the comma-separated tokens after the last colon of each bullet under the prompt's

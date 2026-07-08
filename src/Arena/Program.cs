@@ -12,6 +12,11 @@ try
         case "tournament": return RunTournament(args);
         case "sweep": return RunSweep(args);
         case "evaluate": return RunEvaluate(args);
+        case "fuse": return await RunFuse(args);
+        case "fuse-batch": return await RunFuseBatch(args);
+        case "evaluate-fusions": return RunEvaluateFusions(args);
+        case "quiz": return RunQuiz(args);
+        case "record-f3": return RunRecordF3(args);
         default: PrintUsage(); return 2;
     }
 }
@@ -40,6 +45,45 @@ static int RunEvaluate(string[] args)
     if (args.Length < 2) { Console.Error.WriteLine("usage: evaluate <kitsDir>"); return 2; }
     return Evaluator.RunEvaluate(args[1], Console.Out);
 }
+
+// ── Phase B: fusion pipeline modes ──
+
+static async Task<int> RunFuse(string[] args)
+{
+    if (args.Length < 3) { Console.Error.WriteLine("usage: fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f]"); return 2; }
+    int? tier = ParseTier(Opt(args, "--tier"));
+    string model = Opt(args, "--model") ?? "claude-sonnet-4-6";
+    return await FusionPipeline.RunFuse(args[1], args[2], tier, model, Opt(args, "--stub-responses"), Console.Out);
+}
+
+static async Task<int> RunFuseBatch(string[] args)
+{
+    string pairs = Opt(args, "--pairs-file") ?? throw new ArgumentException("fuse-batch requires --pairs-file <f>");
+    string model = Opt(args, "--model") ?? "claude-sonnet-4-6";
+    return await FusionPipeline.RunFuseBatch(pairs, model, Opt(args, "--stub-responses"), Console.Out);
+}
+
+static int RunEvaluateFusions(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: evaluate-fusions <fusionsDir>"); return 2; }
+    return FusionEvaluator.RunEvaluate(args[1], Console.Out);
+}
+
+static int RunQuiz(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: quiz <fusionsDir> --seed S"); return 2; }
+    long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
+    return FusionQuiz.RunQuiz(args[1], seed, Console.Out);
+}
+
+static int RunRecordF3(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: record-f3 <verdictDoc> --score n/20"); return 2; }
+    string score = Opt(args, "--score") ?? throw new ArgumentException("record-f3 requires --score n/20");
+    return FusionEvaluator.RunRecordF3(args[1], score, Console.Out);
+}
+
+static int? ParseTier(string? s) => s is null || s == "auto" ? null : int.Parse(s, CultureInfo.InvariantCulture);
 
 static int RunFight(string[] args)
 {
@@ -143,4 +187,9 @@ static void PrintUsage()
     Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] [--amplify-major f] --seeds 1..5");
     Console.WriteLine("  sweep <kitsDir> --seeds 1..5 [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");
+    Console.WriteLine("  fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f]");
+    Console.WriteLine("  fuse-batch --pairs-file <f> [--stub-responses f]");
+    Console.WriteLine("  evaluate-fusions <fusionsDir>");
+    Console.WriteLine("  quiz <fusionsDir> --seed S");
+    Console.WriteLine("  record-f3 <verdictDoc> --score n/20");
 }
