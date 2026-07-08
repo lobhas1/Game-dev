@@ -1,0 +1,16 @@
+{
+  "name": "Pebble",
+  "emoji": "🪨",
+  "element": "earth",
+  "tags": ["ward"],
+  "flavor": "The smallest argument a mountain makes.",
+  "spell": {
+    "id": "pebble",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "shield", "share": 1.0, "duration": "medium" }
+    ]
+  }
+}

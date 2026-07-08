@@ -1,0 +1,16 @@
+{
+  "name": "Gust",
+  "emoji": "🌬️",
+  "element": "air",
+  "tags": ["movement"],
+  "flavor": "A breath the sky forgot to hold.",
+  "spell": {
+    "id": "gust",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "trivial" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "displace", "subject": "target", "mode": "push", "distance": "medium" }
+    ]
+  }
+}

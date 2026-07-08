@@ -1,0 +1,16 @@
+{
+  "name": "Droplet",
+  "emoji": "💧",
+  "element": "water",
+  "tags": ["heal"],
+  "flavor": "One bead of rain, patient as the sea.",
+  "spell": {
+    "id": "droplet",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "heal", "share": 1.0 }
+    ]
+  }
+}

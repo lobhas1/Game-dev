@@ -1,0 +1,17 @@
+{
+  "name": "Ember",
+  "emoji": "🔥",
+  "element": "fire",
+  "tags": ["damage"],
+  "flavor": "A stubborn coal that wants to be a wildfire.",
+  "spell": {
+    "id": "ember",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "projectile", "speed": "fast" },
+    "clauses": [
+      { "verb": "damage", "element": "fire", "share": 0.6 },
+      { "verb": "applyStatus", "status": "burn", "duration": "medium", "share": 0.4 }
+    ]
+  }
+}

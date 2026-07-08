@@ -1,0 +1,16 @@
+{
+  "name": "Umbra",
+  "emoji": "🌑",
+  "element": "shadow",
+  "tags": ["conceal"],
+  "flavor": "The dark that stays when the lamp leaves.",
+  "spell": {
+    "id": "umbra",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "applyStatus", "status": "blind", "duration": "medium", "share": 1.0 }
+    ]
+  }
+}
