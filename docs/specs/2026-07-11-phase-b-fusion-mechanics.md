@@ -20,7 +20,10 @@ parents (proposal JSON, bundled with naming metadata)
 A **seed / parent card** bundles meaning and mechanics: `{name, emoji, element, tags, flavor,
 spell}` where `spell` is a gate-clean proposal-stage spell (its `clauses` are the parent's
 mechanics, its top-level fields are the naming line). The prototype's `SEEDS` are meaning-only
-cards; Phase B gives each a real T0-verb body. Six tier-1 seeds, mechanically distinct:
+cards; Phase B gives each a real T0-verb body. A **depth-2 parent** is a fusion record loaded the
+same way — but its ingredient identity (name, element, tags, flavor) is read from the record's
+`concept` block, not its top-level `name` (which is the kebab file-id, e.g. `steam`), so the naming
+line reads `"Steam"`, not `"steam"`. Six tier-1 seeds, mechanically distinct:
 
 | seed | element | parent tag | body (T0 verbs) |
 |---|---|---|---|
@@ -68,7 +71,11 @@ A tag is matched by walking the gated spell's delivery type and every clause, re
 `tier(a, b) = a.tier == b.tier ? min(3, a.tier + 1) : max(a.tier, b.tier)`. Equal tiers ascend by
 one; unequal keep the higher; the T0 slice caps at **tier 3** (the doctrine's cap-5 is out of
 slice). The tier is computed in code and passed to BOTH oracle prompts as `{{TIER}}`; the mechanics
-spell must emit exactly that tier. The record stores the tier-law result as authoritative.
+spell must emit exactly that tier. **The gate enforces it:** a spell whose `tier` ≠ the law's tier
+fails the gate with `tier mismatch: law requires N` and flows into the one-repair path (wrong tier
+once → repaired; twice → discarded), never a silent overwrite. Tier drives the power budget and the
+same-tier decoy pairing, so an unchecked tier would corrupt F1, F2, and the quiz. The record stores
+the tier-law result as authoritative.
 
 ## Decoy construction (F2 and F3)
 

@@ -81,6 +81,46 @@ public class FusionTests
         Assert.Equal(1, oracle.CallCount);    // mechanics never reached
     }
 
+    // ── tier is enforced AT the gate: a wrong tier is a gate failure that flows into repair ──
+    [Fact]
+    public async Task Fuse_WrongTier_RepairsToLawTier()
+    {
+        var (a, b) = Parents();                                  // law tier = T1 + T1 → 2
+        string wrongTier = MechSteam.Replace("\"tier\":2", "\"tier\":3");
+        var oracle = new StubOracle(NamingSteam, wrongTier, MechSteam);
+        var rec = await Fuse(oracle, a, b);
+        Assert.True(rec.Gated);
+        Assert.False(rec.FirstPassOk);      // T3 spell under a T2 law failed the gate
+        Assert.True(rec.Repaired);
+        Assert.Equal(2, rec.Tier);
+        Assert.Equal(3, oracle.CallCount);  // naming + wrong-tier mechanics + repair
+    }
+
+    [Fact]
+    public async Task Fuse_WrongTierTwice_Discards()
+    {
+        var (a, b) = Parents();
+        string wrongTier = MechSteam.Replace("\"tier\":2", "\"tier\":3");
+        var oracle = new StubOracle(NamingSteam, wrongTier, wrongTier);
+        var rec = await Fuse(oracle, a, b);
+        Assert.True(rec.Discarded);
+        Assert.Contains("tier mismatch", rec.GateError);
+    }
+
+    // ── a fusion record loaded as a parent takes its concept name, not the kebab file-id ──
+    [Fact]
+    public void Seed_LoadsFusionRecordAsParent_FromConcept()
+    {
+        string recJson = @"{""name"":""steam"",""tier"":2,""origin"":{""source"":""live"",""model"":""m""},""concept"":{""name"":""Steam"",""element"":""water"",""tags"":[""area"",""control""],""flavor"":""vapor""},""spell"":{""id"":""steam"",""tier"":2,""delivery"":{""type"":""self""},""clauses"":[{""verb"":""heal"",""share"":1.0}]}}";
+        string path = Path.Combine(Path.GetTempPath(), "steam-" + Guid.NewGuid().ToString("N") + ".record.json");
+        File.WriteAllText(path, recJson);
+        var seed = Seed.Load(path);
+        Assert.Equal("Steam", seed.Name);   // concept.name, not the kebab "steam"
+        Assert.Equal("water", seed.Element);
+        Assert.Contains("area", seed.Tags);
+        Assert.Contains("control", seed.Tags);
+    }
+
     // ── F2 scorer: known coverage and decoy baseline ──
     [Fact]
     public void F2_RealBeatsDecoy_OnCleanCorpus()

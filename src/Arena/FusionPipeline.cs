@@ -95,14 +95,14 @@ public static class FusionPipeline
         string mechPrompt = RenderMechanics(mechanicsTemplate, a, b, concept, tier);
         JsonNode? node = KitGenerator.ExtractObject(await oracle.CompleteAsync(mechPrompt));
         string? err1 = "mechanics reply unparseable";
-        bool firstPass = node is not null && TryGate(node, out err1);
+        bool firstPass = node is not null && TryGate(node, tier, out err1);
         if (firstPass)
             return Rec(name, tier, a, b, aPath, bPath, concept, node!, true, false, false, null, namingSha, mechanicsSha, source, model, timestamp);
 
         string repairPrompt = BuildRepair(mechPrompt, node, err1);
         JsonNode? node2 = KitGenerator.ExtractObject(await oracle.CompleteAsync(repairPrompt));
         string? err2 = "repair reply unparseable";
-        bool repairedOk = node2 is not null && TryGate(node2, out err2);
+        bool repairedOk = node2 is not null && TryGate(node2, tier, out err2);
         if (repairedOk)
             return Rec(name, tier, a, b, aPath, bPath, concept, node2!, false, true, false, null, namingSha, mechanicsSha, source, model, timestamp);
 
@@ -114,9 +114,19 @@ public static class FusionPipeline
         string namingSha, string mechanicsSha, string source, string model, string ts) =>
         new(name, tier, a.Name, b.Name, aPath, bPath, concept, spell, firstPass, repaired, discarded, err, namingSha, mechanicsSha, source, model, ts);
 
-    private static bool TryGate(JsonNode node, out string? error)
+    // The gate is parse + compile + tier-law match. The tier check is part of the gate (not a
+    // silent overwrite): a spell whose tier ≠ the law's tier fails with a message that flows into
+    // the one-repair path, so the oracle is told exactly what to fix. Tier drives the power budget
+    // and the same-tier decoy pairing, so an unchecked tier corrupts F1, F2, and the quiz.
+    private static bool TryGate(JsonNode node, int lawTier, out string? error)
     {
-        try { _ = SpellCompiler.Compile(SpellJson.Parse(node.ToJsonString())); error = null; return true; }
+        try
+        {
+            var spell = SpellCompiler.Compile(SpellJson.Parse(node.ToJsonString()));
+            if (spell.Tier != lawTier) { error = $"tier mismatch: law requires {lawTier}"; return false; }
+            error = null;
+            return true;
+        }
         catch (Exception ex) { error = ex.Message; return false; }
     }
 

@@ -15,12 +15,16 @@ public sealed record Seed(string Name, string Emoji, string Element,
     {
         var o = JsonNode.Parse(File.ReadAllText(path)) as JsonObject
                 ?? throw new InvalidOperationException($"seed '{path}' must be a JSON object.");
+        // A fusion record loaded as a depth-2 parent carries its naming fields under "concept" (its
+        // top-level "name" is the kebab file-id, e.g. "steam"); a seed card carries them at the top
+        // level. Read the ingredient identity from whichever exists so the naming line reads "Steam".
+        var meta = o["concept"] as JsonObject ?? o;
         var spell = o["spell"] ?? throw new InvalidOperationException($"seed '{path}' has no 'spell'.");
         return new Seed(
-            Str(o, "name") ?? Path.GetFileNameWithoutExtension(path),
-            Str(o, "emoji") ?? "",
-            Str(o, "element") ?? "",
-            ReadTags(o), Str(o, "flavor") ?? "", spell.DeepClone());
+            Str(meta, "name") ?? Path.GetFileNameWithoutExtension(path),
+            Str(meta, "emoji") ?? "",
+            Str(meta, "element") ?? "",
+            ReadTags(meta), Str(meta, "flavor") ?? "", spell.DeepClone());
     }
 
     /// <summary>The doctrine's ingredient line: <c>"Name" — element: e, tags: [a, b], flavor: "f"</c>.</summary>
