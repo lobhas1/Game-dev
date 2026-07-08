@@ -1,0 +1,121 @@
+[
+  {
+    "id": "glacial-bolt",
+    "tier": 1,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "water",
+        "share": 0.6
+      },
+      {
+        "verb": "applyStatus",
+        "status": "chill",
+        "duration": "medium",
+        "share": 0.4
+      }
+    ]
+  },
+  {
+    "id": "flash-freeze",
+    "tier": 1,
+    "cast": {
+      "mode": "cast",
+      "castTime": "long",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "freeze",
+        "duration": "medium",
+        "share": 0.5,
+        "template": {
+          "kind": "ifStatus",
+          "status": "chill",
+          "consume": true,
+          "amplify": "major",
+          "also": []
+        }
+      },
+      {
+        "verb": "damage",
+        "element": "water",
+        "share": 0.5,
+        "template": {
+          "kind": "ifStatus",
+          "status": "freeze",
+          "consume": false,
+          "amplify": "minor",
+          "also": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "frost-ward",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "element": "water",
+        "share": 0.5,
+        "duration": "medium"
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "small",
+        "duration": "medium",
+        "tickInterval": "slow",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "applyStatus",
+            "status": "chill",
+            "duration": "short",
+            "share": 0.5
+          }
+        ]
+      }
+    ]
+  }
+]

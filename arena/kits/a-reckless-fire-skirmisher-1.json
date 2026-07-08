@@ -1,0 +1,128 @@
+[
+  {
+    "id": "ember-dash",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "medium"
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "small",
+        "duration": "short",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "short",
+            "share": 0.6
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "reckless-flare",
+    "tier": 1,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.65,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": true,
+          "amplify": "major",
+          "also": [
+            {
+              "verb": "applyStatus",
+              "status": "stun",
+              "duration": "short",
+              "share": 0.35
+            }
+          ]
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "burn",
+        "duration": "medium",
+        "share": 0.35
+      }
+    ]
+  },
+  {
+    "id": "molten-skin",
+    "tier": 1,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "element": "fire",
+        "share": 0.5,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "buff",
+        "share": 0.3,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "damageOut",
+        "direction": "buff",
+        "share": 0.2,
+        "duration": "short"
+      }
+    ]
+  }
+]

@@ -1,0 +1,125 @@
+[
+  {
+    "id": "shadow-mark",
+    "tier": 3,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "vulnerable",
+        "duration": "medium",
+        "share": 0.4
+      },
+      {
+        "verb": "applyStatus",
+        "status": "stealth",
+        "duration": "short",
+        "share": 0.35
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "moveSpeed",
+        "direction": "buff",
+        "share": 0.25,
+        "duration": "short"
+      }
+    ]
+  },
+  {
+    "id": "void-strike",
+    "tier": 3,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "projectile",
+      "speed": "fast"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "shadow",
+        "share": 0.55,
+        "template": {
+          "kind": "ifStatus",
+          "status": "vulnerable",
+          "consume": false,
+          "amplify": "major",
+          "also": [
+            {
+              "verb": "applyStatus",
+              "status": "bleed",
+              "duration": "medium",
+              "share": 0.2
+            }
+          ]
+        }
+      },
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "small"
+      }
+    ]
+  },
+  {
+    "id": "umbral-shroud",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "element": "shadow",
+        "share": 0.45,
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "stealth",
+        "duration": "medium",
+        "share": 0.3
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "direction": "buff",
+        "share": 0.25,
+        "duration": "medium"
+      }
+    ]
+  }
+]
