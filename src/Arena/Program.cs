@@ -50,17 +50,19 @@ static int RunEvaluate(string[] args)
 
 static async Task<int> RunFuse(string[] args)
 {
-    if (args.Length < 3) { Console.Error.WriteLine("usage: fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f]"); return 2; }
+    if (args.Length < 3) { Console.Error.WriteLine("usage: fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f] [--arena dir]"); return 2; }
     int? tier = ParseTier(Opt(args, "--tier"));
     string model = Opt(args, "--model") ?? "claude-sonnet-4-6";
-    return await FusionPipeline.RunFuse(args[1], args[2], tier, model, Opt(args, "--stub-responses"), Console.Out);
+    string arena = Opt(args, "--arena") ?? PromptTemplate.ArenaDir();
+    return await FusionPipeline.RunFuse(args[1], args[2], tier, model, Opt(args, "--stub-responses"), arena, Console.Out);
 }
 
 static async Task<int> RunFuseBatch(string[] args)
 {
     string pairs = Opt(args, "--pairs-file") ?? throw new ArgumentException("fuse-batch requires --pairs-file <f>");
     string model = Opt(args, "--model") ?? "claude-sonnet-4-6";
-    return await FusionPipeline.RunFuseBatch(pairs, model, Opt(args, "--stub-responses"), Console.Out);
+    string arena = Opt(args, "--arena") ?? PromptTemplate.ArenaDir();
+    return await FusionPipeline.RunFuseBatch(pairs, model, Opt(args, "--stub-responses"), arena, Console.Out);
 }
 
 static int RunEvaluateFusions(string[] args)
@@ -187,8 +189,8 @@ static void PrintUsage()
     Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] [--amplify-major f] --seeds 1..5");
     Console.WriteLine("  sweep <kitsDir> --seeds 1..5 [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");
-    Console.WriteLine("  fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f]");
-    Console.WriteLine("  fuse-batch --pairs-file <f> [--stub-responses f]");
+    Console.WriteLine("  fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f] [--arena dir]");
+    Console.WriteLine("  fuse-batch --pairs-file <f> [--stub-responses f] [--arena dir]");
     Console.WriteLine("  evaluate-fusions <fusionsDir>");
     Console.WriteLine("  quiz <fusionsDir> --seed S");
     Console.WriteLine("  record-f3 <verdictDoc> --score n/20");

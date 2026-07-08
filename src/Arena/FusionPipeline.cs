@@ -159,15 +159,15 @@ public static class FusionPipeline
 
     // ── mode runners ──
 
-    public static async Task<int> RunFuse(string pathA, string pathB, int? tierOverride, string model, string? stubFile, TextWriter outw)
+    public static async Task<int> RunFuse(string pathA, string pathB, int? tierOverride, string model, string? stubFile, string arenaDir, TextWriter outw)
     {
         var (oracle, source, mdl) = MakeOracle(model, stubFile);
         var rec = await FuseOne(oracle, source, mdl, pathA, pathB, tierOverride);
-        WriteRecord(rec, outw);
+        WriteRecord(rec, arenaDir, outw);
         return rec.Gated ? 0 : 3;
     }
 
-    public static async Task<int> RunFuseBatch(string pairsFile, string model, string? stubFile, TextWriter outw)
+    public static async Task<int> RunFuseBatch(string pairsFile, string model, string? stubFile, string arenaDir, TextWriter outw)
     {
         var (oracle, source, mdl) = MakeOracle(model, stubFile);
         int gated = 0, discarded = 0, total = 0;
@@ -179,7 +179,7 @@ public static class FusionPipeline
             if (parts.Length < 2) { outw.WriteLine($"skip (need two paths): {line}"); continue; }
             total++;
             var rec = await FuseOne(oracle, source, mdl, ResolvePath(parts[0]), ResolvePath(parts[1]), tierOverride: null);
-            WriteRecord(rec, outw);
+            WriteRecord(rec, arenaDir, outw);
             if (rec.Gated) gated++; else discarded++;
         }
         outw.WriteLine($"\nfuse-batch ({source}): {total} pairs → {gated} gated, {discarded} discarded.");
@@ -208,28 +208,58 @@ public static class FusionPipeline
         return (new StubOracle(blocks), "stub", "stub:" + Path.GetFileName(stubFile));
     }
 
-    public static void WriteRecord(FusionRecord rec, TextWriter outw)
-    {
-        string dir = Path.Combine(PromptTemplate.ArenaDir(), "fusions");
-        Directory.CreateDirectory(dir);
-        var opts = new JsonSerializerOptions { WriteIndented = true };
+    /// <summary>Short parents fingerprint: 8 hex of sha256(parentApath | parentbpath). Two recipes
+    /// that converge on the same NAME still get distinct filenames, so convergence (canon-correct)
+    /// never destroys the archive.</summary>
+    public static string ParentsHash8(string aPath, string bPath) =>
+        Evaluator.Sha256Hex(aPath + "|" + bPath).Substring(0, 8);
 
-        File.WriteAllText(Path.Combine(dir, rec.Name + ".record.json"), rec.ToJson().ToJsonString(opts));
+    // A prior record with the SAME name but a DIFFERENT parents-hash — i.e. the same concept
+    // rediscovered by a different recipe. Oldest first, so "first seen" is stable.
+    private static FusionRecord? FindRediscovery(string fusionsDir, FusionRecord rec)
+    {
+        string hash = ParentsHash8(rec.ParentAPath, rec.ParentBPath);
+        return FusionEvaluator.LoadRecords(fusionsDir)
+            .Where(e => string.Equals(e.Name, rec.Name, StringComparison.Ordinal)
+                     && ParentsHash8(e.ParentAPath, e.ParentBPath) != hash)
+            .OrderBy(e => e.Timestamp, StringComparer.Ordinal)
+            .FirstOrDefault();
+    }
+
+    public static void WriteRecord(FusionRecord rec, string arenaDir, TextWriter outw)
+    {
+        string dir = Path.Combine(arenaDir, "fusions");
+        Directory.CreateDirectory(dir);
+        string stem = rec.Name + "-" + ParentsHash8(rec.ParentAPath, rec.ParentBPath);
+        string logPath = Path.Combine(arenaDir, "fusions.log");
+
+        // Detect convergence BEFORE writing (so we never match ourselves). The hashed stem means a
+        // different pair with the same name lands on a different file — never an overwrite.
+        var twin = FindRediscovery(dir, rec);
+
+        var opts = new JsonSerializerOptions { WriteIndented = true };
+        File.WriteAllText(Path.Combine(dir, stem + ".record.json"), rec.ToJson().ToJsonString(opts));
         if (rec.Gated)
-            File.WriteAllText(Path.Combine(dir, rec.Name + ".spell.json"), rec.Spell!.ToJsonString(opts));
+            File.WriteAllText(Path.Combine(dir, stem + ".spell.json"), rec.Spell!.ToJsonString(opts));
 
         string status = rec.Discarded ? "DISCARD" : rec.Repaired ? "repaired" : "first-pass";
-        File.AppendAllText(Path.Combine(PromptTemplate.ArenaDir(), "fusions.log"),
-            string.Join(" | ",
-                rec.Timestamp, "name=" + rec.Name, "tier=" + rec.Tier,
-                "source=" + rec.Source, "model=" + rec.Model,
-                "parents=" + rec.ParentA + "+" + rec.ParentB,
-                "tags=[" + string.Join(",", rec.Concept.Tags) + "]",
-                "gate=" + status,
-                "namingSha=" + rec.NamingSha, "mechanicsSha=" + rec.MechanicsSha,
-                rec.GateError is null ? "" : "error=" + rec.GateError.Replace("|", "/").Replace("\n", " ")) + Environment.NewLine);
+        var log = new StringBuilder();
+        log.Append(string.Join(" | ",
+            rec.Timestamp, "name=" + rec.Name, "file=" + stem, "tier=" + rec.Tier,
+            "source=" + rec.Source, "model=" + rec.Model,
+            "parents=" + rec.ParentA + "+" + rec.ParentB,
+            "tags=[" + string.Join(",", rec.Concept.Tags) + "]",
+            "gate=" + status,
+            "namingSha=" + rec.NamingSha, "mechanicsSha=" + rec.MechanicsSha,
+            rec.GateError is null ? "" : "error=" + rec.GateError.Replace("|", "/").Replace("\n", " ")));
+        log.Append(Environment.NewLine);
+        if (twin is not null)
+            log.Append($"rediscovered: {rec.Concept.Name} via {rec.ParentA}+{rec.ParentB} (first seen: {twin.ParentA}+{twin.ParentB})").Append(Environment.NewLine);
+        File.AppendAllText(logPath, log.ToString());
 
-        outw.WriteLine($"{status,-10} [{rec.Source}] {rec.ParentA} + {rec.ParentB} → {rec.Concept.Name} (T{rec.Tier})  [{string.Join(",", rec.Concept.Tags)}]  → {rec.Name}.record.json");
+        outw.WriteLine($"{status,-10} [{rec.Source}] {rec.ParentA} + {rec.ParentB} → {rec.Concept.Name} (T{rec.Tier})  [{string.Join(",", rec.Concept.Tags)}]  → {stem}.record.json");
+        if (twin is not null)
+            outw.WriteLine($"  ↳ rediscovered: {rec.Concept.Name} (first seen: {twin.ParentA}+{twin.ParentB})");
     }
 
     private static string RelPath(string p)

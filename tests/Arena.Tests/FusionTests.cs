@@ -241,6 +241,48 @@ public class FusionTests
         Assert.Contains("correct side", key);               // the key holds them
     }
 
+    // ── collision-proof filenames: convergence must not destroy the archive ──
+    [Fact]
+    public void SameName_DifferentParents_WritesTwoFiles_AndLogsRediscovery()
+    {
+        string arena = NewTempArena();
+        FusionPipeline.WriteRecord(RecNamed("murk", "Murk", "Droplet", "Umbra", "fixtures/seeds/droplet.seed.json", "fixtures/seeds/umbra.seed.json"), arena, TextWriter.Null);
+        FusionPipeline.WriteRecord(RecNamed("murk", "Murk", "Gust", "Umbra", "fixtures/seeds/gust.seed.json", "fixtures/seeds/umbra.seed.json"), arena, TextWriter.Null);
+
+        Assert.Equal(2, Directory.GetFiles(Path.Combine(arena, "fusions"), "murk-*.record.json").Length); // distinct parents-hash → no overwrite
+        Assert.Contains("rediscovered: Murk via Gust+Umbra (first seen: Droplet+Umbra)",
+            File.ReadAllText(Path.Combine(arena, "fusions.log")), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void SamePair_FusedAgain_SelfOverwrites_OneFile()
+    {
+        string arena = NewTempArena();
+        var pair = RecNamed("murk", "Murk", "Droplet", "Umbra", "fixtures/seeds/droplet.seed.json", "fixtures/seeds/umbra.seed.json");
+        FusionPipeline.WriteRecord(pair, arena, TextWriter.Null);
+        FusionPipeline.WriteRecord(pair, arena, TextWriter.Null);
+
+        Assert.Single(Directory.GetFiles(Path.Combine(arena, "fusions"), "murk-*.record.json")); // same hash → same file, self-overwrite is fine
+        Assert.DoesNotContain("rediscovered", File.ReadAllText(Path.Combine(arena, "fusions.log")), StringComparison.Ordinal);
+    }
+
+    [Fact]
+    public void Readers_CountBothFilenamePatterns()
+    {
+        string arena = NewTempArena();
+        string dir = Path.Combine(arena, "fusions");
+        Directory.CreateDirectory(dir);
+        File.WriteAllText(Path.Combine(dir, "steam.record.json"),               // legacy name-only
+            RecNamed("steam", "Steam", "Ember", "Droplet", "fixtures/seeds/ember.seed.json", "fixtures/seeds/droplet.seed.json").ToJson().ToJsonString());
+        File.WriteAllText(Path.Combine(dir, "murk-a1b2c3d4.record.json"),        // new name-hash
+            RecNamed("murk", "Murk", "Droplet", "Umbra", "fixtures/seeds/droplet.seed.json", "fixtures/seeds/umbra.seed.json").ToJson().ToJsonString());
+
+        var recs = FusionEvaluator.LoadRecords(dir);
+        Assert.Equal(2, recs.Count);                                            // evaluator counts both
+        Assert.Equal(2, FusionEvaluator.Evaluate(recs, "N", "M").MechProposals);
+        Assert.Equal(2, FusionQuiz.BuildTrials(recs, 1).Count);                 // quiz counts both (T2 each → same-tier decoys)
+    }
+
     // ── helpers ──
     private const string NamingSteam = @"{""name"":""Steam"",""emoji"":""x"",""element"":""water"",""tags"":[""area"",""control""],""flavor"":""f"",""why"":""w""}";
     private const string MechSteam = @"{""id"":""steam"",""tier"":2,""cast"":{""mode"":""instant"",""cooldown"":""medium"",""cost"":{""resource"":""mana"",""amount"":""moderate""}},""delivery"":{""type"":""groundAoE"",""shape"":""circle"",""size"":""medium""},""clauses"":[{""verb"":""applyStatus"",""status"":""slow"",""duration"":""medium"",""share"":0.5},{""verb"":""damage"",""element"":""water"",""share"":0.5}]}";
@@ -267,5 +309,22 @@ public class FusionTests
         var concept = new Concept(name, "", "fire", tags.ToList(), "flavor " + name, "why");
         return new FusionRecord(name, tier, "A", "B", "a.json", "b.json", concept, spell,
             firstPass, false, false, null, nSha, mSha, source, "test-model", "2026-01-01T00:00:00Z");
+    }
+
+    // A gated live record with an explicit kebab name, concept name, parent display names, and parent
+    // paths — the paths drive the filename hash, the display names drive the rediscovery message.
+    private static FusionRecord RecNamed(string kebab, string conceptName, string aName, string bName, string aPath, string bPath)
+    {
+        var spell = JsonNode.Parse($"{{\"id\":\"{kebab}\",\"tier\":2,\"delivery\":{{\"type\":\"self\"}},\"clauses\":[{{\"verb\":\"heal\",\"share\":1.0}}]}}");
+        var concept = new Concept(conceptName, "", "shadow", new List<string> { "conceal" }, "flavor", "why");
+        return new FusionRecord(kebab, 2, aName, bName, aPath, bPath, concept, spell,
+            true, false, false, null, "N", "M", "live", "test-model", "2026-01-01T00:00:00Z");
+    }
+
+    private static string NewTempArena()
+    {
+        string dir = Path.Combine(Path.GetTempPath(), "arena-b-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(dir);
+        return dir;
     }
 }

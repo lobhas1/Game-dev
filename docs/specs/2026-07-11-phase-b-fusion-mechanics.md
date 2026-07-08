@@ -111,12 +111,17 @@ layer up. `source` is set by the pipeline from the oracle it used (a `StubOracle
 ## Machinery
 
 - **`fuse <parentA.json> <parentB.json> [--tier auto]`** — naming call → mechanics call → gate (one
-  repair) → writes `arena/fusions/<name>.spell.json` (the gated proposal spell) and
-  `arena/fusions/<name>.record.json` (parents, concept, clauses, both shas, **origin: source
-  live|stub + model**, timestamps, repair/discard notes), and appends `arena/fusions.log`.
-  `--tier auto` (default) applies the tier law; an explicit `--tier N` overrides.
-  `--stub-responses <f>` (offline only) drives the pipeline from a canned-reply file and tags every
-  record `source: stub`.
+  repair) → writes `arena/fusions/<name>-<hash8>.spell.json` (the gated proposal spell) and
+  `arena/fusions/<name>-<hash8>.record.json` (parents, concept, clauses, both shas, **origin: source
+  live|stub + model**, timestamps, repair/discard notes), and appends `arena/fusions.log`. The
+  filename carries **`<hash8>` = the first 8 hex of `sha256(parentApath|parentBpath)`** so two recipes
+  that converge on the same NAME get distinct files — convergence is canon-correct and must not
+  overwrite. When a name reappears under a different parents-hash the run appends
+  `rediscovered: <Name> via <A>+<B> (first seen: <A0>+<B0>)` to the log; a re-fused identical pair
+  self-overwrites (same hash). Every reader globs `*.record.json`, so both the legacy `<name>.` and
+  new `<name>-<hash8>.` filenames are read. `--tier auto` (default) applies the tier law; an explicit
+  `--tier N` overrides. `--stub-responses <f>` (offline) drives the pipeline from a canned-reply file
+  and tags every record `source: stub`; `--arena <dir>` (offline/test) redirects the output tree.
 - **`fuse-batch --pairs-file <f>`** — one `fuse` per line (`parentA.json parentB.json`), a scripted
   run list. Rejections and discards are data — a pair is never rerun.
 - **`evaluate-fusions <fusionsDir>`** — computes F1 (first-try gate rate) and F2 (mean coverage +
@@ -138,6 +143,19 @@ doctrine's six load-bearing sentences are reproduced VERBATIM in `prompts/naming
 doctrine sync test extends to it; the fusion-mechanics prompt duplicates the proposal prompt's
 closed vocabulary, drift-guarded by `PromptVocabularySyncTests`. Experiment docs are append-only;
 thresholds, prompts, seeds, and the mapping never move after the first live call.
+
+## Data-loss disclosure (run 483a70f)
+
+Run `483a70f` fused 20 pairs, but records were filed by name alone, so two naming convergences
+overwrote earlier records before this fix: **Droplet + Umbra → Murk** (clobbered by Gust + Umbra →
+Murk) and **Glimmer + Pebble → Cairn** (clobbered by Pebble + Umbra → Cairn) were lost — the log has
+20 lines, the archive 18 files. Convergence is canon-correct for the game; destroying the archive
+was a bug, now closed by the hashed filenames above. The two lost pairs will be **re-fused as NEW
+samples** under the same (unchanged) prompt shas — disclosed **data-loss recovery, not
+result-fishing**: fishing means rerunning a pair to chase a better score, which stays forbidden;
+restoring an archive the tooling destroyed is a different act. After recovery the corpus is 20 again
+and the quiz regenerates at **20 trials, seed 42**, to match the pre-registered ≥14/20 bar (the bar
+never moves; the trial count returns to 20).
 
 ## Two-stage plan
 
