@@ -194,6 +194,8 @@ public static class Replay
 
     private static IReadOnlyList<string> ReRunLive(HeaderInfo h)
     {
+        if (h.Mode == "showcase")
+            return Showcase.RunLive(Resolve(h.KitAPath), h.Seed, h.MaxSeconds);
         var config = new FightConfig { HpScale = h.HpScale, Mana = h.Mana, AmplifyMajor = h.AmplifyMajor };
         var a = Kit.Load(Resolve(h.KitAPath), config.Overrides);
         var b = Kit.Load(Resolve(h.KitBPath), config.Overrides);
@@ -204,7 +206,13 @@ public static class Replay
 
     public sealed record HeaderInfo(string KitA, string KitB, string KitAPath, string KitBPath, long Seed,
         float HpScale, float Mana, float AmplifyMajor, double Duration, string Winner, string EndReason,
-        IReadOnlyList<(int Id, string Name)> Entities);
+        IReadOnlyList<(int Id, string Name)> Entities)
+    {
+        /// <summary>Optional schema-1-compatible extras: "fight" (default) or "showcase". Extra header
+        /// keys are ignored by every schema-1 reader (Unreal included).</summary>
+        public string Mode { get; init; } = "fight";
+        public float MaxSeconds { get; init; } = Showcase.DefaultMaxSeconds;
+    }
 
     private static bool IsStr(JsonNode? n) => n is JsonValue && n.GetValueKind() == JsonValueKind.String;
     private static bool IsNum(JsonNode? n) => n is JsonValue && n.GetValueKind() == JsonValueKind.Number;
@@ -243,7 +251,11 @@ public static class Replay
             (float)h["config"]!["hpScale"]!.GetValue<double>(), (float)h["config"]!["mana"]!.GetValue<double>(),
             (float)h["config"]!["amplifyMajor"]!.GetValue<double>(),
             h["durationSeconds"]!.GetValue<double>(),
-            h["winner"]!.GetValue<string>(), h["endReason"]!.GetValue<string>(), entities), null);
+            h["winner"]!.GetValue<string>(), h["endReason"]!.GetValue<string>(), entities)
+        {
+            Mode = IsStr(h["mode"]) ? h["mode"]!.GetValue<string>() : "fight",
+            MaxSeconds = IsNum(h["maxSeconds"]) ? (float)h["maxSeconds"]!.GetValue<double>() : Showcase.DefaultMaxSeconds
+        }, null);
     }
 
     /// <summary>The header must agree with the event stream: referenced entity ids exist in the
@@ -256,7 +268,10 @@ public static class Replay
         foreach (var id in referenced)
             if (id != 0 && !ids.Contains(id))
                 return $"an event references entity id {id}, absent from the manifest [{string.Join(",", ids)}].";
-        if (h.EndReason is not ("death" or "timeout" or "oom"))
+        bool showcase = h.Mode == "showcase";
+        if (showcase && h.EndReason is not ("quiescent" or "cap"))
+            return $"endReason '{h.EndReason}' is not quiescent|cap (showcase mode).";
+        if (!showcase && h.EndReason is not ("death" or "timeout" or "oom"))
             return $"endReason '{h.EndReason}' is not death|timeout|oom.";
         if (!string.Equals(h.Winner, "draw", StringComparison.Ordinal) && h.Entities.All(e => e.Name != h.Winner))
             return $"winner '{h.Winner}' is neither \"draw\" nor a manifest entity name.";

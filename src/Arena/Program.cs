@@ -19,6 +19,8 @@ try
         case "quiz": return RunQuiz(args);
         case "record-f3": return RunRecordF3(args);
         case "replay-verify": return RunReplayVerify(args);
+        case "showcase": return RunShowcase(args);
+        case "showcase-batch": return RunShowcaseBatch(args);
         default: PrintUsage(); return 2;
     }
 }
@@ -135,6 +137,27 @@ static int RunReplayVerify(string[] args)
     return Replay.RunVerify(args[1], HasFlag(args, "--diff-against-live"), Console.Out);
 }
 
+// ── M2: showcase modes ──
+
+static int RunShowcase(string[] args)
+{
+    string? replayOut = Opt(args, "--replay-out");
+    if (args.Length < 2 || replayOut is null)
+    { Console.Error.WriteLine("usage: showcase <spellfile> --seed N --replay-out <file.json> [--max-seconds S]"); return 2; }
+    long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
+    float maxSeconds = float.Parse(Opt(args, "--max-seconds") ?? Showcase.DefaultMaxSeconds.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+    return Showcase.RunShowcase(args[1], seed, maxSeconds, replayOut, Console.Out);
+}
+
+static int RunShowcaseBatch(string[] args)
+{
+    string outDir = Opt(args, "--out") ?? Path.Combine(PromptTemplate.ArenaDir(), "showcases");
+    string coverageDoc = Opt(args, "--coverage-doc")
+        ?? Path.Combine(PromptTemplate.RepoRoot(), "docs", "specs", "2026-07-11-m2-vocabulary-coverage.md");
+    long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
+    return Showcase.RunBatch(outDir, coverageDoc, seed, Console.Out);
+}
+
 static int RunTournament(string[] args)
 {
     if (args.Length < 2) { Console.Error.WriteLine("usage: tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] --seeds A..B"); return 2; }
@@ -211,6 +234,8 @@ static void PrintUsage()
     Console.WriteLine("  generate --brief \"…\" --tier N --kit-size 3 --count M [--model claude-sonnet-4-6] [--out arena/kits/]");
     Console.WriteLine("  fight <kitA.json> <kitB.json> --seed S [--hp-scale k] [--mana N] [--amplify-major f] [--replay-out file.json]");
     Console.WriteLine("  replay-verify <file.json> [--diff-against-live]");
+    Console.WriteLine("  showcase <spellfile> --seed N --replay-out <file.json> [--max-seconds S]");
+    Console.WriteLine("  showcase-batch [--out arena/showcases] [--seed N]");
     Console.WriteLine("  tournament <kitsDir> [--same-tier] [--hp-scale k] [--mana N] [--amplify-major f] --seeds 1..5");
     Console.WriteLine("  sweep <kitsDir> --seeds 1..5 [--hp-scales 3,4,5,6,8 | --hp-scale 8 --amplify-majors 2.5,2.25,2.0,1.75,1.5] [--mana N]");
     Console.WriteLine("  evaluate <kitsDir>");
