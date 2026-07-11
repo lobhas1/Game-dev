@@ -28,7 +28,8 @@ public static class FusionQuiz
         public bool Bool() => (Next() & 1UL) == 0UL;
     }
 
-    public static List<QuizTrial> BuildTrials(IReadOnlyList<FusionRecord> records, long seed)
+    public static List<QuizTrial> BuildTrials(IReadOnlyList<FusionRecord> records, long seed,
+        bool sameElementDecoys = false, IList<string>? notes = null)
     {
         // Only LIVE gated fusions are quizzable — a stub fusion is not genuine data.
         var gated = records.Where(r => r.Gated && r.IsLive && r.Spell is not null)
@@ -41,6 +42,14 @@ public static class FusionQuiz
             if (trials.Count >= MaxTrials) break;
             var peers = gated.Where(o => o.Tier == real.Tier && !string.Equals(o.Name, real.Name, StringComparison.Ordinal)).ToList();
             if (peers.Count == 0) continue; // no same-tier decoy → skip (logged by caller)
+            if (sameElementDecoys)
+            {
+                // F3-v2 (prompt-v4 spec): decoys of the SAME concept element wherever the corpus
+                // allows; where it can't, fall back to same-tier with a logged note — never silently.
+                var sameEl = peers.Where(o => string.Equals(o.Concept.Element, real.Concept.Element, StringComparison.Ordinal)).ToList();
+                if (sameEl.Count > 0) peers = sameEl;
+                else notes?.Add($"trial {trials.Count + 1}: no same-element ({real.Concept.Element}) decoy for {real.Name} — same-tier fallback");
+            }
             var decoy = peers[rng.Int(peers.Count)];
 
             var realClauses = (real.Spell!["clauses"] ?? new JsonArray()).DeepClone();
@@ -100,13 +109,15 @@ public static class FusionQuiz
         return sb.ToString();
     }
 
-    public static int RunQuiz(string fusionsDir, long seed, TextWriter outw)
+    public static int RunQuiz(string fusionsDir, long seed, bool sameElementDecoys, TextWriter outw)
     {
         var records = FusionEvaluator.LoadRecords(fusionsDir);
-        var trials = BuildTrials(records, seed);
+        var notes = new List<string>();
+        var trials = BuildTrials(records, seed, sameElementDecoys, notes);
         int gated = records.Count(r => r.Gated);
         if (trials.Count < gated)
             outw.WriteLine($"note: {gated - trials.Count} gated fusion(s) had no same-tier decoy and were skipped.");
+        foreach (var n in notes) outw.WriteLine("note: " + n);
 
         var now = DateTime.UtcNow;
         string stamp = now.ToString("yyyy-MM-dd-HHmmss", CultureInfo.InvariantCulture);

@@ -18,6 +18,7 @@ try
         case "evaluate-fusions": return RunEvaluateFusions(args);
         case "quiz": return RunQuiz(args);
         case "record-f3": return RunRecordF3(args);
+        case "flavor-eval": return RunFlavorEval(args);
         case "replay-verify": return RunReplayVerify(args);
         case "showcase": return RunShowcase(args);
         case "showcase-batch": return RunShowcaseBatch(args);
@@ -77,9 +78,15 @@ static int RunEvaluateFusions(string[] args)
 
 static int RunQuiz(string[] args)
 {
-    if (args.Length < 2) { Console.Error.WriteLine("usage: quiz <fusionsDir> --seed S"); return 2; }
+    if (args.Length < 2) { Console.Error.WriteLine("usage: quiz <fusionsDir> --seed S [--same-element-decoys]"); return 2; }
     long seed = long.Parse(Opt(args, "--seed") ?? "1", CultureInfo.InvariantCulture);
-    return FusionQuiz.RunQuiz(args[1], seed, Console.Out);
+    return FusionQuiz.RunQuiz(args[1], seed, HasFlag(args, "--same-element-decoys"), Console.Out);
+}
+
+static int RunFlavorEval(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: flavor-eval <fusionsDir>"); return 2; }
+    return FlavorEval.RunEvaluate(args[1], Console.Out);
 }
 
 static int RunRecordF3(string[] args)
@@ -242,6 +249,7 @@ static void PrintUsage()
     Console.WriteLine("  fuse <parentA.json> <parentB.json> [--tier auto|N] [--stub-responses f] [--arena dir]");
     Console.WriteLine("  fuse-batch --pairs-file <f> [--stub-responses f] [--arena dir]");
     Console.WriteLine("  evaluate-fusions <fusionsDir>");
-    Console.WriteLine("  quiz <fusionsDir> --seed S");
+    Console.WriteLine("  quiz <fusionsDir> --seed S [--same-element-decoys]");
     Console.WriteLine("  record-f3 <verdictDoc> --score n/20");
+    Console.WriteLine("  flavor-eval <fusionsDir>");
 }

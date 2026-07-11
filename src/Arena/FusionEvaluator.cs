@@ -111,6 +111,11 @@ public static class FusionEvaluator
         };
     }
 
+    /// <summary>A corpus holding BOTH current-sha and stale-sha records is a prompt-generation mix
+    /// (e.g. v3 records left in place after a v4 prompt change) — scoring the matching subset would
+    /// hide the contamination. Archive the old corpus first.</summary>
+    public static bool MixedShaCorpus(FusionEvalResult r) => r.MatchingRecords > 0 && r.ExcludedStale > 0;
+
     // ── mode wrapper ──
     public static int RunEvaluate(string fusionsDir, TextWriter outw)
     {
@@ -118,6 +123,12 @@ public static class FusionEvaluator
         string mechSha = Evaluator.Sha256Hex(File.ReadAllText(PromptTemplate.LocateRepoFile("prompts/fusion-mechanics-oracle.md")));
         var records = LoadRecords(fusionsDir);
         var r = Evaluate(records, namingSha, mechSha);
+
+        if (MixedShaCorpus(r))
+        {
+            outw.WriteLine($"ERROR: corpus mixes prompt-sha generations — {r.MatchingRecords} record(s) match the current prompts (naming {namingSha[..8]}…, mechanics {mechSha[..8]}…) and {r.ExcludedStale} carry stale shas. Refusing to score a mixed corpus; archive the old generation first (e.g. git mv arena/fusions arena/fusions-v3-archive).");
+            return 5;
+        }
 
         outw.WriteLine(FormatScorecard(r));
 
