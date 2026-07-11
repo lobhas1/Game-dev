@@ -39,7 +39,9 @@ public class ShowcaseTests
         {
             "bare" => Temp(BareSpell),
             "seed" => PromptTemplate.LocateRepoFile("fixtures/seeds/ember.seed.json"),
-            _ => PromptTemplate.LocateRepoFile("arena/fusions/steam.record.json"),
+            // the archived v3 record: stable and committed — the live corpus is re-fused per prompt
+            // generation and its filenames change, so it must not anchor a test.
+            _ => PromptTemplate.LocateRepoFile("arena/fusions-v3-archive/steam.record.json"),
         };
         var (r, rec) = Showcase.Run(path, 1, Showcase.DefaultMaxSeconds);
         Assert.NotEmpty(rec.Events);
