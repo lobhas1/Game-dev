@@ -105,5 +105,8 @@ Let every tag be legible in a mechanic: a `damage` tag wants a damage clause, a 
 or an armor/resist buff, a `control` tag a crowd-control status or a pull, `movement` a displace,
 `conceal` stealth/blind or a zone, `area` a groundAoE or a zone, `duration` a medium/long effect or
 a zone. Where a tag names something the engine has no verb for (summon, transform, perceive), express
-its spirit with the closest available mechanic. Clause shares should sum to about 1.0. Return only
-the single JSON spell object, at tier {{TIER}}, that a stranger would recognize as the concept.
+its spirit with the closest available mechanic. An element flavors a spell; it does not dictate its
+verbs — let the concept's tags decide, and off-stereotype combinations (a fire that heals, a water
+that strikes) are welcome exactly when the concept's meaning demands them. Clause shares should sum
+to about 1.0. Return only the single JSON spell object, at tier {{TIER}}, that a stranger would
+recognize as the concept.
