@@ -1,0 +1,81 @@
+{
+  "name": "lodestone",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Cinder Rock",
+    "b": "Dewdrop Lens",
+    "aPath": "arena/fusions-v3-archive/cinder-rock.record.json",
+    "bPath": "arena/fusions-v3-archive/dewdrop-lens.record.json"
+  },
+  "concept": {
+    "name": "Lodestone",
+    "emoji": "\uD83E\uDEA8",
+    "element": "earth",
+    "tags": [
+      "perceive",
+      "ward"
+    ],
+    "flavor": "Pulls the hidden thing forward, holds it still.",
+    "why": "Stone shaped by water reveals and anchors what it finds."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:41:24Z",
+  "spell": {
+    "id": "lodestone",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "large"
+    },
+    "clauses": [
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "pull",
+        "distance": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "root",
+        "duration": "medium",
+        "share": 0.45
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.25,
+        "direction": "debuff",
+        "duration": "medium"
+      },
+      {
+        "verb": "shield",
+        "share": 0.30,
+        "duration": "medium"
+      }
+    ]
+  }
+}

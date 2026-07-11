@@ -1,0 +1,49 @@
+{
+  "id": "barrow",
+  "tier": 3,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "shield",
+      "share": 0.40,
+      "duration": "long"
+    },
+    {
+      "verb": "damage",
+      "element": "shadow",
+      "share": 0.35,
+      "template": {
+        "kind": "onHit",
+        "clauses": [
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "medium",
+            "share": 0.15
+          }
+        ]
+      }
+    },
+    {
+      "verb": "applyStatus",
+      "status": "stealth",
+      "duration": "short",
+      "share": 0.10
+    }
+  ]
+}

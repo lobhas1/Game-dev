@@ -1,0 +1,56 @@
+{
+  "id": "steam",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "medium",
+      "tickInterval": "medium",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "damage",
+          "element": "air",
+          "share": 0.45,
+          "template": {
+            "kind": "ifStatus",
+            "status": "burn",
+            "consume": false,
+            "amplify": "major",
+            "also": []
+          }
+        },
+        {
+          "verb": "applyStatus",
+          "status": "slow",
+          "duration": "short",
+          "share": 0.35
+        },
+        {
+          "verb": "applyStatus",
+          "status": "blind",
+          "duration": "short",
+          "share": 0.20
+        }
+      ]
+    }
+  ]
+}

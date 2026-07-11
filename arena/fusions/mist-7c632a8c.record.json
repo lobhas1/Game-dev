@@ -1,0 +1,80 @@
+{
+  "name": "mist",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Droplet",
+    "b": "Gust",
+    "aPath": "fixtures/seeds/droplet.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Mist",
+    "emoji": "\uD83C\uDF2B\uFE0F",
+    "element": "water",
+    "tags": [
+      "area",
+      "movement"
+    ],
+    "flavor": "Tiny droplets drift where the wind scatters them thin.",
+    "why": "Water broken into air becomes the suspended haze between them."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:39:13Z",
+  "spell": {
+    "id": "mist",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "all",
+        "tickClauses": [
+          {
+            "verb": "displace",
+            "subject": "target",
+            "mode": "push",
+            "distance": "small"
+          },
+          {
+            "verb": "applyStatus",
+            "status": "slow",
+            "duration": "short",
+            "share": 0.6
+          }
+        ]
+      }
+    ]
+  }
+}

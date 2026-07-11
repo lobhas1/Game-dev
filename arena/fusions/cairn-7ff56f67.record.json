@@ -1,0 +1,67 @@
+{
+  "name": "cairn",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Pebble",
+    "b": "Umbra",
+    "aPath": "fixtures/seeds/pebble.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Cairn",
+    "emoji": "\uD83E\uDEA8",
+    "element": "shadow",
+    "tags": [
+      "ward",
+      "conceal"
+    ],
+    "flavor": "Stones stacked where no one should pass, but might.",
+    "why": "A hidden boundary marker; earth\u0027s ward made invisible by shadow."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:40:48Z",
+  "spell": {
+    "id": "cairn",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.55,
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "stealth",
+        "duration": "medium",
+        "share": 0.45
+      }
+    ]
+  }
+}

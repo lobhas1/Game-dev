@@ -1,0 +1,86 @@
+{
+  "name": "smoke",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Umbra",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Smoke",
+    "emoji": "\uD83C\uDF2B\uFE0F",
+    "element": "shadow",
+    "tags": [
+      "area",
+      "conceal",
+      "damage"
+    ],
+    "flavor": "Thick coils choke the air and swallow every outline.",
+    "why": "Fire\u0027s heat and shadow\u0027s dark meet as obscuring smoke."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:40:01Z",
+  "spell": {
+    "id": "smoke",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "shadow",
+            "share": 0.35
+          },
+          {
+            "verb": "applyStatus",
+            "status": "blind",
+            "duration": "short",
+            "share": 0.40
+          }
+        ]
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "medium",
+        "share": 0.25
+      }
+    ]
+  }
+}

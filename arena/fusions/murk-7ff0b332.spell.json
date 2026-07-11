@@ -1,0 +1,45 @@
+{
+  "id": "murk",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "long",
+      "tickInterval": "slow",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "applyStatus",
+          "status": "blind",
+          "duration": "medium",
+          "share": 0.65
+        },
+        {
+          "verb": "modifyStat",
+          "stat": "moveSpeed",
+          "direction": "debuff",
+          "share": 0.35,
+          "duration": "medium"
+        }
+      ]
+    }
+  ]
+}

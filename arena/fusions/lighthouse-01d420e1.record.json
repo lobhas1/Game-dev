@@ -1,0 +1,93 @@
+{
+  "name": "lighthouse",
+  "tier": 3,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Dewdrop Lens",
+    "b": "Beacon",
+    "aPath": "arena/fusions-v3-archive/dewdrop-lens.record.json",
+    "bPath": "arena/fusions-v3-archive/beacon.record.json"
+  },
+  "concept": {
+    "name": "Lighthouse",
+    "emoji": "\uD83C\uDFEE",
+    "element": "light",
+    "tags": [
+      "perceive",
+      "heal",
+      "area"
+    ],
+    "flavor": "Steady beam guides lost travelers to safe ground.",
+    "why": "Water\u0027s clarity fused with beacon\u0027s signal becomes guiding light."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:41:32Z",
+  "spell": {
+    "id": "lighthouse",
+    "tier": 3,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "long",
+        "tickInterval": "slow",
+        "affects": "allies",
+        "tickClauses": [
+          {
+            "verb": "heal",
+            "share": 0.45
+          },
+          {
+            "verb": "modifyStat",
+            "stat": "evasion",
+            "direction": "buff",
+            "share": 0.25,
+            "duration": "medium"
+          },
+          {
+            "verb": "modifyStat",
+            "stat": "critChance",
+            "direction": "buff",
+            "share": 0.15,
+            "duration": "medium"
+          },
+          {
+            "verb": "applyStatus",
+            "status": "regen",
+            "duration": "medium",
+            "share": 0.15
+          }
+        ]
+      }
+    ]
+  }
+}

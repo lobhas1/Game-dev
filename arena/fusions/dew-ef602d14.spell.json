@@ -1,0 +1,31 @@
+{
+  "id": "dew",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "short",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "heal",
+      "share": 0.6
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.4,
+      "direction": "buff",
+      "duration": "medium"
+    }
+  ]
+}

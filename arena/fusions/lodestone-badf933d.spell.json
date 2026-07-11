@@ -1,0 +1,45 @@
+{
+  "id": "lodestone",
+  "tier": 3,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "large"
+  },
+  "clauses": [
+    {
+      "verb": "displace",
+      "subject": "target",
+      "mode": "pull",
+      "distance": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "root",
+      "duration": "medium",
+      "share": 0.45
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "evasion",
+      "share": 0.25,
+      "direction": "debuff",
+      "duration": "medium"
+    },
+    {
+      "verb": "shield",
+      "share": 0.30,
+      "duration": "medium"
+    }
+  ]
+}

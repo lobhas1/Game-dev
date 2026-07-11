@@ -1,0 +1,45 @@
+{
+  "id": "beacon",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "long",
+      "tickInterval": "slow",
+      "affects": "allies",
+      "tickClauses": [
+        {
+          "verb": "modifyStat",
+          "stat": "critChance",
+          "share": 0.35,
+          "direction": "buff",
+          "duration": "short"
+        },
+        {
+          "verb": "displace",
+          "subject": "target",
+          "mode": "pull",
+          "distance": "small"
+        }
+      ]
+    }
+  ]
+}

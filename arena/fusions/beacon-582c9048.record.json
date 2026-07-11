@@ -1,0 +1,82 @@
+{
+  "name": "beacon",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Ember",
+    "b": "Glimmer",
+    "aPath": "fixtures/seeds/ember.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Beacon",
+    "emoji": "\uD83D\uDD25",
+    "element": "light",
+    "tags": [
+      "perceive",
+      "damage"
+    ],
+    "flavor": "A coal-fed flame tall enough to read a map by.",
+    "why": "Ember\u0027s heat amplifies Glimmer\u0027s light into a guiding signal."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:39:38Z",
+  "spell": {
+    "id": "beacon",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.35,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "damage",
+        "element": "light",
+        "share": 0.4,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": false,
+          "amplify": "major"
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "blind",
+        "duration": "short",
+        "share": 0.25
+      }
+    ]
+  }
+}

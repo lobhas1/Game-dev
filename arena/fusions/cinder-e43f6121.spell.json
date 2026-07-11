@@ -1,0 +1,68 @@
+{
+  "id": "cinder",
+  "tier": 3,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "shadow",
+      "share": 0.35,
+      "template": {
+        "kind": "ifStatus",
+        "status": "burn",
+        "consume": true,
+        "amplify": "major",
+        "also": [
+          {
+            "verb": "applyStatus",
+            "status": "stealth",
+            "duration": "short",
+            "share": 0.10
+          }
+        ]
+      }
+    },
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "medium",
+      "duration": "medium",
+      "tickInterval": "slow",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "damage",
+          "element": "shadow",
+          "share": 0.12
+        },
+        {
+          "verb": "applyStatus",
+          "status": "burn",
+          "duration": "short",
+          "share": 0.08
+        }
+      ]
+    },
+    {
+      "verb": "applyStatus",
+      "status": "stealth",
+      "duration": "medium",
+      "share": 0.25
+    }
+  ]
+}

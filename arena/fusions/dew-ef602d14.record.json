@@ -1,0 +1,67 @@
+{
+  "name": "dew",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Droplet",
+    "b": "Glimmer",
+    "aPath": "fixtures/seeds/droplet.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Dew",
+    "emoji": "\uD83D\uDCA7",
+    "element": "light",
+    "tags": [
+      "heal",
+      "perceive"
+    ],
+    "flavor": "A drop clings to glass, catching dawn before sunrise.",
+    "why": "Water meets light at its smallest, clearest, most familiar form."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:39:06Z",
+  "spell": {
+    "id": "dew",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "short",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "heal",
+        "share": 0.6
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.4,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

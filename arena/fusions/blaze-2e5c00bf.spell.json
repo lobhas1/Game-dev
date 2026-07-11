@@ -1,0 +1,59 @@
+{
+  "id": "blaze",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "cone",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.45
+    },
+    {
+      "verb": "applyStatus",
+      "status": "burn",
+      "duration": "medium",
+      "share": 0.25
+    },
+    {
+      "verb": "displace",
+      "subject": "target",
+      "mode": "push",
+      "distance": "medium"
+    },
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "small",
+      "duration": "short",
+      "tickInterval": "medium",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "damage",
+          "element": "fire",
+          "share": 0.15
+        },
+        {
+          "verb": "applyStatus",
+          "status": "burn",
+          "duration": "short",
+          "share": 0.15
+        }
+      ]
+    }
+  ]
+}

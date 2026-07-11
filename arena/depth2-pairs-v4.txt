@@ -1,0 +1,5 @@
+arena/fusions-v3-archive/beacon.record.json arena/fusions-v3-archive/blaze.record.json
+arena/fusions-v3-archive/blaze.record.json arena/fusions-v3-archive/cairn.record.json
+arena/fusions-v3-archive/cairn.record.json arena/fusions-v3-archive/cinder-rock.record.json
+arena/fusions-v3-archive/cinder-rock.record.json arena/fusions-v3-archive/dewdrop-lens.record.json
+arena/fusions-v3-archive/dewdrop-lens.record.json arena/fusions-v3-archive/beacon.record.json

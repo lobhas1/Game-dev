@@ -1,0 +1,92 @@
+{
+  "name": "steam",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Droplet",
+    "b": "Ember",
+    "aPath": "fixtures/seeds/droplet.seed.json",
+    "bPath": "fixtures/seeds/ember.seed.json"
+  },
+  "concept": {
+    "name": "Steam",
+    "emoji": "\uD83D\uDCA8",
+    "element": "air",
+    "tags": [
+      "area",
+      "control"
+    ],
+    "flavor": "Scalding cloud billows where cold water meets hot coal.",
+    "why": "Water quenches fire; heat converts it to steam."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-11T19:38:57Z",
+  "spell": {
+    "id": "steam",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "medium",
+        "duration": "medium",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "air",
+            "share": 0.45,
+            "template": {
+              "kind": "ifStatus",
+              "status": "burn",
+              "consume": false,
+              "amplify": "major",
+              "also": []
+            }
+          },
+          {
+            "verb": "applyStatus",
+            "status": "slow",
+            "duration": "short",
+            "share": 0.35
+          },
+          {
+            "verb": "applyStatus",
+            "status": "blind",
+            "duration": "short",
+            "share": 0.20
+          }
+        ]
+      }
+    ]
+  }
+}

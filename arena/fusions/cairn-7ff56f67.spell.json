@@ -1,0 +1,31 @@
+{
+  "id": "cairn",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "shield",
+      "share": 0.55,
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "stealth",
+      "duration": "medium",
+      "share": 0.45
+    }
+  ]
+}
