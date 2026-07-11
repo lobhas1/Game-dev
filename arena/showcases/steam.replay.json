@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "steam",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/steam.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 3.8999974727630615,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "steam",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 steam",
+      "payload": {
+        "caster": 1,
+        "spell": "steam"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=153.6 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 153.60000610351562,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Burn",
+      "payload": {
+        "target": 2,
+        "status": "Burn"
+      }
+    }
+  ]
+}

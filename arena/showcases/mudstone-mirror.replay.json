@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "mudstone-mirror",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/mudstone-mirror.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 11.800026893615723,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "mudstone-mirror",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 mudstone-mirror",
+      "payload": {
+        "caster": 1,
+        "spell": "mudstone-mirror"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=92.16 dur=10",
+      "payload": {
+        "target": 1,
+        "amount": 92.1600112915039,
+        "duration": 10
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=30 dur=10",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 30.000001907348633,
+        "duration": 10
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    }
+  ]
+}

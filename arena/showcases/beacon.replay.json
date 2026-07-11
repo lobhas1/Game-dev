@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "beacon",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/beacon.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.400006294250488,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "beacon",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 beacon",
+      "payload": {
+        "caster": 1,
+        "spell": "beacon"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=80 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 80,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 CritChance pct=30 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 30.000001907348633,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatusApplied",
+      "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Vulnerable",
+      "payload": {
+        "target": 2,
+        "status": "Vulnerable"
+      }
+    }
+  ]
+}

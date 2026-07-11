@@ -1,0 +1,838 @@
+{
+  "spells": [
+    {
+      "id": "beacon",
+      "displayName": "Beacon",
+      "element": "light",
+      "tags": [
+        "damage",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "modifyStat"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "beacon.replay.json"
+    },
+    {
+      "id": "blaze",
+      "displayName": "Blaze",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "large",
+          "medium"
+        ]
+      },
+      "file": "blaze.replay.json"
+    },
+    {
+      "id": "cairn-2184858c",
+      "displayName": "Cairn",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "cairn-2184858c.replay.json"
+    },
+    {
+      "id": "cairn",
+      "displayName": "Cairn",
+      "element": "shadow",
+      "tags": [
+        "ward",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "cairn.replay.json"
+    },
+    {
+      "id": "cinder-rock",
+      "displayName": "Cinder Rock",
+      "element": "earth",
+      "tags": [
+        "damage",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield"
+      ],
+      "deliveryType": "projectile",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "speed": [
+          "fast"
+        ]
+      },
+      "file": "cinder-rock.replay.json"
+    },
+    {
+      "id": "conflagration",
+      "displayName": "Conflagration",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "area",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "high"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major",
+          "minor"
+        ],
+        "size": [
+          "large",
+          "medium",
+          "small"
+        ]
+      },
+      "file": "conflagration.replay.json"
+    },
+    {
+      "id": "dewdrop-lens",
+      "displayName": "Dewdrop Lens",
+      "element": "water",
+      "tags": [
+        "perceive",
+        "heal"
+      ],
+      "clauseVerbs": [
+        "heal",
+        "modifyStat"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "dewdrop-lens.replay.json"
+    },
+    {
+      "id": "drift",
+      "displayName": "Drift",
+      "element": "air",
+      "tags": [
+        "movement",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "displace",
+        "modifyStat"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "drift.replay.json"
+    },
+    {
+      "id": "droplet",
+      "displayName": "Droplet",
+      "element": "water",
+      "tags": [
+        "heal"
+      ],
+      "clauseVerbs": [
+        "heal"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ]
+      },
+      "file": "droplet.replay.json"
+    },
+    {
+      "id": "dust-devil",
+      "displayName": "Dust Devil",
+      "element": "air",
+      "tags": [
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "dust-devil.replay.json"
+    },
+    {
+      "id": "ember",
+      "displayName": "Ember",
+      "element": "fire",
+      "tags": [
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "projectile",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "speed": [
+          "fast"
+        ]
+      },
+      "file": "ember.replay.json"
+    },
+    {
+      "id": "glimmer",
+      "displayName": "Glimmer",
+      "element": "light",
+      "tags": [
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "glimmer.replay.json"
+    },
+    {
+      "id": "gust",
+      "displayName": "Gust",
+      "element": "air",
+      "tags": [
+        "movement"
+      ],
+      "clauseVerbs": [
+        "displace"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "trivial"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "gust.replay.json"
+    },
+    {
+      "id": "hearthstone",
+      "displayName": "Hearthstone",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "damage",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ]
+      },
+      "file": "hearthstone.replay.json"
+    },
+    {
+      "id": "lighthouse",
+      "displayName": "Lighthouse",
+      "element": "light",
+      "tags": [
+        "perceive",
+        "heal",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "heal",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "lighthouse.replay.json"
+    },
+    {
+      "id": "mist",
+      "displayName": "Mist",
+      "element": "air",
+      "tags": [
+        "movement",
+        "heal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "mist.replay.json"
+    },
+    {
+      "id": "mudstone-mirror",
+      "displayName": "Mudstone Mirror",
+      "element": "earth",
+      "tags": [
+        "perceive",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ]
+      },
+      "file": "mudstone-mirror.replay.json"
+    },
+    {
+      "id": "murk-7ff0b332",
+      "displayName": "Murk",
+      "element": "shadow",
+      "tags": [
+        "conceal",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "murk-7ff0b332.replay.json"
+    },
+    {
+      "id": "murk",
+      "displayName": "Murk",
+      "element": "shadow",
+      "tags": [
+        "conceal",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "murk.replay.json"
+    },
+    {
+      "id": "pebble",
+      "displayName": "Pebble",
+      "element": "earth",
+      "tags": [
+        "ward"
+      ],
+      "clauseVerbs": [
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "pebble.replay.json"
+    },
+    {
+      "id": "penumbra",
+      "displayName": "Penumbra",
+      "element": "shadow",
+      "tags": [
+        "perceive",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "penumbra.replay.json"
+    },
+    {
+      "id": "pyre-cairn",
+      "displayName": "Pyre Cairn",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "ward",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "high"
+        ],
+        "duration": [
+          "long",
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "pyre-cairn.replay.json"
+    },
+    {
+      "id": "riverstone",
+      "displayName": "Riverstone",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "heal",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long"
+        ]
+      },
+      "file": "riverstone.replay.json"
+    },
+    {
+      "id": "smoke",
+      "displayName": "Smoke",
+      "element": "shadow",
+      "tags": [
+        "conceal",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "smoke.replay.json"
+    },
+    {
+      "id": "steam",
+      "displayName": "Steam",
+      "element": "air",
+      "tags": [
+        "damage",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "steam.replay.json"
+    },
+    {
+      "id": "umbra",
+      "displayName": "Umbra",
+      "element": "shadow",
+      "tags": [
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "umbra.replay.json"
+    }
+  ]
+}
