@@ -58,3 +58,14 @@ perceive=7  (7 fusion(s) carried ≥1 unmappable tag — the widening signal, by
 - **F2** — mean tag-coverage ≥70% AND strictly greater than the decoy baseline (concepts scored against a derangement of the other fusions' clause lists). summon/transform/perceive are unmappable: excluded from the denominator, counted as quantization pressure.
 - **F3** — a stranger matches concept → clause list vs a same-tier decoy for 20 trials; ≥14/20 correct.
 - **OVERALL** — INCOMPLETE until F3 appended; then PASS iff F1, F2, F3 all pass, else FAIL.
+
+## F3 — human result
+
+- **F3:** 19/20 — **PASS** (threshold ≥14/20).
+- **OVERALL (final):** PASS  (f1pass=true, f2pass=true, f3pass=true).
+
+## F3 session notes — 2026-07-11
+Tester: same friend as the naming test (naming session showed no spell mechanics, so no leakage).
+Protocol held: glossary once, zero feedback, key closed until all 20 picks recorded.
+Caveat (noted before scoring): corpus has a strong element→verb lock (fire→damage 100%,
+water→heal 100%), which lets stereotype alone win some trials. Future variant: same-element decoys.
