@@ -58,3 +58,5 @@ perceive=8  (8 fusion(s) carried ≥1 unmappable tag — the widening signal, by
 - **F2** — mean tag-coverage ≥70% AND strictly greater than the decoy baseline (concepts scored against a derangement of the other fusions' clause lists). summon/transform/perceive are unmappable: excluded from the denominator, counted as quantization pressure.
 - **F3** — a stranger matches concept → clause list vs a same-tier decoy for 20 trials; ≥14/20 correct.
 - **OVERALL** — INCOMPLETE until F3 appended; then PASS iff F1, F2, F3 all pass, else FAIL.
+
+
