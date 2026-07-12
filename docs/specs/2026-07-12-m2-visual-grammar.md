@@ -1,4 +1,30 @@
-# M2 Visual Grammar — DRAFT v0 (argument copy; becomes law only after review)
+# M2 Visual Grammar — v1 (LAW, ratified 2026-07-12)
+
+## Ratified decisions (2026-07-12)
+1. Art direction: clean and stylized — simple readable shapes, strong color. Impact
+   is heavy (Law 6); gore is not part of this game.
+2. Element palettes: ratified as tabled below, unchanged.
+3. Floating damage numbers: kept — element-tinted, scaled with the amount, always
+   facing the camera.
+4. Camera: the three-quarter angled view is canonical everywhere — showcases, fights,
+   and the eventual live game. The straight-down overhead is retired to a debug toggle.
+5. Impact register: heavy and visceral — hit-stop, screen shake, crunch — governed by
+   Law 6 below.
+
+## Law 6 — Juice is data
+Impact feedback derives from event data and modulates ONLY the shared playback clock
+and the camera — never an individual event. Hit-stop: pause the playback clock 40 ms
+when a damage event removes ≥25% of the victim's max HP, 90 ms at ≥50%, none below.
+Screen shake: amplitude proportional to the damage fraction, capped at a readable
+maximum; non-damage events never shake. Crunch: three impact-sound tiers keyed to the
+same fractions. New gate G1b: one full playback with juice enabled and one with juice
+disabled must produce byte-identical REPLAY| logs, and the 1x/4x invariance test must
+also pass with juice enabled.
+
+## Camera law
+Three-quarter angle, pitched down about 55 degrees, framing both fighters with
+comfortable margin, smoothly tracking their midpoint without cuts. Overhead becomes
+a debug toggle only.
 
 ## Laws
 1. DERIVATION. Every spell's look derives from its JSON through this grammar. No
