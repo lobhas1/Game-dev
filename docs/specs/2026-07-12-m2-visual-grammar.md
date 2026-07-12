@@ -1,4 +1,4 @@
-# M2 Visual Grammar — v1 (LAW, ratified 2026-07-12)
+# M2 Visual Grammar — v1.1 (LAW, ratified 2026-07-12)
 
 ## Ratified decisions (2026-07-12)
 1. Art direction: clean and stylized — simple readable shapes, strong color. Impact
@@ -10,6 +10,9 @@
    and the eventual live game. The straight-down overhead is retired to a debug toggle.
 5. Impact register: heavy and visceral — hit-stop, screen shake, crunch — governed by
    Law 6 below.
+
+Amended to v1.1 (2026-07-12): added vulnerable and regen to the status table;
+specified teleport treatment under displace. Gaps found by the M2-A corpus census.
 
 ## Law 6 — Juice is data
 Impact feedback derives from event data and modulates ONLY the shared playback clock
@@ -64,7 +67,7 @@ a debug toggle only.
 | shield | translucent shell; hits ripple at contact point; expiry pops gently. ELEMENTAL shields are element-tinted and wear a small element sigil; omni shields are neutral white — the pricing trade, made visible |
 | applyStatus | status sigil rises, docks over head (see status table); aura tint while active; removal shatters the sigil |
 | modifyStat | brief arrow stream (up gold / down violet) + faint ring while active; stat glyph from status table style |
-| displace | motion trail on the moved body; dust burst at origin and landing; push vs pull read by trail direction |
+| displace | Push and Dash: motion trail on the moved body, dust bursts at origin and landing; Teleport: no trail — an implosion flash at the origin and an appearance flash at the destination |
 | spawnZone | ground decal in delivery shape, element-tinted low-alpha fill; edge pulses on each tick event; expiry contracts and fades |
 | summon / transform / dispel (spec'd, no corpus material yet) | rising pillar + silhouette / swirl-wrap / outward cleanse ring that pops sigils |
 
@@ -87,13 +90,16 @@ slow weight-glyph+dragging trail · root stone-clasp at feet · stun orbiting st
 blind dark band at eye-line · stealth 40% alpha + shimmer (replays are omniscient:
 marked, not hidden) · haste speed lines · silence crossed rune · fear jagged violet
 aura · poison green drip · bleed red drip · shock arc flicker · weaken sagging aura ·
-invulnerable gold shell · unstoppable steady red glow · disarm falling-weapon glyph
+invulnerable gold shell · unstoppable steady red glow · disarm falling-weapon glyph ·
+vulnerable downward-cracked-shield glyph, red tint (defense is broken) ·
+regen green plus sigil, small green motes rise on each tick (healing rises, harm drips)
 
 ## Verbless events
 oom: blue fizzle + slump posture · death: grey-out, fall, element-tinted wisp ·
 castFailed: fizzle puff + red X sigil · fightEnd: winner banner (per M1)
 
 ## Gate hooks
-G1 regression unchanged. G2: every corpus token above has an implemented asset;
-one screenshot per verb & delivery family; zero fallback-placeholder renders across
-all 26 showcases. G3 per the registered protocol, fresh tester.
+G1 regression unchanged (juice on, per Law 6 / G1b). G2: every corpus token above has
+an implemented asset; one screenshot per verb & delivery family; zero
+fallback-placeholder renders across all 26 showcases. G3 per the registered protocol,
+fresh tester.
