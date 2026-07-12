@@ -129,7 +129,20 @@ Ratified direction for a future visual round, not a requirement of the current b
 2. NO PERFECT PRIMITIVES. Real substances are irregular. Effect bodies avoid perfectly
    symmetric spheres and discs: noise in the silhouette, rotation, flicker, and
    surface motion. (All examples illustrative, not literal.)
-3. Structure unchanged: richness lives in the element-motif × verb/delivery matrix,
+
+
+3. CONCEPT MOTIFS (the third leg). A future round restores a visual field to the
+   naming oracle, constrained to a CLOSED vocabulary of authored motif primitives
+   (e.g. winged, tear, spiral, serpent, bloom, shatter — illustrative). The oracle
+   composes a concept's look from that vocabulary exactly as it composes mechanics
+   from verbs; each motif is authored once and inherited by every matching concept
+   forever. Motifs DECORATE, verb signatures INFORM: a motif may never impersonate
+   another verb's signature (Law 4 outranks). Vocabulary widens by data-vote, like
+   verbs. This round carries its own prompt change, new sha, and a pre-registered
+   blind concept-to-visual matching test.
+
+
+4. Structure unchanged: richness lives in the element-motif × verb/delivery matrix,
    authored once per cell, inherited by every spell forever (Law 1). Laws 4 and 5 —
    legibility and restraint — outrank spectacle: irregularity must never cost
    readability. Law 2 truth is untouchable.
