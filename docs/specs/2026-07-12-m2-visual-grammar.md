@@ -147,3 +147,10 @@ Ratified direction for a future visual round, not a requirement of the current b
    legibility and restraint — outrank spectacle: irregularity must never cost
    readability. Law 2 truth is untouchable.
 Scope: opens as its own milestone after M2's gates close.
+
+5. THE TWIN TEST (banked gate for the beauty round): distinct concepts must be
+   perceptually distinct. Protocol sketch: show a stranger paired playbacks of
+   different-concept spells and ask same-or-different; threshold pre-registered
+   when the round opens. Visual sameness between spells with near-identical
+   mechanics is treated as a CANON question (convergence candidate), never
+   masked by cosmetic differentiation.
