@@ -116,3 +116,21 @@ richness lives in the element-motif × verb-archetype matrix, authored once per 
 inherited by every spell forever (Law 1 unchanged). Laws 4 and 5 — legibility and
 restraint — outrank spectacle; Law 2 truth is untouchable. Scope: opens as its own
 milestone after M2's gates close.
+
+
+## Direction addendum v2 — the beauty pass (banked 2026-07-12; NON-BINDING for M2 gates)
+Ratified direction for a future visual round, not a requirement of the current build.
+1. DIEGETIC SUBSTANCE. Effects are made of their element's physical substance doing
+   physically readable things, not abstract glows. Projectiles especially: the flying
+   body itself is elemental — a fire throw is a ball of fire, a water throw a coherent
+   glob of water, an earth throw a hurled rock — the trail is a consequence of the
+   substance, not a costume on a glowing dot. Shields likewise: a water shield is
+   flowing water shaped into a shell around the target.
+2. NO PERFECT PRIMITIVES. Real substances are irregular. Effect bodies avoid perfectly
+   symmetric spheres and discs: noise in the silhouette, rotation, flicker, and
+   surface motion. (All examples illustrative, not literal.)
+3. Structure unchanged: richness lives in the element-motif × verb/delivery matrix,
+   authored once per cell, inherited by every spell forever (Law 1). Laws 4 and 5 —
+   legibility and restraint — outrank spectacle: irregularity must never cost
+   readability. Law 2 truth is untouchable.
+Scope: opens as its own milestone after M2's gates close.
