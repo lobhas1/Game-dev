@@ -60,3 +60,4 @@ perceive=8  (8 fusion(s) carried ≥1 unmappable tag — the widening signal, by
 - **OVERALL** — INCOMPLETE until F3 appended; then PASS iff F1, F2, F3 all pass, else FAIL.
 
 
+

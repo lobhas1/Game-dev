@@ -71,15 +71,3 @@ Caveat (noted before scoring): corpus has a strong element→verb lock (fire→d
 water→heal 100%), which lets stereotype alone win some trials. Future variant: same-element decoys.
 
 
-## V3c — off-stereotype evidence (filed 2026-07-11, adjudicated)
-Two operationalizations of the registered wording existed: core-verb inversions
-(narrow) vs any non-archetype verb (broad). Adjudicated by baseline test: BOTH pass
-the v3 archive (narrow 11/20, broad 14/20) and v4 (narrow 9/20, broad 17/20). The
-criterion as designed is therefore vacuous — secondary verbs were never element-
-locked — and V3c is recorded as PASS by letter (≥2 under any reading) with NO
-evidential value for the decoupling sentence. Criterion-design error: reviewer's.
-EXPLORATORY, not a gate: archetype-ABSENCE (spells lacking their own element's
-archetype verb): v3 5/20 (air/shadow only) → v4 8/20, including the corpus's first
-four hard-element absences: Beacon[light], Lighthouse[light], Mist[water], Mud[earth].
-A pre-registered absence-based criterion is logged in the notebook for any future
-round that must prove decoupling.   
