@@ -105,18 +105,6 @@ fallback-placeholder renders across all 26 showcases. G3 per the registered prot
 fresh tester.
 
 
-## Direction addendum — the beauty pass (banked 2026-07-12; NON-BINDING for M2 gates)
-Ratified direction for a future visual round, not a requirement of the current build:
-effects should be DIEGETIC — made of their element's physical substance doing
-physically readable things, not abstract glows. Illustrative, not literal: a water
-shield forms a flowing water sphere around its target; projectiles are visible flying
-objects with mass; displaces kick up the ground they travel; an earth strike tears
-rock from the arena floor and hurls it. The grammar's structure already carries this:
-richness lives in the element-motif × verb-archetype matrix, authored once per cell,
-inherited by every spell forever (Law 1 unchanged). Laws 4 and 5 — legibility and
-restraint — outrank spectacle; Law 2 truth is untouchable. Scope: opens as its own
-milestone after M2's gates close.
-
 
 ## Direction addendum v2 — the beauty pass (banked 2026-07-12; NON-BINDING for M2 gates)
 Ratified direction for a future visual round, not a requirement of the current build.
