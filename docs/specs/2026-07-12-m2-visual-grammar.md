@@ -144,3 +144,13 @@ Scope: opens as its own milestone after M2's gates close.
    when the round opens. Visual sameness between spells with near-identical
    mechanics is treated as a CANON question (convergence candidate), never
    masked by cosmetic differentiation.
+
+6. COVERAGE PRINCIPLE. No closed vocabulary represents all imaginable spells at full
+   fidelity; it does not need to. The naming doctrine's convergence-onto-known-things
+   bounds the space of visual identities the canon actually produces, so the motif
+   vocabulary chases a convergent target. Coverage is tiered by design: function always
+   reads (Law 4 floor); recurring concept families get true identity; the figurative
+   long tail gets nearest-motif approximation, with name, flavor, and mechanics
+   carrying residual meaning. Gaps that recur become data-votes for widening. Adequacy
+   is not asserted but measured: the motif round's blind concept-to-visual matching
+   test is its gate.
