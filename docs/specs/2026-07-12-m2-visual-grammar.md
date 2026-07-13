@@ -108,6 +108,8 @@ fresh tester.
 
 ## Direction addendum v2 — the beauty pass (banked 2026-07-12; NON-BINDING for M2 gates)
 Ratified direction for a future visual round, not a requirement of the current build.
+
+STYLE REFERENCE (ratified 2026-07-13): Genshin Impact — anime-stylized; cel-shaded readable shapes, bold silhouettes, stylized elemental substance (flipbook-style flames, foam-rimmed water, visible wind swirls). Style direction, not quality parity.
 1. DIEGETIC SUBSTANCE. Effects are made of their element's physical substance doing
    physically readable things, not abstract glows. Projectiles especially: the flying
    body itself is elemental — a fire throw is a ball of fire, a water throw a coherent
