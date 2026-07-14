@@ -1,0 +1,10 @@
+1. Beacon: v4 = B
+2. Blaze: v4 = B
+3. Cairn: v4 = A
+4. Dust Devil: v4 = A
+5. Lighthouse: v4 = A
+6. Mist: v4 = A
+7. Murk: v4 = A
+8. Penumbra: v4 = A
+9. Smoke: v4 = A
+10. Steam: v4 = B

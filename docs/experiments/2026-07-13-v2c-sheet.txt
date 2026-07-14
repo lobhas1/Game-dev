@@ -1,0 +1,30 @@
+1. Beacon
+   A: A fire that says: here, come here, look here.
+   B: A steady flame guides the lost back to the path.
+2. Blaze
+   A: Wind breathed life into a coal; now nothing stands.
+   B: A coal fed a breath, now running loose across dry grass.
+3. Cairn
+   A: Stones stacked where no one should pass, but might.
+   B: Stones that remember where the darkness chose to rest.
+4. Dust Devil
+   A: A spinning skirt of grit that scours bare stone clean.
+   B: The desert's oldest argument with the wind.
+5. Lighthouse
+   A: Steady beam guides lost travelers to safe ground.
+   B: Steady beam cuts fog; ships find shore, storms find focus.
+6. Mist
+   A: Tiny droplets drift where the wind scatters them thin.
+   B: Soft as forgetting, it settles where the wound waits.
+7. Murk
+   A: Still water gone dark, holding whatever sank into it.
+   B: The world goes gray before you know you're lost.
+8. Penumbra
+   A: Soft gray where light and dark negotiate every edge.
+   B: The edge where seeing ends and hiding begins.
+9. Smoke
+   A: Thick coils choke the air and swallow every outline.
+   B: It hides what burned and blurs what stands.
+10. Steam
+   A: Scalding cloud that blurs the line between rain and ruin.
+   B: Scalding cloud billows where cold water meets hot coal.

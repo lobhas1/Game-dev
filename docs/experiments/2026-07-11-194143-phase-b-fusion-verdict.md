@@ -61,3 +61,8 @@ perceive=8  (8 fusion(s) carried ≥1 unmappable tag — the widening signal, by
 
 
 
+
+## F3 — human result
+
+- **F3:** 18/20 — **PASS** (threshold ≥14/20).
+- **OVERALL (final):** PASS  (f1pass=true, f2pass=true, f3pass=true).
