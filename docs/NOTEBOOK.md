@@ -9,6 +9,13 @@
   rewards banks for M3+ (needs a game); open question: quest spells also
   fusion-reachable? Pre-registered test when opened: fuse anchors x seeds, measure
   off-stereotype inheritance rate in descendants, threshold fixed before data.
+- COMBAT MODEL FORK (M3+, foundational): do characters have weapons and basic
+  attacks between casts? Unlocks enchantment spells proper ("element around a
+  weapon" as attack enhancement) vs. today's nearest expressible form (elemental
+  self-buff concepts like Flameblade via modifyStat). Touches sim law, budget
+  pricing of attack buffs, and eventually visible weapon models. Decide when the
+  playable slice is scoped.
+  
 - REVEAL VERB: perceive-tag quantization pressure (perceive=6 in v4 corpus) is the
   standing data-vote; widen the vocabulary in a differential-tested round.
 - MOTIF VOCABULARY (third leg): naming oracle regains a visual field constrained to
@@ -36,3 +43,5 @@
 - FUSE-BATCH QUOTED PATHS: pairs-file parsing splits on spaces in quoted paths.
 - PACKAGING ERA: UAT demands "VS2022 x64 installed" even with a valid toolchain;
   known workaround is a bare VS2022 core-shell install (months away).
+
+
