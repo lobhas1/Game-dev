@@ -19,6 +19,7 @@ try
         case "quiz": return RunQuiz(args);
         case "record-f3": return RunRecordF3(args);
         case "flavor-eval": return RunFlavorEval(args);
+        case "ancestry-eval": return RunAncestryEval(args);
         case "replay-verify": return RunReplayVerify(args);
         case "showcase": return RunShowcase(args);
         case "showcase-batch": return RunShowcaseBatch(args);
@@ -87,6 +88,12 @@ static int RunFlavorEval(string[] args)
 {
     if (args.Length < 2) { Console.Error.WriteLine("usage: flavor-eval <fusionsDir>"); return 2; }
     return FlavorEval.RunEvaluate(args[1], Console.Out);
+}
+
+static int RunAncestryEval(string[] args)
+{
+    if (args.Length < 2) { Console.Error.WriteLine("usage: ancestry-eval <fusionsDir>"); return 2; }
+    return AncestryEval.RunEvaluate(args[1], Console.Out);
 }
 
 static int RunRecordF3(string[] args)
@@ -252,4 +259,5 @@ static void PrintUsage()
     Console.WriteLine("  quiz <fusionsDir> --seed S [--same-element-decoys]");
     Console.WriteLine("  record-f3 <verdictDoc> --score n/20");
     Console.WriteLine("  flavor-eval <fusionsDir>");
+    Console.WriteLine("  ancestry-eval <fusionsDir>");
 }

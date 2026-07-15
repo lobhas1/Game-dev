@@ -1,0 +1,17 @@
+{
+  "name": "Rune",
+  "emoji": "🪄",
+  "element": "arcane",
+  "tags": ["ward", "perceive"],
+  "flavor": "A carved sigil that hardens the air and sharpens the eye.",
+  "spell": {
+    "id": "rune",
+    "tier": 1,
+    "cast": { "mode": "cast", "castTime": "quick", "cooldown": "medium", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": true, "moveWhileCasting": false },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "shield", "share": 0.6, "duration": "medium" },
+      { "verb": "modifyStat", "stat": "critChance", "share": 0.4, "direction": "buff", "duration": "medium" }
+    ]
+  }
+}

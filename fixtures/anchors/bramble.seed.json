@@ -1,0 +1,17 @@
+{
+  "name": "Bramble",
+  "emoji": "🌿",
+  "element": "nature",
+  "tags": ["control", "damage"],
+  "flavor": "Thorned vines grip the legs and bite what struggles.",
+  "spell": {
+    "id": "bramble",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "medium", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "applyStatus", "status": "root", "duration": "medium", "share": 0.5 },
+      { "verb": "damage", "element": "nature", "share": 0.5 }
+    ]
+  }
+}

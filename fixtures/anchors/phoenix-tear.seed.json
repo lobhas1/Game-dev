@@ -1,0 +1,17 @@
+{
+  "name": "Phoenix Tear",
+  "emoji": "🔥",
+  "element": "fire",
+  "tags": ["heal"],
+  "flavor": "A hot tear that seals the wound it falls on.",
+  "spell": {
+    "id": "phoenix-tear",
+    "tier": 1,
+    "cast": { "mode": "cast", "castTime": "quick", "cooldown": "medium", "cost": { "resource": "mana", "amount": "moderate" }, "interruptible": true, "moveWhileCasting": false },
+    "delivery": { "type": "self" },
+    "clauses": [
+      { "verb": "heal", "share": 0.7 },
+      { "verb": "applyStatus", "status": "regen", "duration": "medium", "share": 0.3 }
+    ]
+  }
+}

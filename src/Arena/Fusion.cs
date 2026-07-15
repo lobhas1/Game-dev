@@ -108,6 +108,12 @@ public static class TagCoverage
         ["duration"] = f => f.HasMedLongDuration || f.HasZone,
     };
 
+    /// <summary>Single-source accessor over the frozen F2 mapping: does the spell's mechanics deliver
+    /// <paramref name="tag"/>? Unmappable/unknown tags (summon/transform/perceive) are never covered.
+    /// Reused by ancestry-eval so it can never drift from the F2 mapper.</summary>
+    public static bool Covers(string tag, MechFacts facts) =>
+        Mappings.TryGetValue(tag, out var pred) && pred(facts);
+
     public sealed class MechFacts
     {
         public bool HasDamage, HasHeal, HasShield, HasArmorResistBuff, HasControlStatus,

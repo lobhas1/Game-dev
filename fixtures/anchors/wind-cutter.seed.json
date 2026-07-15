@@ -1,0 +1,17 @@
+{
+  "name": "Wind Cutter",
+  "emoji": "🌬️",
+  "element": "air",
+  "tags": ["damage"],
+  "flavor": "A blade of wind that opens a thin red line.",
+  "spell": {
+    "id": "wind-cutter",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "projectile", "speed": "fast" },
+    "clauses": [
+      { "verb": "damage", "element": "air", "share": 0.8 },
+      { "verb": "applyStatus", "status": "bleed", "duration": "short", "share": 0.2 }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Riptide",
+  "emoji": "🌊",
+  "element": "water",
+  "tags": ["damage"],
+  "flavor": "A surge of water that knocks a body off its feet.",
+  "spell": {
+    "id": "riptide",
+    "tier": 1,
+    "cast": { "mode": "instant", "cooldown": "short", "cost": { "resource": "mana", "amount": "low" }, "interruptible": false, "moveWhileCasting": true },
+    "delivery": { "type": "targetUnit", "range": "medium" },
+    "clauses": [
+      { "verb": "damage", "element": "water", "share": 1.0 },
+      { "verb": "displace", "subject": "target", "mode": "push", "distance": "small" }
+    ]
+  }
+}
