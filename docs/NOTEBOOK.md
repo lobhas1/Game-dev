@@ -44,4 +44,12 @@
 - PACKAGING ERA: UAT demands "VS2022 x64 installed" even with a valid toolchain;
   known workaround is a bare VS2022 core-shell install (months away).
 
-
+- FUSION AFFINITY / FAILURE-AS-CONTENT (banked 2026-07-14): hard compatibility
+  blocking is REJECTED — the canon's best concepts live at parent tension (Steam,
+  Mud, Penumbra), and designer steering never happens per-pair. Instead: the naming
+  oracle emits an affinity judgment; low affinity yields dud-class concepts (Ash,
+  Sludge, Fizzle — weak/volatile but real; every fusion produces something, essence
+  still spent). Pre-registered validation when opened: affinity must predict
+  stranger nonsense verdicts on the same fusions. Costs: prompt change (new sha,
+  own round), possible volatility vocabulary, and it presupposes the essence
+  economy — M3+ territory.
