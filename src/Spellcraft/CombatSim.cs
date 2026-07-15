@@ -914,6 +914,13 @@ public sealed class Sim
     // Executes a single clause: ifStatus pre-amplify → dispatch → post triggers.
     internal EffectResult RunClause(EffectCtx ctx, Clause clause, EntityRef target, CastGuards guards)
     {
+        // Self-exclusion (spec docs/specs/2026-07-15-target-filter.md): an entity's own OFFENSIVE
+        // effects never touch itself — a groundAoE covering the caster, a zone ticking its owner, an
+        // onHit landing on the caster. Beneficial self-effects (heal, shield, buffs, self-dash,
+        // dispel) fall through unchanged. The excluded effect emits no event.
+        if (target.IsValid && target == ctx.Caster && IsOffensive(clause))
+            return new NoResult();
+
         float amplify = 1f;
         bool ifStatusMatched = false;
         if (clause.Template is IfStatusTemplate ifs && target.IsValid && ctx.State.HasStatus(target, ifs.Status))
@@ -926,6 +933,18 @@ public sealed class Sim
         RunTriggers(ctx, clause, target, result, ifStatusMatched, guards);
         return result;
     }
+
+    // Offensive iff it would harm the caster: damage, a debuff status, a stat DEBUFF (signed
+    // AmountPct < 0), or a displace of a unit-as-subject. Self-dash (Subject "caster"), heal,
+    // shield, dispel, spawnZone, and stat BUFFs are beneficial and still apply to the caster.
+    private static bool IsOffensive(Clause clause) => clause.Verb switch
+    {
+        VerbId.Damage => true,
+        VerbId.ApplyStatus => StatusCatalog.IsDebuff(((ApplyStatusParams)clause.Params).Status),
+        VerbId.ModifyStat => ((ModifyStatParams)clause.Params).AmountPct < 0f,
+        VerbId.Displace => ((DisplaceParams)clause.Params).Subject != "caster",
+        _ => false
+    };
 
     // §7 trigger phase — executes ifStatus + onHit; the other six parse-validate but no-op.
     private void RunTriggers(EffectCtx ctx, Clause clause, EntityRef target, EffectResult result,
