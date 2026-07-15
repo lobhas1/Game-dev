@@ -1,0 +1,78 @@
+{
+  "name": "eclipse-cut",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Wind Cutter",
+    "b": "Umbra",
+    "aPath": "fixtures/anchors/wind-cutter.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Eclipse Cut",
+    "emoji": "\uD83C\uDF11",
+    "element": "shadow",
+    "tags": [
+      "damage",
+      "conceal"
+    ],
+    "flavor": "A slash that swallows its own wound in darkness.",
+    "why": "Wind\u0027s cutting edge hidden inside shadow\u0027s consuming dark."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:38:49Z",
+  "spell": {
+    "id": "eclipse-cut",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "shadow",
+        "share": 0.65
+      },
+      {
+        "verb": "applyStatus",
+        "status": "blind",
+        "duration": "medium",
+        "share": 0.35,
+        "template": {
+          "kind": "onHit",
+          "clauses": [
+            {
+              "verb": "applyStatus",
+              "status": "bleed",
+              "duration": "short",
+              "share": 0.25
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

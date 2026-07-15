@@ -1,0 +1,81 @@
+{
+  "name": "warding-wind",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Rune",
+    "b": "Gust",
+    "aPath": "fixtures/anchors/rune.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Warding Wind",
+    "emoji": "\uD83C\uDF00",
+    "element": "arcane",
+    "tags": [
+      "ward",
+      "movement",
+      "perceive"
+    ],
+    "flavor": "Spinning air locks out hands and clears the sight.",
+    "why": "Rune\u0027s protective sight fused with Gust\u0027s moving breath."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:53Z",
+  "spell": {
+    "id": "warding-wind",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.45,
+        "duration": "medium"
+      },
+      {
+        "verb": "displace",
+        "subject": "caster",
+        "mode": "dash",
+        "distance": "small"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "evasion",
+        "share": 0.3,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.25,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "eclipse-cut",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "shadow",
+      "share": 0.65
+    },
+    {
+      "verb": "applyStatus",
+      "status": "blind",
+      "duration": "medium",
+      "share": 0.35,
+      "template": {
+        "kind": "onHit",
+        "clauses": [
+          {
+            "verb": "applyStatus",
+            "status": "bleed",
+            "duration": "short",
+            "share": 0.25
+          }
+        ]
+      }
+    }
+  ]
+}

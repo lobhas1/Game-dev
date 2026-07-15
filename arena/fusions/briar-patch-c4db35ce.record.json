@@ -1,0 +1,81 @@
+{
+  "name": "briar-patch",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Bramble",
+    "b": "Pebble",
+    "aPath": "fixtures/anchors/bramble.seed.json",
+    "bPath": "fixtures/seeds/pebble.seed.json"
+  },
+  "concept": {
+    "name": "Briar Patch",
+    "emoji": "\uD83C\uDF3F",
+    "element": "nature",
+    "tags": [
+      "control",
+      "ward",
+      "damage"
+    ],
+    "flavor": "Roots and stones lock feet; the ground itself refuses passage.",
+    "why": "Vines anchor, pebbles fortify: terrain becomes an impassable defensive trap."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:35:44Z",
+  "spell": {
+    "id": "briar-patch",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "root",
+        "duration": "medium",
+        "share": 0.4
+      },
+      {
+        "verb": "shield",
+        "share": 0.35,
+        "duration": "medium"
+      },
+      {
+        "verb": "damage",
+        "element": "nature",
+        "share": 0.25,
+        "template": {
+          "kind": "ifStatus",
+          "status": "root",
+          "consume": false,
+          "amplify": "major"
+        }
+      }
+    ]
+  }
+}

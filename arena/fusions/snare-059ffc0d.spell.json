@@ -1,0 +1,43 @@
+{
+  "id": "snare",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "root",
+      "duration": "medium",
+      "share": 0.4
+    },
+    {
+      "verb": "applyStatus",
+      "status": "blind",
+      "duration": "medium",
+      "share": 0.35
+    },
+    {
+      "verb": "damage",
+      "element": "shadow",
+      "share": 0.25,
+      "template": {
+        "kind": "ifStatus",
+        "status": "root",
+        "consume": false,
+        "amplify": "minor"
+      }
+    }
+  ]
+}

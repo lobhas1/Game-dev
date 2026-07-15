@@ -1,0 +1,54 @@
+{
+  "id": "wildfire",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.4
+    },
+    {
+      "verb": "spawnZone",
+      "shape": "circle",
+      "size": "large",
+      "duration": "long",
+      "tickInterval": "medium",
+      "affects": "enemies",
+      "tickClauses": [
+        {
+          "verb": "damage",
+          "element": "fire",
+          "share": 0.35,
+          "template": {
+            "kind": "ifStatus",
+            "status": "burn",
+            "consume": false,
+            "amplify": "major"
+          }
+        },
+        {
+          "verb": "applyStatus",
+          "status": "burn",
+          "duration": "medium",
+          "share": 0.25
+        }
+      ]
+    }
+  ]
+}

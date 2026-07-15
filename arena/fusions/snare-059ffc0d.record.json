@@ -1,0 +1,80 @@
+{
+  "name": "snare",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Bramble",
+    "b": "Umbra",
+    "aPath": "fixtures/anchors/bramble.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Snare",
+    "emoji": "\uD83D\uDD77\uFE0F",
+    "element": "shadow",
+    "tags": [
+      "control",
+      "conceal",
+      "damage"
+    ],
+    "flavor": "Dark roots lock the ankle; the pit closes overhead.",
+    "why": "Hidden trap: nature\u0027s grip made invisible by shadow"
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:35:54Z",
+  "spell": {
+    "id": "snare",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "root",
+        "duration": "medium",
+        "share": 0.4
+      },
+      {
+        "verb": "applyStatus",
+        "status": "blind",
+        "duration": "medium",
+        "share": 0.35
+      },
+      {
+        "verb": "damage",
+        "element": "shadow",
+        "share": 0.25,
+        "template": {
+          "kind": "ifStatus",
+          "status": "root",
+          "consume": false,
+          "amplify": "minor"
+        }
+      }
+    ]
+  }
+}

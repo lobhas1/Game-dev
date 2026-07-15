@@ -1,0 +1,45 @@
+{
+  "id": "mudslide",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "high"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "line",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "earth",
+      "share": 0.4
+    },
+    {
+      "verb": "applyStatus",
+      "status": "root",
+      "duration": "medium",
+      "share": 0.35
+    },
+    {
+      "verb": "displace",
+      "subject": "target",
+      "mode": "push",
+      "distance": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "slow",
+      "duration": "medium",
+      "share": 0.25
+    }
+  ]
+}

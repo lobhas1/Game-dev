@@ -1,0 +1,38 @@
+{
+  "id": "cauterizing-light",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "heal",
+      "share": 0.55
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.25,
+      "direction": "buff",
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "regen",
+      "duration": "medium",
+      "share": 0.2
+    }
+  ]
+}

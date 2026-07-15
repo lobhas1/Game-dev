@@ -1,0 +1,90 @@
+{
+  "name": "wildfire",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Wind Cutter",
+    "b": "Ember",
+    "aPath": "fixtures/anchors/wind-cutter.seed.json",
+    "bPath": "fixtures/seeds/ember.seed.json"
+  },
+  "concept": {
+    "name": "Wildfire",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "damage",
+      "area"
+    ],
+    "flavor": "Wind-fed flames race across the ground, eating everything dry.",
+    "why": "Wind turns ember to spreading fire; wind feeds, fire grows."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:38:18Z",
+  "spell": {
+    "id": "wildfire",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "circle",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.4
+      },
+      {
+        "verb": "spawnZone",
+        "shape": "circle",
+        "size": "large",
+        "duration": "long",
+        "tickInterval": "medium",
+        "affects": "enemies",
+        "tickClauses": [
+          {
+            "verb": "damage",
+            "element": "fire",
+            "share": 0.35,
+            "template": {
+              "kind": "ifStatus",
+              "status": "burn",
+              "consume": false,
+              "amplify": "major"
+            }
+          },
+          {
+            "verb": "applyStatus",
+            "status": "burn",
+            "duration": "medium",
+            "share": 0.25
+          }
+        ]
+      }
+    ]
+  }
+}

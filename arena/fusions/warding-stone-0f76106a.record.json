@@ -1,0 +1,75 @@
+{
+  "name": "warding-stone",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Rune",
+    "b": "Pebble",
+    "aPath": "fixtures/anchors/rune.seed.json",
+    "bPath": "fixtures/seeds/pebble.seed.json"
+  },
+  "concept": {
+    "name": "Warding Stone",
+    "emoji": "\uD83E\uDEA8",
+    "element": "earth",
+    "tags": [
+      "ward",
+      "perceive"
+    ],
+    "flavor": "A sigil-carved rock that watches and holds the line.",
+    "why": "Arcane rune etched into earth creates a sentinel ward-stone."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:59Z",
+  "spell": {
+    "id": "warding-stone",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.6,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.25,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "armor",
+        "share": 0.15,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

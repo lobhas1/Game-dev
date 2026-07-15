@@ -1,0 +1,43 @@
+{
+  "id": "cauterize",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "fire",
+      "share": 0.35
+    },
+    {
+      "verb": "heal",
+      "share": 0.4,
+      "template": {
+        "kind": "ifStatus",
+        "status": "burn",
+        "consume": true,
+        "amplify": "major",
+        "also": []
+      }
+    },
+    {
+      "verb": "applyStatus",
+      "status": "regen",
+      "duration": "medium",
+      "share": 0.25
+    }
+  ]
+}

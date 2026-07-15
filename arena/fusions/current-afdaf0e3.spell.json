@@ -1,0 +1,37 @@
+{
+  "id": "current",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "heal",
+      "share": 0.55
+    },
+    {
+      "verb": "displace",
+      "subject": "target",
+      "mode": "pull",
+      "distance": "small"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "slow",
+      "duration": "medium",
+      "share": 0.45
+    }
+  ]
+}

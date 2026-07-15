@@ -1,0 +1,76 @@
+{
+  "name": "glint",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Riptide",
+    "b": "Glimmer",
+    "aPath": "fixtures/anchors/riptide.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Glint",
+    "emoji": "\uD83D\uDCA7",
+    "element": "water",
+    "tags": [
+      "perceive",
+      "movement"
+    ],
+    "flavor": "A fast current catches the light, marking hidden shallows.",
+    "why": "Moving water reveals what still water conceals"
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:01Z",
+  "spell": {
+    "id": "glint",
+    "tier": 2,
+    "cast": {
+      "mode": "instant",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "low"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "line",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "short",
+        "share": 0.4
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.35,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "blind",
+        "duration": "short",
+        "share": 0.25
+      }
+    ]
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "name": "cauterizing-light",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Phoenix Tear",
+    "b": "Glimmer",
+    "aPath": "fixtures/anchors/phoenix-tear.seed.json",
+    "bPath": "fixtures/seeds/glimmer.seed.json"
+  },
+  "concept": {
+    "name": "Cauterizing Light",
+    "emoji": "\uD83D\uDD6F\uFE0F",
+    "element": "light",
+    "tags": [
+      "heal",
+      "perceive"
+    ],
+    "flavor": "Bright beam finds the cut and seals it shut.",
+    "why": "Healing fire meets revealing light; focused glow that mends."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:36:18Z",
+  "spell": {
+    "id": "cauterizing-light",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "heal",
+        "share": 0.55
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.25,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "regen",
+        "duration": "medium",
+        "share": 0.2
+      }
+    ]
+  }
+}

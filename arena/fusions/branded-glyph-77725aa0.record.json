@@ -1,0 +1,85 @@
+{
+  "name": "branded-glyph",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Rune",
+    "b": "Ember",
+    "aPath": "fixtures/anchors/rune.seed.json",
+    "bPath": "fixtures/seeds/ember.seed.json"
+  },
+  "concept": {
+    "name": "Branded Glyph",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "ward",
+      "damage",
+      "perceive"
+    ],
+    "flavor": "A sigil scorched into stone that bites back when touched.",
+    "why": "Fire\u0027s heat burns the arcane mark into a dangerous, reactive seal."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:38Z",
+  "spell": {
+    "id": "branded-glyph",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "shield",
+        "share": 0.35,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.2,
+        "direction": "buff",
+        "duration": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "burn",
+        "duration": "medium",
+        "share": 0.45,
+        "template": {
+          "kind": "onHit",
+          "clauses": [
+            {
+              "verb": "damage",
+              "element": "fire",
+              "share": 0.6
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

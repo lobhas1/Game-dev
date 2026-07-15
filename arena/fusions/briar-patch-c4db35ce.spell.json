@@ -1,0 +1,44 @@
+{
+  "id": "briar-patch",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "normal",
+    "cooldown": "long",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "circle",
+    "size": "large"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "root",
+      "duration": "medium",
+      "share": 0.4
+    },
+    {
+      "verb": "shield",
+      "share": 0.35,
+      "duration": "medium"
+    },
+    {
+      "verb": "damage",
+      "element": "nature",
+      "share": 0.25,
+      "template": {
+        "kind": "ifStatus",
+        "status": "root",
+        "consume": false,
+        "amplify": "major"
+      }
+    }
+  ]
+}

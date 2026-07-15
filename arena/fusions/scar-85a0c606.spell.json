@@ -1,0 +1,37 @@
+{
+  "id": "scar",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "heal",
+      "share": 0.45
+    },
+    {
+      "verb": "shield",
+      "share": 0.4,
+      "duration": "long",
+      "element": "earth"
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "armor",
+      "share": 0.15,
+      "direction": "buff",
+      "duration": "long"
+    }
+  ]
+}

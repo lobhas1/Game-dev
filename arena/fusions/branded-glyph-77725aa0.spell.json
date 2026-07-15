@@ -1,0 +1,48 @@
+{
+  "id": "branded-glyph",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "shield",
+      "share": 0.35,
+      "duration": "medium"
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.2,
+      "direction": "buff",
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "burn",
+      "duration": "medium",
+      "share": 0.45,
+      "template": {
+        "kind": "onHit",
+        "clauses": [
+          {
+            "verb": "damage",
+            "element": "fire",
+            "share": 0.6
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "name": "squall",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Riptide",
+    "b": "Gust",
+    "aPath": "fixtures/anchors/riptide.seed.json",
+    "bPath": "fixtures/seeds/gust.seed.json"
+  },
+  "concept": {
+    "name": "Squall",
+    "emoji": "\uD83C\uDF0A",
+    "element": "water",
+    "tags": [
+      "damage",
+      "movement",
+      "area"
+    ],
+    "flavor": "Wind and water together shove everything sideways at once.",
+    "why": "Water\u0027s force plus air\u0027s motion equals a driving squall."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:08Z",
+  "spell": {
+    "id": "squall",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "cone",
+      "size": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "water",
+        "share": 0.5
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "short",
+        "share": 0.3
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "name": "cauterize",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Phoenix Tear",
+    "b": "Ember",
+    "aPath": "fixtures/anchors/phoenix-tear.seed.json",
+    "bPath": "fixtures/seeds/ember.seed.json"
+  },
+  "concept": {
+    "name": "Cauterize",
+    "emoji": "\uD83D\uDD25",
+    "element": "fire",
+    "tags": [
+      "heal",
+      "damage"
+    ],
+    "flavor": "Searing heat closes the wound before pain arrives.",
+    "why": "Fire\u0027s dual nature: burning that heals by burning."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:36:09Z",
+  "spell": {
+    "id": "cauterize",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "targetUnit",
+      "range": "medium"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "fire",
+        "share": 0.35
+      },
+      {
+        "verb": "heal",
+        "share": 0.4,
+        "template": {
+          "kind": "ifStatus",
+          "status": "burn",
+          "consume": true,
+          "amplify": "major",
+          "also": []
+        }
+      },
+      {
+        "verb": "applyStatus",
+        "status": "regen",
+        "duration": "medium",
+        "share": 0.25
+      }
+    ]
+  }
+}

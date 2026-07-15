@@ -1,0 +1,33 @@
+{
+  "id": "snare",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "root",
+      "duration": "medium",
+      "share": 0.6
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "evasion",
+      "direction": "debuff",
+      "duration": "medium",
+      "share": 0.4
+    }
+  ]
+}

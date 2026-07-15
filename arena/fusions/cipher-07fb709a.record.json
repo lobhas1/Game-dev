@@ -1,0 +1,75 @@
+{
+  "name": "cipher",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Rune",
+    "b": "Umbra",
+    "aPath": "fixtures/anchors/rune.seed.json",
+    "bPath": "fixtures/seeds/umbra.seed.json"
+  },
+  "concept": {
+    "name": "Cipher",
+    "emoji": "\uD83D\uDD0F",
+    "element": "arcane",
+    "tags": [
+      "ward",
+      "conceal",
+      "perceive"
+    ],
+    "flavor": "A hidden mark that watches without being seen.",
+    "why": "Rune\u0027s seeing sigil fused with Umbra\u0027s concealing dark yields invisible surveillance."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:38:05Z",
+  "spell": {
+    "id": "cipher",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "quick",
+      "cooldown": "medium",
+      "cost": {
+        "resource": "mana",
+        "amount": "moderate"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "self"
+    },
+    "clauses": [
+      {
+        "verb": "applyStatus",
+        "status": "stealth",
+        "duration": "medium",
+        "share": 0.4
+      },
+      {
+        "verb": "shield",
+        "share": 0.35,
+        "duration": "medium"
+      },
+      {
+        "verb": "modifyStat",
+        "stat": "critChance",
+        "share": 0.25,
+        "direction": "buff",
+        "duration": "medium"
+      }
+    ]
+  }
+}

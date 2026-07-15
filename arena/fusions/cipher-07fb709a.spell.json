@@ -1,0 +1,38 @@
+{
+  "id": "cipher",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "stealth",
+      "duration": "medium",
+      "share": 0.4
+    },
+    {
+      "verb": "shield",
+      "share": 0.35,
+      "duration": "medium"
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.25,
+      "direction": "buff",
+      "duration": "medium"
+    }
+  ]
+}

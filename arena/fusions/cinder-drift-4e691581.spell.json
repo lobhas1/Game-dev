@@ -1,0 +1,35 @@
+{
+  "id": "cinder-drift",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "self"
+  },
+  "clauses": [
+    {
+      "verb": "displace",
+      "subject": "caster",
+      "mode": "dash",
+      "distance": "medium"
+    },
+    {
+      "verb": "heal",
+      "share": 0.6
+    },
+    {
+      "verb": "applyStatus",
+      "status": "regen",
+      "duration": "medium",
+      "share": 0.4
+    }
+  ]
+}

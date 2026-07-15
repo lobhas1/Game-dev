@@ -1,0 +1,82 @@
+{
+  "name": "mudslide",
+  "tier": 2,
+  "origin": {
+    "source": "live",
+    "model": "claude-sonnet-4-6"
+  },
+  "parents": {
+    "a": "Riptide",
+    "b": "Pebble",
+    "aPath": "fixtures/anchors/riptide.seed.json",
+    "bPath": "fixtures/seeds/pebble.seed.json"
+  },
+  "concept": {
+    "name": "Mudslide",
+    "emoji": "\uD83C\uDF0A",
+    "element": "earth",
+    "tags": [
+      "damage",
+      "control",
+      "area"
+    ],
+    "flavor": "A churning wall of wet earth buries everything in its path.",
+    "why": "Water\u0027s force plus earth\u0027s mass equals unstoppable sliding ground."
+  },
+  "gate": {
+    "firstPassOk": true,
+    "repaired": false,
+    "discarded": false,
+    "error": null
+  },
+  "shas": {
+    "naming": "d08bf90c4ea83be588e1852cb89dde0edcdff42c1e5346226d302aeda5e0f2d0",
+    "mechanics": "dadc702f5e34b23246a6610b73113649a51d24ba7301e3ac1155f8ff7cb2c498"
+  },
+  "timestamp": "2026-07-15T17:37:15Z",
+  "spell": {
+    "id": "mudslide",
+    "tier": 2,
+    "cast": {
+      "mode": "cast",
+      "castTime": "normal",
+      "cooldown": "long",
+      "cost": {
+        "resource": "mana",
+        "amount": "high"
+      },
+      "interruptible": true,
+      "moveWhileCasting": false
+    },
+    "delivery": {
+      "type": "groundAoE",
+      "shape": "line",
+      "size": "large"
+    },
+    "clauses": [
+      {
+        "verb": "damage",
+        "element": "earth",
+        "share": 0.4
+      },
+      {
+        "verb": "applyStatus",
+        "status": "root",
+        "duration": "medium",
+        "share": 0.35
+      },
+      {
+        "verb": "displace",
+        "subject": "target",
+        "mode": "push",
+        "distance": "medium"
+      },
+      {
+        "verb": "applyStatus",
+        "status": "slow",
+        "duration": "medium",
+        "share": 0.25
+      }
+    ]
+  }
+}

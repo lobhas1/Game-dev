@@ -1,0 +1,40 @@
+{
+  "id": "glint",
+  "tier": 2,
+  "cast": {
+    "mode": "instant",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "line",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "applyStatus",
+      "status": "slow",
+      "duration": "short",
+      "share": 0.4
+    },
+    {
+      "verb": "modifyStat",
+      "stat": "critChance",
+      "share": 0.35,
+      "direction": "buff",
+      "duration": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "blind",
+      "duration": "short",
+      "share": 0.25
+    }
+  ]
+}

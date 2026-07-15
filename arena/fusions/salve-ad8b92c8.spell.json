@@ -1,0 +1,31 @@
+{
+  "id": "salve",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "low"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "targetUnit",
+    "range": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "heal",
+      "share": 0.5
+    },
+    {
+      "verb": "applyStatus",
+      "status": "regen",
+      "duration": "long",
+      "share": 0.5
+    }
+  ]
+}

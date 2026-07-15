@@ -1,0 +1,39 @@
+{
+  "id": "squall",
+  "tier": 2,
+  "cast": {
+    "mode": "cast",
+    "castTime": "quick",
+    "cooldown": "medium",
+    "cost": {
+      "resource": "mana",
+      "amount": "moderate"
+    },
+    "interruptible": true,
+    "moveWhileCasting": false
+  },
+  "delivery": {
+    "type": "groundAoE",
+    "shape": "cone",
+    "size": "medium"
+  },
+  "clauses": [
+    {
+      "verb": "damage",
+      "element": "water",
+      "share": 0.5
+    },
+    {
+      "verb": "displace",
+      "subject": "target",
+      "mode": "push",
+      "distance": "medium"
+    },
+    {
+      "verb": "applyStatus",
+      "status": "slow",
+      "duration": "short",
+      "share": 0.3
+    }
+  ]
+}
