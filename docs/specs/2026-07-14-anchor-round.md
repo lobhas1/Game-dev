@@ -99,3 +99,28 @@ ratification.
 2. `ancestry-eval arena/fusions` — A1 per anchor (PASS iff ≥1/3 AND ≥ baseline+25pp) and A2 wings.
 3. `evaluate-fusions arena/fusions` — A3 (F1 ≥90%) and doctrine.
 4. Commit results with the REAL numbers in the message.
+
+
+## Live results (2026-07-15) — filed post-run; re-derived independently by review
+30 anchor×seed fusions, all gated first-try. Verdict: ROUND PASS (A0, A1 ×5, A2, A3).
+
+| anchor       | signature        | A1 (children)   | vs frozen baseline | expressing children        |
+|--------------|------------------|-----------------|--------------------|----------------------------|
+| Phoenix Tear | fire+heal        | 33.3% (2/6) PASS| 0.0% + 25pp met    | Cauterize, Cinder Drift    |
+| Riptide      | water+damage     | 33.3% (2/6) PASS| 0.0% + 25pp met    | Geyser, Squall             |
+| Wind Cutter  | air+damage       | 33.3% (2/6) PASS| 0.0% + 25pp met    | Squall, Dust Devil         |
+| Bramble      | nature+ctrl/dmg  | 66.7% (4/6) PASS| 0.0% + 25pp met    | Seagrass, Tangle, Briar Patch, Snare |
+| Rune         | arcane+ward/perc | 66.7% (4/6) PASS| 0.0% + 25pp met    | Scrying Pool, Inscription, Warding Wind, Cipher |
+
+A2 wings: nature 4 concepts, arcane 4 concepts (both were 0 before this run) — OPEN.
+A3: F1 100% (50/50 corpus-wide); child names doctrine-legal on review.
+Notes: (1) the binding baseline is the spec's frozen 0.0% row; the tool's displayed
+baseline (4–8%) recomputes on the post-run corpus and thus counts the very children
+under test — cosmetic here (no verdict flips under either reading), but the tool
+should exclude anchor children from its baseline denominator in future runs.
+(2) Cross-generation convergence: Squall reached from two different anchors;
+Dust Devil re-converged with the pre-anchor corpus. (3) Same-name drift continues:
+a new air-element Mist and a shadow Snare coexist with prior/nature namesakes —
+the banked convergence-doctrine question grows more interesting.
+(4) Commit 50db890's message shipped with placeholders (hall of shame #10); this
+section is the round's number-carrying record.
