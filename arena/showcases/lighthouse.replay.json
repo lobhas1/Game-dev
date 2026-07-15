@@ -134,33 +134,6 @@
     },
     {
       "t": 1.7999993562698364,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=102.4 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 102.40001678466797,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 1.7999993562698364,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=False",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": false
-      }
-    },
-    {
-      "t": 1.7999993562698364,
       "type": "Healed",
       "canonical": "heal E2 eff=0 over=143.36",
       "payload": {
@@ -208,38 +181,11 @@
     {
       "t": 2.7999985218048096,
       "type": "Healed",
-      "canonical": "heal E1 eff=102.4 over=40.96",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 102.39990234375,
-        "overheal": 40.960113525390625
-      }
-    },
-    {
-      "t": 2.7999985218048096,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 2.7999985218048096,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -291,38 +237,11 @@
     {
       "t": 3.799997568130493,
       "type": "Healed",
-      "canonical": "heal E1 eff=117.76 over=25.6",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 117.760009765625,
-        "overheal": 25.600006103515625
-      }
-    },
-    {
-      "t": 3.799997568130493,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 3.799997568130493,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -361,38 +280,11 @@
     {
       "t": 4.800000190734863,
       "type": "Healed",
-      "canonical": "heal E1 eff=117.76 over=25.6",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 117.760009765625,
-        "overheal": 25.600006103515625
-      }
-    },
-    {
-      "t": 4.800000190734863,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 4.800000190734863,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -431,38 +323,11 @@
     {
       "t": 5.800004005432129,
       "type": "Healed",
-      "canonical": "heal E1 eff=117.76 over=25.6",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 117.760009765625,
-        "overheal": 25.600006103515625
-      }
-    },
-    {
-      "t": 5.800004005432129,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 5.800004005432129,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -514,38 +379,11 @@
     {
       "t": 6.8000078201293945,
       "type": "Healed",
-      "canonical": "heal E1 eff=117.76 over=25.6",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 117.760009765625,
-        "overheal": 25.600006103515625
-      }
-    },
-    {
-      "t": 6.8000078201293945,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 6.8000078201293945,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -597,38 +435,11 @@
     {
       "t": 7.80001163482666,
       "type": "Healed",
-      "canonical": "heal E1 eff=117.76 over=25.6",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 117.760009765625,
-        "overheal": 25.600006103515625
-      }
-    },
-    {
-      "t": 7.80001163482666,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=235.52 Light crit=True killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 235.52003479003906,
-        "element": "Light",
-        "crit": true,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 7.80001163482666,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -680,38 +491,11 @@
     {
       "t": 8.800015449523926,
       "type": "Healed",
-      "canonical": "heal E1 eff=143.36 over=-0",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 143.360107421875,
-        "overheal": -9.1552734375E-05
-      }
-    },
-    {
-      "t": 8.800015449523926,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 8.800015449523926,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -763,38 +547,11 @@
     {
       "t": 9.800019264221191,
       "type": "Healed",
-      "canonical": "heal E1 eff=143.36 over=-0",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 143.360107421875,
-        "overheal": -9.1552734375E-05
-      }
-    },
-    {
-      "t": 9.800019264221191,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=117.76 Light crit=False killed=False absorbed=0",
-      "payload": {
-        "target": 1,
-        "amount": 117.76001739501953,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": false
-      }
-    },
-    {
-      "t": 9.800019264221191,
-      "type": "StatusApplied",
-      "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=True",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable",
-        "duration": 5,
-        "stacks": 1,
-        "resisted": false,
-        "refreshed": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -846,25 +603,11 @@
     {
       "t": 10.800023078918457,
       "type": "Healed",
-      "canonical": "heal E1 eff=143.36 over=-0",
+      "canonical": "heal E1 eff=0 over=143.36",
       "payload": {
         "target": 1,
-        "effective": 143.360107421875,
-        "overheal": -9.1552734375E-05
-      }
-    },
-    {
-      "t": 10.800023078918457,
-      "type": "DamageDealt",
-      "canonical": "damage E1 evaded",
-      "payload": {
-        "target": 1,
-        "amount": 0,
-        "element": "Light",
-        "crit": false,
-        "killed": false,
-        "absorbed": 0,
-        "evaded": true
+        "effective": 0,
+        "overheal": 143.36001586914062
       }
     },
     {
@@ -910,15 +653,6 @@
       "canonical": "zoneExpired Z1",
       "payload": {
         "id": 1
-      }
-    },
-    {
-      "t": 14.80003833770752,
-      "type": "StatusRemoved",
-      "canonical": "statusRemoved E1 Vulnerable",
-      "payload": {
-        "target": 1,
-        "status": "Vulnerable"
       }
     },
     {

@@ -61,20 +61,6 @@
     },
     {
       "t": 0.8000001311302185,
-      "type": "DamageDealt",
-      "canonical": "damage E1 amt=0 Fire crit=False killed=False absorbed=61.44",
-      "payload": {
-        "target": 1,
-        "amount": 0,
-        "element": "Fire",
-        "crit": false,
-        "killed": false,
-        "absorbed": 61.44001007080078,
-        "evaded": false
-      }
-    },
-    {
-      "t": 0.8000001311302185,
       "type": "StatusApplied",
       "canonical": "status E1 Stealth dur=5 stacks=1 refreshed=False",
       "payload": {

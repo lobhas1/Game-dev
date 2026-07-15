@@ -91,15 +91,20 @@ public class ShowcaseTests
     }
 
     [Fact]
-    public void Batch_Produces26Files_AndManifest()
+    public void Batch_ProducesOnePerCorpusInput_AndManifest()
     {
         string outDir = Path.Combine(Path.GetTempPath(), "showcases-" + Guid.NewGuid().ToString("N"));
         string doc = Path.Combine(outDir, "coverage.md");
         Showcase.RunBatch(outDir, doc, 1, TextWriter.Null);
 
-        Assert.Equal(26, Directory.GetFiles(outDir, "*.replay.json").Length);  // 6 seeds + 20 fusions
+        // one showcase per corpus input — mirrors RunBatch's own globs, so it tracks corpus growth
+        // (the v4 re-fusion + anchor children) instead of pinning a stale count.
+        int expected =
+            Directory.GetFiles(Path.Combine(PromptTemplate.RepoRoot(), "fixtures", "seeds"), "*.seed.json").Length +
+            Directory.GetFiles(Path.Combine(PromptTemplate.ArenaDir(), "fusions"), "*.record.json").Length;
+        Assert.Equal(expected, Directory.GetFiles(outDir, "*.replay.json").Length);
         var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(outDir, "manifest.json")))!;
-        Assert.Equal(26, manifest["spells"]!.AsArray().Count);
+        Assert.Equal(expected, manifest["spells"]!.AsArray().Count);
         Assert.Contains("Missing tokens", File.ReadAllText(doc), StringComparison.Ordinal);
     }
 

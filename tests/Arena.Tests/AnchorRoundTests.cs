@@ -114,10 +114,17 @@ public class AnchorRoundTests
     }
 
     [Fact]
-    public void Baseline_V4Corpus_AllZero_NonVacuous()
+    public void Baseline_Corpus_BelowVacuityBar_NonVacuous()
     {
+        // Before the anchor live run this was pinned at 0.0% (no signature occurred pre-anchor). The
+        // run added the 30 anchor children, which DO express their signatures, so baselines are now
+        // low-but-nonzero (4-8%). The invariant that still matters is non-vacuity: no signature
+        // already occurs at a rate that would make A1 a non-test. The anchor spec fixes that bar at
+        // 10% ("no signature exceeds 10%, none is vacuous"). Deeper fix flagged in the anchor doc
+        // (exclude anchor children from the baseline denominator) remains open.
         var res = AncestryEval.Evaluate(FusionEvaluator.LoadRecords(RepoDir("arena/fusions")));
-        Assert.All(res, r => Assert.Equal(0.0, r.BaselinePct, 1)); // pinned: no signature already occurs
+        Assert.All(res, r => Assert.True(r.BaselinePct < 10.0,
+            $"{r.Sig.Name} baseline {r.BaselinePct:0.0}% >= 10% vacuity bar"));
     }
 
     // ── helpers ──
