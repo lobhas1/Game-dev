@@ -154,3 +154,11 @@ Scope: opens as its own milestone after M2's gates close.
    carrying residual meaning. Gaps that recur become data-votes for widening. Adequacy
    is not asserted but measured: the motif round's blind concept-to-visual matching
    test is its gate.
+
+7. MOTIF VARIATION PRINCIPLE. Motifs are parameterized templates, never stamps.
+   Each motif instance derives its substance and texture from its element (fire
+   wings are flame-stuff, light wings glow-feathers, shadow wings smoke), its
+   scale and intensity from the bands, and per-concept variation (silhouette
+   noise, animation phase, additive detail) from a seed keyed to the concept —
+   so concepts sharing a motif read as kin, never as identical twins in
+   different colours. Enforcement: the twin test (clause 5).
