@@ -53,3 +53,12 @@
   stranger nonsense verdicts on the same fusions. Costs: prompt change (new sha,
   own round), possible volatility vocabulary, and it presupposes the essence
   economy — M3+ territory.
+Affinity-source fork (settled in principle 2026-07-14): measured convergence
+  (repeat-fusion agreement — the canon's own reproducibility) is ground truth; the
+  oracle's judged score and element overlap and LINEAGE OVERLAP are three cheap
+  candidate predictors; the round's first pre-registered test is which predictors
+  track measured truth on ~40 pairs — whatever fails is dropped as decorative.
+  Pedigree ruling: lineage is already recorded per record; concept identity stays
+  a SINGLE element (doctrine: converged concept, never a blend) while heritage is
+  plural and derivable by walking parents; a pedigree walker is needed by the
+  anchor round's ancestry test regardless of the affinity question.
