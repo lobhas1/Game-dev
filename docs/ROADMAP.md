@@ -7,12 +7,12 @@
   Wind Cutter, Bramble, Rune) enter the gene pool; ancestry test A0–A3 pre-registered;
   designer ratification at stop one.
 - BEAUTY PASS (after M2 closes end to end):
-  act 1 — SUBSTANCE: diegetic elemental bodies, no perfect primitives, Genshin-style
+  act 2 — SUBSTANCE: diegetic elemental bodies, no perfect primitives, Genshin-style
   reference; fills the parameterized sockets (heads, bursts, trails) built in M2-D.
-  act 2 — CONCEPT MOTIFS: closed motif vocabulary chosen by the naming oracle; own
+  act 3 — CONCEPT MOTIFS: closed motif vocabulary chosen by the naming oracle; own
   prompt sha, re-fusion, blind concept-to-visual matching gate; variation principle
   (clause 7) and twin test (clause 5) govern.
-  act 3 — CHARACTERS & CAST ANIMATION: skeletal casters, cast-archetype vocabulary,
+  act 1 — CHARACTERS & CAST ANIMATION: skeletal casters, cast-archetype vocabulary,
   animation-under-event-cues law. Fork: may run before or after M3's first slice.
 - M3 — PLAYABLE SLICE: live wire (input → sim → render), essence economy, combat-model
   fork (weapons/basic attacks?), fusion-affinity round becomes meaningful here;
