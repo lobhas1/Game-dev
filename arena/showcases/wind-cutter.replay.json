@@ -1,0 +1,145 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "wind-cutter",
+    "kitB": "dummy",
+    "kitAPath": "fixtures/anchors/wind-cutter.seed.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 3.499997854232788,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "wind-cutter",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E1 wind-cutter",
+      "payload": {
+        "caster": 1,
+        "spell": "wind-cutter"
+      }
+    },
+    {
+      "t": 0,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=68 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 68,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0,
+      "type": "StatusApplied",
+      "canonical": "status E2 Bleed dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Bleed",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.5000000596046448,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=17 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 17,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.0000001192092896,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=17 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 17,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.4999996423721313,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=17 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 17,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.9999991655349731,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=17 Arcane crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 17,
+        "element": "Arcane",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.9999991655349731,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Bleed",
+      "payload": {
+        "target": 2,
+        "status": "Bleed"
+      }
+    }
+  ]
+}

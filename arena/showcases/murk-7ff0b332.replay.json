@@ -1,0 +1,426 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "murk",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/murk-7ff0b332.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 17.30002212524414,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "murk",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 murk",
+      "payload": {
+        "caster": 1,
+        "spell": "murk"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=6 dur=10",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 6,
+        "duration": 10
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=5 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 MoveSpeed pct=-35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "MoveSpeed",
+        "statElement": null,
+        "amountPct": -35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    },
+    {
+      "t": 15.800042152404785,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Blind",
+      "payload": {
+        "target": 2,
+        "status": "Blind"
+      }
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "beacon",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/beacon-582c9048.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.400006294250488,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "beacon",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 beacon",
+      "payload": {
+        "caster": 1,
+        "spell": "beacon"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 CritChance pct=35 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 35,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Light crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Light",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Blind",
+      "payload": {
+        "target": 2,
+        "status": "Blind"
+      }
+    }
+  ]
+}

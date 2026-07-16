@@ -30,9 +30,17 @@ public static class PromptTemplate
     /// <summary>The experiment output directory, always &lt;repo-root&gt;/arena.</summary>
     public static string ArenaDir() => Path.Combine(RepoRoot(), "arena");
 
+    /// <summary>Resolve a committed repo-relative path (e.g. "arena/fusions/x.record.json"). Anchors
+    /// on the repo root — the single directory holding Spellcraft.sln — so resolution is deterministic
+    /// and does not depend on probing each ancestor of bin/ (which could match a coincidental colliding
+    /// path on the way up). The walk-up is kept only as a fallback for paths given relative to a subdir.</summary>
     public static string LocateRepoFile(string relativePath)
     {
         string relative = relativePath.Replace('/', Path.DirectorySeparatorChar);
+
+        string atRoot = Path.Combine(RepoRoot(), relative);
+        if (File.Exists(atRoot)) return atRoot;
+
         string? dir = AppContext.BaseDirectory;
         for (int i = 0; i < 12 && dir is not null; i++)
         {
@@ -40,6 +48,7 @@ public static class PromptTemplate
             if (File.Exists(candidate)) return candidate;
             dir = Directory.GetParent(dir)?.FullName;
         }
-        throw new FileNotFoundException($"'{relativePath}' not found walking up from {AppContext.BaseDirectory}.");
+        throw new FileNotFoundException(
+            $"'{relativePath}' not found: not at repo root '{RepoRoot()}' nor walking up from {AppContext.BaseDirectory}.");
     }
 }

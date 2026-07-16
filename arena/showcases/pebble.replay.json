@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "pebble",
+    "kitB": "dummy",
+    "kitAPath": "fixtures/seeds/pebble.seed.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.000004768371582,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "pebble",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E1 pebble",
+      "payload": {
+        "caster": 1,
+        "spell": "pebble"
+      }
+    },
+    {
+      "t": 0,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=68 dur=5",
+      "payload": {
+        "target": 1,
+        "amount": 68,
+        "duration": 5
+      }
+    }
+  ]
+}

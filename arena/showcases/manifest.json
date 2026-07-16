@@ -1,0 +1,2001 @@
+{
+  "spells": [
+    {
+      "id": "barrow-a4e87a02",
+      "displayName": "Barrow",
+      "element": "shadow",
+      "tags": [
+        "ward",
+        "damage",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium",
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "barrow-a4e87a02.replay.json"
+    },
+    {
+      "id": "beacon-582c9048",
+      "displayName": "Beacon",
+      "element": "light",
+      "tags": [
+        "perceive",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "beacon-582c9048.replay.json"
+    },
+    {
+      "id": "beacon-dc117147",
+      "displayName": "Beacon",
+      "element": "light",
+      "tags": [
+        "perceive",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "displace",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "short"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "beacon-dc117147.replay.json"
+    },
+    {
+      "id": "blaze-2e5c00bf",
+      "displayName": "Blaze",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "area",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "large",
+          "medium",
+          "small"
+        ]
+      },
+      "file": "blaze-2e5c00bf.replay.json"
+    },
+    {
+      "id": "bramble",
+      "displayName": "Bramble",
+      "element": "nature",
+      "tags": [
+        "control",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "bramble.replay.json"
+    },
+    {
+      "id": "branded-glyph-77725aa0",
+      "displayName": "Branded Glyph",
+      "element": "fire",
+      "tags": [
+        "ward",
+        "damage",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "branded-glyph-77725aa0.replay.json"
+    },
+    {
+      "id": "briar-patch-c4db35ce",
+      "displayName": "Briar Patch",
+      "element": "nature",
+      "tags": [
+        "control",
+        "ward",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "briar-patch-c4db35ce.replay.json"
+    },
+    {
+      "id": "brushfire-1262ed95",
+      "displayName": "Brushfire",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "area",
+        "control"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "brushfire-1262ed95.replay.json"
+    },
+    {
+      "id": "cairn-2184858c",
+      "displayName": "Cairn",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long"
+        ]
+      },
+      "file": "cairn-2184858c.replay.json"
+    },
+    {
+      "id": "cairn-7ff56f67",
+      "displayName": "Cairn",
+      "element": "shadow",
+      "tags": [
+        "ward",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "cairn-7ff56f67.replay.json"
+    },
+    {
+      "id": "cauterize-a0fd89b5",
+      "displayName": "Cauterize",
+      "element": "fire",
+      "tags": [
+        "heal",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "heal"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "cauterize-a0fd89b5.replay.json"
+    },
+    {
+      "id": "cauterizing-light-7e61621e",
+      "displayName": "Cauterizing Light",
+      "element": "light",
+      "tags": [
+        "heal",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal",
+        "modifyStat"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "cauterizing-light-7e61621e.replay.json"
+    },
+    {
+      "id": "cinder-drift-4e691581",
+      "displayName": "Cinder Drift",
+      "element": "fire",
+      "tags": [
+        "movement",
+        "heal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "heal"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "cinder-drift-4e691581.replay.json"
+    },
+    {
+      "id": "cinder-e43f6121",
+      "displayName": "Cinder",
+      "element": "shadow",
+      "tags": [
+        "damage",
+        "area",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "cinder-e43f6121.replay.json"
+    },
+    {
+      "id": "cinder-scar-1f4de4c2",
+      "displayName": "Cinder Scar",
+      "element": "shadow",
+      "tags": [
+        "heal",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "cinder-scar-1f4de4c2.replay.json"
+    },
+    {
+      "id": "cipher-07fb709a",
+      "displayName": "Cipher",
+      "element": "arcane",
+      "tags": [
+        "ward",
+        "conceal",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "cipher-07fb709a.replay.json"
+    },
+    {
+      "id": "current-afdaf0e3",
+      "displayName": "Current",
+      "element": "water",
+      "tags": [
+        "heal",
+        "control"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "heal"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "current-afdaf0e3.replay.json"
+    },
+    {
+      "id": "dew-ef602d14",
+      "displayName": "Dew",
+      "element": "light",
+      "tags": [
+        "heal",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "heal",
+        "modifyStat"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "dew-ef602d14.replay.json"
+    },
+    {
+      "id": "droplet",
+      "displayName": "Droplet",
+      "element": "water",
+      "tags": [
+        "heal"
+      ],
+      "clauseVerbs": [
+        "heal"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ]
+      },
+      "file": "droplet.replay.json"
+    },
+    {
+      "id": "dust-devil-5396ac4f",
+      "displayName": "Dust Devil",
+      "element": "air",
+      "tags": [
+        "movement",
+        "area",
+        "control"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "dust-devil-5396ac4f.replay.json"
+    },
+    {
+      "id": "dust-devil-df8264f5",
+      "displayName": "Dust Devil",
+      "element": "air",
+      "tags": [
+        "damage",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "dust-devil-df8264f5.replay.json"
+    },
+    {
+      "id": "eclipse-cut-3631b78d",
+      "displayName": "Eclipse Cut",
+      "element": "shadow",
+      "tags": [
+        "damage",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "eclipse-cut-3631b78d.replay.json"
+    },
+    {
+      "id": "ember",
+      "displayName": "Ember",
+      "element": "fire",
+      "tags": [
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "projectile",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "speed": [
+          "fast"
+        ]
+      },
+      "file": "ember.replay.json"
+    },
+    {
+      "id": "geyser-551f2e6b",
+      "displayName": "Geyser",
+      "element": "water",
+      "tags": [
+        "damage",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "geyser-551f2e6b.replay.json"
+    },
+    {
+      "id": "glimmer",
+      "displayName": "Glimmer",
+      "element": "light",
+      "tags": [
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "glimmer.replay.json"
+    },
+    {
+      "id": "glint-464e3ac7",
+      "displayName": "Glint",
+      "element": "water",
+      "tags": [
+        "perceive",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "glint-464e3ac7.replay.json"
+    },
+    {
+      "id": "gust",
+      "displayName": "Gust",
+      "element": "air",
+      "tags": [
+        "movement"
+      ],
+      "clauseVerbs": [
+        "displace"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "trivial"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "gust.replay.json"
+    },
+    {
+      "id": "hearth-stone-97569a6d",
+      "displayName": "Hearth Stone",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "hearth-stone-97569a6d.replay.json"
+    },
+    {
+      "id": "inscription-d13637d6",
+      "displayName": "Inscription",
+      "element": "arcane",
+      "tags": [
+        "ward",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long"
+        ]
+      },
+      "file": "inscription-d13637d6.replay.json"
+    },
+    {
+      "id": "lighthouse-01d420e1",
+      "displayName": "Lighthouse",
+      "element": "light",
+      "tags": [
+        "perceive",
+        "heal",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "lighthouse-01d420e1.replay.json"
+    },
+    {
+      "id": "lodestone-badf933d",
+      "displayName": "Lodestone",
+      "element": "earth",
+      "tags": [
+        "perceive",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "large",
+          "medium"
+        ]
+      },
+      "file": "lodestone-badf933d.replay.json"
+    },
+    {
+      "id": "mist-7c632a8c",
+      "displayName": "Mist",
+      "element": "water",
+      "tags": [
+        "area",
+        "movement"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "large",
+          "small"
+        ]
+      },
+      "file": "mist-7c632a8c.replay.json"
+    },
+    {
+      "id": "mist-d7584484",
+      "displayName": "Mist",
+      "element": "air",
+      "tags": [
+        "area",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "mist-d7584484.replay.json"
+    },
+    {
+      "id": "mud-8a898dc2",
+      "displayName": "Mud",
+      "element": "earth",
+      "tags": [
+        "control",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "mud-8a898dc2.replay.json"
+    },
+    {
+      "id": "mudslide-97937d18",
+      "displayName": "Mudslide",
+      "element": "earth",
+      "tags": [
+        "damage",
+        "control",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "high"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "large",
+          "medium"
+        ]
+      },
+      "file": "mudslide-97937d18.replay.json"
+    },
+    {
+      "id": "murk-4728aaaa",
+      "displayName": "Murk",
+      "element": "shadow",
+      "tags": [
+        "control",
+        "conceal",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "murk-4728aaaa.replay.json"
+    },
+    {
+      "id": "murk-621a9843",
+      "displayName": "Murk",
+      "element": "shadow",
+      "tags": [
+        "conceal",
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "large",
+          "small"
+        ]
+      },
+      "file": "murk-621a9843.replay.json"
+    },
+    {
+      "id": "murk-7ff0b332",
+      "displayName": "Murk",
+      "element": "shadow",
+      "tags": [
+        "conceal",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ],
+        "interval": [
+          "slow"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "murk-7ff0b332.replay.json"
+    },
+    {
+      "id": "pebble",
+      "displayName": "Pebble",
+      "element": "earth",
+      "tags": [
+        "ward"
+      ],
+      "clauseVerbs": [
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "pebble.replay.json"
+    },
+    {
+      "id": "penumbra-779a5033",
+      "displayName": "Penumbra",
+      "element": "shadow",
+      "tags": [
+        "perceive",
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "penumbra-779a5033.replay.json"
+    },
+    {
+      "id": "phoenix-tear",
+      "displayName": "Phoenix Tear",
+      "element": "fire",
+      "tags": [
+        "heal"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "phoenix-tear.replay.json"
+    },
+    {
+      "id": "pyre-e8694c69",
+      "displayName": "Pyre",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "area",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "modifyStat",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "pyre-e8694c69.replay.json"
+    },
+    {
+      "id": "riptide",
+      "displayName": "Riptide",
+      "element": "water",
+      "tags": [
+        "damage"
+      ],
+      "clauseVerbs": [
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "low"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "riptide.replay.json"
+    },
+    {
+      "id": "rune",
+      "displayName": "Rune",
+      "element": "arcane",
+      "tags": [
+        "ward",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "rune.replay.json"
+    },
+    {
+      "id": "salve-ad8b92c8",
+      "displayName": "Salve",
+      "element": "water",
+      "tags": [
+        "heal",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "heal"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "long"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "salve-ad8b92c8.replay.json"
+    },
+    {
+      "id": "scar-85a0c606",
+      "displayName": "Scar",
+      "element": "earth",
+      "tags": [
+        "heal",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "heal",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long"
+        ]
+      },
+      "file": "scar-85a0c606.replay.json"
+    },
+    {
+      "id": "scrying-pool-4ba61be1",
+      "displayName": "Scrying Pool",
+      "element": "arcane",
+      "tags": [
+        "perceive",
+        "ward"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ]
+      },
+      "file": "scrying-pool-4ba61be1.replay.json"
+    },
+    {
+      "id": "seagrass-d0bb75b2",
+      "displayName": "Seagrass",
+      "element": "nature",
+      "tags": [
+        "control",
+        "duration"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "seagrass-d0bb75b2.replay.json"
+    },
+    {
+      "id": "smoke-96cf7093",
+      "displayName": "Smoke",
+      "element": "shadow",
+      "tags": [
+        "area",
+        "conceal",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "smoke-96cf7093.replay.json"
+    },
+    {
+      "id": "snare-059ffc0d",
+      "displayName": "Snare",
+      "element": "shadow",
+      "tags": [
+        "control",
+        "conceal",
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "multiplier": [
+          "minor"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "snare-059ffc0d.replay.json"
+    },
+    {
+      "id": "snare-a0713c59",
+      "displayName": "Snare",
+      "element": "nature",
+      "tags": [
+        "control",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "modifyStat"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "snare-a0713c59.replay.json"
+    },
+    {
+      "id": "spotlight-a3e9e999",
+      "displayName": "Spotlight",
+      "element": "light",
+      "tags": [
+        "damage",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "modifyStat"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "spotlight-a3e9e999.replay.json"
+    },
+    {
+      "id": "squall-980300de",
+      "displayName": "Squall",
+      "element": "water",
+      "tags": [
+        "damage",
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "squall-980300de.replay.json"
+    },
+    {
+      "id": "squall-aa5dd79b",
+      "displayName": "Squall",
+      "element": "air",
+      "tags": [
+        "damage",
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "short"
+        ],
+        "size": [
+          "large",
+          "medium"
+        ]
+      },
+      "file": "squall-aa5dd79b.replay.json"
+    },
+    {
+      "id": "steam-8c9c73a7",
+      "displayName": "Steam",
+      "element": "air",
+      "tags": [
+        "area",
+        "control"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium",
+          "short"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "steam-8c9c73a7.replay.json"
+    },
+    {
+      "id": "tangle-796edaa0",
+      "displayName": "Tangle",
+      "element": "nature",
+      "tags": [
+        "control",
+        "movement",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "displace"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium",
+          "small"
+        ]
+      },
+      "file": "tangle-796edaa0.replay.json"
+    },
+    {
+      "id": "umbra",
+      "displayName": "Umbra",
+      "element": "shadow",
+      "tags": [
+        "conceal"
+      ],
+      "clauseVerbs": [
+        "applyStatus"
+      ],
+      "deliveryType": "targetUnit",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "medium"
+        ]
+      },
+      "file": "umbra.replay.json"
+    },
+    {
+      "id": "warding-stone-0f76106a",
+      "displayName": "Warding Stone",
+      "element": "earth",
+      "tags": [
+        "ward",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "castTime": [
+          "quick"
+        ],
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ]
+      },
+      "file": "warding-stone-0f76106a.replay.json"
+    },
+    {
+      "id": "warding-wind-a681f3a8",
+      "displayName": "Warding Wind",
+      "element": "arcane",
+      "tags": [
+        "ward",
+        "movement",
+        "perceive"
+      ],
+      "clauseVerbs": [
+        "displace",
+        "modifyStat",
+        "shield"
+      ],
+      "deliveryType": "self",
+      "bandsUsed": {
+        "cooldown": [
+          "medium"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "medium"
+        ],
+        "size": [
+          "small"
+        ]
+      },
+      "file": "warding-wind-a681f3a8.replay.json"
+    },
+    {
+      "id": "wildfire-b91ea689",
+      "displayName": "Wildfire",
+      "element": "fire",
+      "tags": [
+        "damage",
+        "area"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage",
+        "spawnZone"
+      ],
+      "deliveryType": "groundAoE",
+      "bandsUsed": {
+        "castTime": [
+          "normal"
+        ],
+        "cooldown": [
+          "long"
+        ],
+        "cost": [
+          "moderate"
+        ],
+        "duration": [
+          "long",
+          "medium"
+        ],
+        "interval": [
+          "medium"
+        ],
+        "multiplier": [
+          "major"
+        ],
+        "size": [
+          "large"
+        ]
+      },
+      "file": "wildfire-b91ea689.replay.json"
+    },
+    {
+      "id": "wind-cutter",
+      "displayName": "Wind Cutter",
+      "element": "air",
+      "tags": [
+        "damage"
+      ],
+      "clauseVerbs": [
+        "applyStatus",
+        "damage"
+      ],
+      "deliveryType": "projectile",
+      "bandsUsed": {
+        "cooldown": [
+          "short"
+        ],
+        "cost": [
+          "low"
+        ],
+        "duration": [
+          "short"
+        ],
+        "speed": [
+          "fast"
+        ]
+      },
+      "file": "wind-cutter.replay.json"
+    }
+  ]
+}

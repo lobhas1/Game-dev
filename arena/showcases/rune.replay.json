@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "rune",
+    "kitB": "dummy",
+    "kitAPath": "fixtures/anchors/rune.seed.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.400006294250488,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "rune",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 rune",
+      "payload": {
+        "caster": 1,
+        "spell": "rune"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=48 dur=5",
+      "payload": {
+        "target": 1,
+        "amount": 48.000003814697266,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=40 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 40,
+        "duration": 5
+      }
+    }
+  ]
+}

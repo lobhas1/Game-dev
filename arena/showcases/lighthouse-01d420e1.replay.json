@@ -1,0 +1,926 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "lighthouse",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/lighthouse-01d420e1.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 17.30002212524414,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "lighthouse",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 lighthouse",
+      "payload": {
+        "caster": 1,
+        "spell": "lighthouse"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=10 dur=10",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 10,
+        "duration": 10
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=61.44",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 61.44001007080078
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=2 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 2,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=122.88",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 122.88002014160156
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=122.88",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 122.88002014160156
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 4.2999982833862305,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 6.300005912780762,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 7.300009727478027,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 8.300013542175293,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 8.800015449523926,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.3200225830078
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 Evasion pct=25 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 25,
+        "duration": 5
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=15 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 15.000000953674316,
+        "duration": 5
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "StatusApplied",
+      "canonical": "status E1 Regen dur=5 stacks=3 refreshed=True",
+      "payload": {
+        "target": 1,
+        "status": "Regen",
+        "duration": 5,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    },
+    {
+      "t": 11.30002498626709,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 11.800026893615723,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 12.300028800964355,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 12.800030708312988,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 13.300032615661621,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 13.800034523010254,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 14.300036430358887,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 14.80003833770752,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 15.800042152404785,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=184.32",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 184.32003784179688
+      }
+    },
+    {
+      "t": 15.800042152404785,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E1 Regen",
+      "payload": {
+        "target": 1,
+        "status": "Regen"
+      }
+    }
+  ]
+}

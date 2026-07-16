@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "scrying-pool",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/scrying-pool-4ba61be1.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.8000078201293945,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "scrying-pool",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 scrying-pool",
+      "payload": {
+        "caster": 1,
+        "spell": "scrying-pool"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "ShieldGranted",
+      "canonical": "shield E1 amt=64 dur=5",
+      "payload": {
+        "target": 1,
+        "amount": 64,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatModified",
+      "canonical": "modifyStat E1 CritChance pct=30 dur=5",
+      "payload": {
+        "target": 1,
+        "statKind": "CritChance",
+        "statElement": null,
+        "amountPct": 30.000001907348633,
+        "duration": 5
+      }
+    }
+  ]
+}

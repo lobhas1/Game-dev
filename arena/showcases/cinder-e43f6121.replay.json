@@ -1,0 +1,470 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "cinder",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/cinder-e43f6121.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 8.800015449523926,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "cinder",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 2560.000244140625,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 cinder",
+      "payload": {
+        "caster": 1,
+        "spell": "cinder"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=143.36 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 143.36001586914062,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=6 dur=5",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 6,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=49.15 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 49.15200424194336,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 2.2999989986419678,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=32.77 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 32.768001556396484,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=49.15 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 49.15200424194336,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=2 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 2,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=65.54 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 65.53600311279297,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=65.54 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 65.53600311279297,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=49.15 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 49.15200424194336,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=3 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 3,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.799997568130493,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=98.3 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 98.30400085449219,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.2999982833862305,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=98.3 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 98.30400085449219,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=49.15 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 49.15200424194336,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=4 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 4,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.800000190734863,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=131.07 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 131.07200622558594,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=131.07 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 131.07200622558594,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=49.15 Shadow crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 49.15200424194336,
+        "element": "Shadow",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusApplied",
+      "canonical": "status E2 Burn dur=2 stacks=5 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Burn",
+        "duration": 2,
+        "stacks": 5,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=163.84 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 163.8400115966797,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    },
+    {
+      "t": 6.300005912780762,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=163.84 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 163.8400115966797,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 6.8000078201293945,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=163.84 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 163.8400115966797,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 7.300009727478027,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=163.84 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 163.8400115966797,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=163.84 Fire crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 163.8400115966797,
+        "element": "Fire",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 7.80001163482666,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Burn",
+      "payload": {
+        "target": 2,
+        "status": "Burn"
+      }
+    }
+  ]
+}

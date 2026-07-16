@@ -1,0 +1,646 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "dust-devil",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/dust-devil-5396ac4f.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 8.40001392364502,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "dust-devil",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 dust-devil",
+      "payload": {
+        "caster": 1,
+        "spell": "dust-devil"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=6 dur=5",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 6,
+        "duration": 5
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 1.8999992609024048,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 2.899998426437378,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.899998426437378,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 2.899998426437378,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.899998426437378,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 3.8999974727630615,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.8999974727630615,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 3.8999974727630615,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.8999974727630615,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 4.90000057220459,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.90000057220459,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 4.90000057220459,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.90000057220459,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "Displaced",
+      "canonical": "displace E2 Pull to=(8,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Pull",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=64 Air crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 64,
+        "element": "Air",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    },
+    {
+      "t": 7.400010108947754,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Slow",
+      "payload": {
+        "target": 2,
+        "status": "Slow"
+      }
+    }
+  ]
+}

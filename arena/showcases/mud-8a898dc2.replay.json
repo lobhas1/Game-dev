@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "mud",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/mud-8a898dc2.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.8000078201293945,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "mud",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 mud",
+      "payload": {
+        "caster": 1,
+        "spell": "mud"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatusApplied",
+      "canonical": "status E2 Root dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Root",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Armor pct=-20 dur=5",
+      "payload": {
+        "target": 2,
+        "statKind": "Armor",
+        "statElement": null,
+        "amountPct": -20,
+        "duration": 5
+      }
+    },
+    {
+      "t": 2.7999985218048096,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Root",
+      "payload": {
+        "target": 2,
+        "status": "Root"
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Slow",
+      "payload": {
+        "target": 2,
+        "status": "Slow"
+      }
+    }
+  ]
+}

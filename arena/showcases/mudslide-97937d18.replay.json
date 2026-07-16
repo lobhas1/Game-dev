@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "mudslide",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/mudslide-97937d18.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 6.8000078201293945,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "mudslide",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.8000001311302185,
+      "type": "CastStarted",
+      "canonical": "cast E1 mudslide",
+      "payload": {
+        "caster": 1,
+        "spell": "mudslide"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "DamageDealt",
+      "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
+      "payload": {
+        "target": 2,
+        "amount": 102.4000015258789,
+        "element": "Earth",
+        "crit": false,
+        "killed": false,
+        "absorbed": 0,
+        "evaded": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatusApplied",
+      "canonical": "status E2 Root dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Root",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "Displaced",
+      "canonical": "displace E2 Push to=(14,0,0) blocked=False",
+      "payload": {
+        "subject": 2,
+        "mode": "Push",
+        "from": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "to": {
+          "x": 14,
+          "y": 0,
+          "z": 0
+        },
+        "blocked": false
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "StatusApplied",
+      "canonical": "status E2 Slow dur=5 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Slow",
+        "duration": 5,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Root",
+      "payload": {
+        "target": 2,
+        "status": "Root"
+      }
+    },
+    {
+      "t": 5.800004005432129,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Slow",
+      "payload": {
+        "target": 2,
+        "status": "Slow"
+      }
+    }
+  ]
+}

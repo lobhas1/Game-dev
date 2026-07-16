@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "cinder-scar",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/cinder-scar-1f4de4c2.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 3.8999974727630615,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "cinder-scar",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 cinder-scar",
+      "payload": {
+        "caster": 1,
+        "spell": "cinder-scar"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "Healed",
+      "canonical": "heal E2 eff=0 over=80",
+      "payload": {
+        "target": 2,
+        "effective": 0,
+        "overheal": 80
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatusApplied",
+      "canonical": "status E2 Stealth dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Stealth",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Stealth",
+      "payload": {
+        "target": 2,
+        "status": "Stealth"
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Blind",
+      "payload": {
+        "target": 2,
+        "status": "Blind"
+      }
+    }
+  ]
+}

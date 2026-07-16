@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "beacon",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/beacon-dc117147.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 11.400025367736816,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "beacon",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 beacon",
+      "payload": {
+        "caster": 1,
+        "spell": "beacon"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=6 dur=10",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 6,
+        "duration": 10
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 6.400006294250488,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 7.400010108947754,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 8.40001392364502,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 9.400017738342285,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 10.40002155303955,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=0",
+      "payload": {
+        "id": 1,
+        "affected": 0
+      }
+    },
+    {
+      "t": 10.40002155303955,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    }
+  ]
+}

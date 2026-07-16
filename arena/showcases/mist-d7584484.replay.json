@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "mist",
+    "kitB": "dummy",
+    "kitAPath": "arena/fusions/mist-d7584484.record.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 8.40001392364502,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "mist",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1600,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0.40000003576278687,
+      "type": "CastStarted",
+      "canonical": "cast E1 mist",
+      "payload": {
+        "caster": 1,
+        "spell": "mist"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "ZoneSpawned",
+      "canonical": "zoneSpawned Z1 Circle r=6 dur=5",
+      "payload": {
+        "id": 1,
+        "center": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        },
+        "shape": "Circle",
+        "size": 6,
+        "duration": 5
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=False",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": false
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Evasion pct=20 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 20,
+        "duration": 2
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 2.399998903274536,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Evasion pct=20 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 20,
+        "duration": 2
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 3.3999979496002197,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Evasion pct=20 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 20,
+        "duration": 2
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 4.399998664855957,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Evasion pct=20 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 20,
+        "duration": 2
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "ZoneTicked",
+      "canonical": "zoneTick Z1 affected=1",
+      "payload": {
+        "id": 1,
+        "affected": 1
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "StatusApplied",
+      "canonical": "status E2 Chill dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Chill",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "StatusApplied",
+      "canonical": "status E2 Blind dur=2 stacks=1 refreshed=True",
+      "payload": {
+        "target": 2,
+        "status": "Blind",
+        "duration": 2,
+        "stacks": 1,
+        "resisted": false,
+        "refreshed": true
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "StatModified",
+      "canonical": "modifyStat E2 Evasion pct=20 dur=2",
+      "payload": {
+        "target": 2,
+        "statKind": "Evasion",
+        "statElement": null,
+        "amountPct": 20,
+        "duration": 2
+      }
+    },
+    {
+      "t": 5.400002479553223,
+      "type": "ZoneExpired",
+      "canonical": "zoneExpired Z1",
+      "payload": {
+        "id": 1
+      }
+    },
+    {
+      "t": 7.400010108947754,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Chill",
+      "payload": {
+        "target": 2,
+        "status": "Chill"
+      }
+    },
+    {
+      "t": 7.400010108947754,
+      "type": "StatusRemoved",
+      "canonical": "statusRemoved E2 Blind",
+      "payload": {
+        "target": 2,
+        "status": "Blind"
+      }
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1",
+  "header": {
+    "kitA": "droplet",
+    "kitB": "dummy",
+    "kitAPath": "fixtures/seeds/droplet.seed.json",
+    "kitBPath": "dummy",
+    "seed": 1,
+    "config": {
+      "hpScale": 0,
+      "mana": 10000,
+      "amplifyMajor": 2.5
+    },
+    "durationSeconds": 1.0000001192092896,
+    "winner": "draw",
+    "endReason": "quiescent",
+    "entities": [
+      {
+        "id": 1,
+        "name": "droplet",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      },
+      {
+        "id": 2,
+        "name": "dummy",
+        "maxHp": 1000,
+        "spawn": {
+          "x": 8,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "mode": "showcase",
+    "maxSeconds": 30
+  },
+  "events": [
+    {
+      "t": 0,
+      "type": "CastStarted",
+      "canonical": "cast E1 droplet",
+      "payload": {
+        "caster": 1,
+        "spell": "droplet"
+      }
+    },
+    {
+      "t": 0,
+      "type": "Healed",
+      "canonical": "heal E1 eff=0 over=68",
+      "payload": {
+        "target": 1,
+        "effective": 0,
+        "overheal": 68
+      }
+    }
+  ]
+}
