@@ -97,10 +97,11 @@ public class ShowcaseTests
         string doc = Path.Combine(outDir, "coverage.md");
         Showcase.RunBatch(outDir, doc, 1, TextWriter.Null);
 
-        // one showcase per corpus input — mirrors RunBatch's own globs, so it tracks corpus growth
-        // (the v4 re-fusion + anchor children) instead of pinning a stale count.
+        // one showcase per corpus input — mirrors RunBatch's own globs (seeds + anchors + fusion
+        // records), so it tracks the full castable canon instead of pinning a stale count.
         int expected =
             Directory.GetFiles(Path.Combine(PromptTemplate.RepoRoot(), "fixtures", "seeds"), "*.seed.json").Length +
+            Directory.GetFiles(Path.Combine(PromptTemplate.RepoRoot(), "fixtures", "anchors"), "*.seed.json").Length +
             Directory.GetFiles(Path.Combine(PromptTemplate.ArenaDir(), "fusions"), "*.record.json").Length;
         Assert.Equal(expected, Directory.GetFiles(outDir, "*.replay.json").Length);
         var manifest = JsonNode.Parse(File.ReadAllText(Path.Combine(outDir, "manifest.json")))!;
