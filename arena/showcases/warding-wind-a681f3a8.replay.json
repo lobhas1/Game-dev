@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 warding-wind",
+      "payload": {
+        "caster": 1,
+        "spell": "warding-wind"
+      }
+    },
+    {
+      "t": 0,
       "type": "ShieldGranted",
       "canonical": "shield E1 amt=48.96 dur=5",
       "payload": {

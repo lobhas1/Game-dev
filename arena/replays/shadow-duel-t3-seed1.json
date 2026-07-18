@@ -49,6 +49,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatusApplied",
       "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -96,6 +105,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatusApplied",
       "canonical": "status E1 Vulnerable dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -133,7 +151,7 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
       "type": "CastStarted",
       "canonical": "cast E1 void-strike",
       "payload": {
@@ -142,7 +160,16 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 0.5000000596046448,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=293.22 Shadow crit=False killed=False absorbed=0",
       "payload": {
@@ -156,7 +183,7 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
       "type": "StatusApplied",
       "canonical": "status E2 Bleed dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -169,7 +196,7 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
       "type": "Displaced",
       "canonical": "displace E1 Dash to=(3,0,0) blocked=False",
       "payload": {
@@ -189,9 +216,18 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
       "type": "CastStarted",
       "canonical": "cast E2 void-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "void-burst"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 void-burst",
       "payload": {
         "caster": 2,
         "spell": "void-burst"
@@ -246,7 +282,7 @@
       }
     },
     {
-      "t": 1.399999737739563,
+      "t": 1.0000001192092896,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -274,7 +310,7 @@
       }
     },
     {
-      "t": 1.7999993562698364,
+      "t": 1.399999737739563,
       "type": "CastStarted",
       "canonical": "cast E1 umbral-shroud",
       "payload": {
@@ -283,7 +319,7 @@
       }
     },
     {
-      "t": 1.7999993562698364,
+      "t": 1.4999996423721313,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -294,6 +330,15 @@
         "killed": false,
         "absorbed": 0,
         "evaded": false
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 umbral-shroud",
+      "payload": {
+        "caster": 1,
+        "spell": "umbral-shroud"
       }
     },
     {
@@ -335,6 +380,15 @@
       "t": 1.7999993562698364,
       "type": "CastStarted",
       "canonical": "cast E2 shroud-step",
+      "payload": {
+        "caster": 2,
+        "spell": "shroud-step"
+      }
+    },
+    {
+      "t": 1.7999993562698364,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 shroud-step",
       "payload": {
         "caster": 2,
         "spell": "shroud-step"
@@ -396,7 +450,7 @@
       }
     },
     {
-      "t": 2.2999989986419678,
+      "t": 1.8999992609024048,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -410,7 +464,7 @@
       }
     },
     {
-      "t": 2.2999989986419678,
+      "t": 1.9999991655349731,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -424,7 +478,7 @@
       }
     },
     {
-      "t": 2.2999989986419678,
+      "t": 1.9999991655349731,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E1 Blind",
       "payload": {
@@ -433,7 +487,7 @@
       }
     },
     {
-      "t": 2.2999989986419678,
+      "t": 1.9999991655349731,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Stealth",
       "payload": {
@@ -442,7 +496,7 @@
       }
     },
     {
-      "t": 2.7999985218048096,
+      "t": 2.399998903274536,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -456,7 +510,7 @@
       }
     },
     {
-      "t": 2.7999985218048096,
+      "t": 2.4999988079071045,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -470,7 +524,7 @@
       }
     },
     {
-      "t": 3.2999980449676514,
+      "t": 2.899998426437378,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -484,7 +538,7 @@
       }
     },
     {
-      "t": 3.2999980449676514,
+      "t": 2.9999983310699463,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -498,7 +552,7 @@
       }
     },
     {
-      "t": 3.799997568130493,
+      "t": 3.3999979496002197,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -512,7 +566,7 @@
       }
     },
     {
-      "t": 3.799997568130493,
+      "t": 3.499997854232788,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -535,7 +589,7 @@
       }
     },
     {
-      "t": 4.2999982833862305,
+      "t": 3.8999974727630615,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -549,7 +603,7 @@
       }
     },
     {
-      "t": 4.2999982833862305,
+      "t": 3.99999737739563,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -563,7 +617,7 @@
       }
     },
     {
-      "t": 4.800000190734863,
+      "t": 4.399998664855957,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -577,7 +631,7 @@
       }
     },
     {
-      "t": 4.800000190734863,
+      "t": 4.499999046325684,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -591,7 +645,7 @@
       }
     },
     {
-      "t": 5.300002098083496,
+      "t": 4.90000057220459,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -605,7 +659,7 @@
       }
     },
     {
-      "t": 5.300002098083496,
+      "t": 5.000000953674316,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -619,7 +673,7 @@
       }
     },
     {
-      "t": 5.300002098083496,
+      "t": 5.000000953674316,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Vulnerable",
       "payload": {
@@ -631,6 +685,15 @@
       "t": 5.300002098083496,
       "type": "CastStarted",
       "canonical": "cast E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 shadow-mark",
       "payload": {
         "caster": 1,
         "spell": "shadow-mark"
@@ -675,7 +738,7 @@
       }
     },
     {
-      "t": 5.800004005432129,
+      "t": 5.400002479553223,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -689,7 +752,7 @@
       }
     },
     {
-      "t": 5.800004005432129,
+      "t": 5.500002861022949,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=43.52 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -703,7 +766,7 @@
       }
     },
     {
-      "t": 5.800004005432129,
+      "t": 5.500002861022949,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Bleed",
       "payload": {
@@ -712,7 +775,7 @@
       }
     },
     {
-      "t": 6.300005912780762,
+      "t": 5.9000043869018555,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=51.2 Arcane crit=False killed=False absorbed=0",
       "payload": {
@@ -726,7 +789,7 @@
       }
     },
     {
-      "t": 6.300005912780762,
+      "t": 5.9000043869018555,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E1 Bleed",
       "payload": {
@@ -756,6 +819,15 @@
       "t": 9.300017356872559,
       "type": "CastStarted",
       "canonical": "cast E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 9.300017356872559,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 shadow-mark",
       "payload": {
         "caster": 2,
         "spell": "shadow-mark"
@@ -803,6 +875,15 @@
       "t": 9.800019264221191,
       "type": "CastStarted",
       "canonical": "cast E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 9.800019264221191,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 void-strike",
       "payload": {
         "caster": 1,
         "spell": "void-strike"
@@ -889,6 +970,15 @@
     },
     {
       "t": 10.300021171569824,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 10.300021171569824,
       "type": "StatusApplied",
       "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -943,6 +1033,15 @@
       "t": 10.800023078918457,
       "type": "CastStarted",
       "canonical": "cast E2 shroud-step",
+      "payload": {
+        "caster": 2,
+        "spell": "shroud-step"
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 shroud-step",
       "payload": {
         "caster": 2,
         "spell": "shroud-step"
@@ -1180,6 +1279,15 @@
     },
     {
       "t": 15.300040245056152,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 shadow-mark",
+      "payload": {
+        "caster": 1,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 15.300040245056152,
       "type": "StatusApplied",
       "canonical": "status E2 Vulnerable dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -1217,9 +1325,18 @@
       }
     },
     {
-      "t": 16.20003890991211,
+      "t": 15.800042152404785,
       "type": "CastStarted",
       "canonical": "cast E2 void-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "void-burst"
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 void-burst",
       "payload": {
         "caster": 2,
         "spell": "void-burst"
@@ -1252,9 +1369,18 @@
       }
     },
     {
-      "t": 17.100025177001953,
+      "t": 16.700031280517578,
       "type": "CastStarted",
       "canonical": "cast E1 umbral-shroud",
+      "payload": {
+        "caster": 1,
+        "spell": "umbral-shroud"
+      }
+    },
+    {
+      "t": 17.100025177001953,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 umbral-shroud",
       "payload": {
         "caster": 1,
         "spell": "umbral-shroud"
@@ -1296,7 +1422,7 @@
       }
     },
     {
-      "t": 17.600017547607422,
+      "t": 17.30002212524414,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Stealth",
       "payload": {
@@ -1308,6 +1434,15 @@
       "t": 18.60000228881836,
       "type": "CastStarted",
       "canonical": "cast E2 shadow-mark",
+      "payload": {
+        "caster": 2,
+        "spell": "shadow-mark"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 shadow-mark",
       "payload": {
         "caster": 2,
         "spell": "shadow-mark"
@@ -1355,6 +1490,15 @@
       "t": 19.099994659423828,
       "type": "CastStarted",
       "canonical": "cast E1 void-strike",
+      "payload": {
+        "caster": 1,
+        "spell": "void-strike"
+      }
+    },
+    {
+      "t": 19.099994659423828,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 void-strike",
       "payload": {
         "caster": 1,
         "spell": "void-strike"

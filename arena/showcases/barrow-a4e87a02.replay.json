@@ -41,9 +41,18 @@
   },
   "events": [
     {
-      "t": 0.8000001311302185,
+      "t": 0,
       "type": "CastStarted",
       "canonical": "cast E1 barrow",
+      "payload": {
+        "caster": 1,
+        "spell": "barrow"
+      }
+    },
+    {
+      "t": 0.8000001311302185,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 barrow",
       "payload": {
         "caster": 1,
         "spell": "barrow"

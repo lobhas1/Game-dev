@@ -41,9 +41,18 @@
   },
   "events": [
     {
-      "t": 0.40000003576278687,
+      "t": 0,
       "type": "CastStarted",
       "canonical": "cast E1 steam",
+      "payload": {
+        "caster": 1,
+        "spell": "steam"
+      }
+    },
+    {
+      "t": 0.40000003576278687,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 steam",
       "payload": {
         "caster": 1,
         "spell": "steam"

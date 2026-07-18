@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 glimmer",
+      "payload": {
+        "caster": 1,
+        "spell": "glimmer"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatModified",
       "canonical": "modifyStat E1 CritChance pct=50 dur=5",
       "payload": {

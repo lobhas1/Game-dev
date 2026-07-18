@@ -49,6 +49,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 stone-aegis",
+      "payload": {
+        "caster": 1,
+        "spell": "stone-aegis"
+      }
+    },
+    {
+      "t": 0,
       "type": "ShieldGranted",
       "canonical": "shield E1 amt=76.16 dur=5",
       "payload": {
@@ -73,6 +82,15 @@
       "t": 0,
       "type": "CastStarted",
       "canonical": "cast E2 gust-slash",
+      "payload": {
+        "caster": 2,
+        "spell": "gust-slash"
+      }
+    },
+    {
+      "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 gust-slash",
       "payload": {
         "caster": 2,
         "spell": "gust-slash"
@@ -106,7 +124,7 @@
       }
     },
     {
-      "t": 1.699999451637268,
+      "t": 0.5000000596046448,
       "type": "CastStarted",
       "canonical": "cast E1 earthen-grasp",
       "payload": {
@@ -115,7 +133,16 @@
       }
     },
     {
-      "t": 1.699999451637268,
+      "t": 1.2999998331069946,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 earthen-grasp",
+      "payload": {
+        "caster": 1,
+        "spell": "earthen-grasp"
+      }
+    },
+    {
+      "t": 1.2999998331069946,
       "type": "StatusApplied",
       "canonical": "status E2 Root dur=5 stacks=1 refreshed=False",
       "payload": {
@@ -128,7 +155,7 @@
       }
     },
     {
-      "t": 1.699999451637268,
+      "t": 1.2999998331069946,
       "type": "StatModified",
       "canonical": "modifyStat E2 MoveSpeed pct=-52.5 dur=10",
       "payload": {
@@ -140,7 +167,7 @@
       }
     },
     {
-      "t": 1.699999451637268,
+      "t": 1.2999998331069946,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=32 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -154,9 +181,18 @@
       }
     },
     {
-      "t": 1.699999451637268,
+      "t": 1.2999998331069946,
       "type": "CastStarted",
       "canonical": "cast E2 cyclone-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "cyclone-burst"
+      }
+    },
+    {
+      "t": 1.699999451637268,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 cyclone-burst",
       "payload": {
         "caster": 2,
         "spell": "cyclone-burst"
@@ -231,7 +267,7 @@
       }
     },
     {
-      "t": 3.699997663497925,
+      "t": 2.1999990940093994,
       "type": "CastStarted",
       "canonical": "cast E1 tremor-field",
       "payload": {
@@ -246,6 +282,15 @@
       "payload": {
         "target": 1,
         "status": "Weaken"
+      }
+    },
+    {
+      "t": 3.699997663497925,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 tremor-field",
+      "payload": {
+        "caster": 1,
+        "spell": "tremor-field"
       }
     },
     {
@@ -268,6 +313,15 @@
       "t": 3.699997663497925,
       "type": "CastStarted",
       "canonical": "cast E2 wind-step",
+      "payload": {
+        "caster": 2,
+        "spell": "wind-step"
+      }
+    },
+    {
+      "t": 3.699997663497925,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 wind-step",
       "payload": {
         "caster": 2,
         "spell": "wind-step"
@@ -459,6 +513,15 @@
     },
     {
       "t": 5.2000017166137695,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 gust-slash",
+      "payload": {
+        "caster": 2,
+        "spell": "gust-slash"
+      }
+    },
+    {
+      "t": 5.2000017166137695,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=61.2 Air crit=False killed=False absorbed=0",
       "payload": {
@@ -542,7 +605,7 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 5.700003623962402,
       "type": "CastStarted",
       "canonical": "cast E1 earthen-grasp",
       "payload": {
@@ -551,7 +614,7 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 6.200005531311035,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -560,7 +623,7 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 6.200005531311035,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -574,7 +637,7 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 6.200005531311035,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -587,7 +650,7 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 6.200005531311035,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -599,12 +662,21 @@
       }
     },
     {
-      "t": 6.500006675720215,
+      "t": 6.300005912780762,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Root",
       "payload": {
         "target": 2,
         "status": "Root"
+      }
+    },
+    {
+      "t": 6.500006675720215,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 earthen-grasp",
+      "payload": {
+        "caster": 1,
+        "spell": "earthen-grasp"
       }
     },
     {
@@ -647,7 +719,7 @@
       }
     },
     {
-      "t": 7.000008583068848,
+      "t": 6.700007438659668,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -656,7 +728,7 @@
       }
     },
     {
-      "t": 7.000008583068848,
+      "t": 6.700007438659668,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -670,7 +742,7 @@
       }
     },
     {
-      "t": 7.000008583068848,
+      "t": 6.700007438659668,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -683,7 +755,7 @@
       }
     },
     {
-      "t": 7.000008583068848,
+      "t": 6.700007438659668,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -695,7 +767,7 @@
       }
     },
     {
-      "t": 7.5000104904174805,
+      "t": 7.200009346008301,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -704,7 +776,7 @@
       }
     },
     {
-      "t": 7.5000104904174805,
+      "t": 7.200009346008301,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -718,7 +790,7 @@
       }
     },
     {
-      "t": 7.5000104904174805,
+      "t": 7.200009346008301,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -731,7 +803,7 @@
       }
     },
     {
-      "t": 7.5000104904174805,
+      "t": 7.200009346008301,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -743,7 +815,7 @@
       }
     },
     {
-      "t": 7.5000104904174805,
+      "t": 7.200009346008301,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E1 Slow",
       "payload": {
@@ -752,7 +824,7 @@
       }
     },
     {
-      "t": 8.000012397766113,
+      "t": 7.700011253356934,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -761,7 +833,7 @@
       }
     },
     {
-      "t": 8.000012397766113,
+      "t": 7.700011253356934,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -775,7 +847,7 @@
       }
     },
     {
-      "t": 8.000012397766113,
+      "t": 7.700011253356934,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -788,7 +860,7 @@
       }
     },
     {
-      "t": 8.000012397766113,
+      "t": 7.700011253356934,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -800,7 +872,7 @@
       }
     },
     {
-      "t": 8.500014305114746,
+      "t": 8.200013160705566,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -809,7 +881,7 @@
       }
     },
     {
-      "t": 8.500014305114746,
+      "t": 8.200013160705566,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -823,7 +895,7 @@
       }
     },
     {
-      "t": 8.500014305114746,
+      "t": 8.200013160705566,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -836,7 +908,7 @@
       }
     },
     {
-      "t": 8.500014305114746,
+      "t": 8.200013160705566,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -848,7 +920,7 @@
       }
     },
     {
-      "t": 9.000016212463379,
+      "t": 8.7000150680542,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -857,7 +929,7 @@
       }
     },
     {
-      "t": 9.000016212463379,
+      "t": 8.7000150680542,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -871,7 +943,7 @@
       }
     },
     {
-      "t": 9.000016212463379,
+      "t": 8.7000150680542,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -884,7 +956,7 @@
       }
     },
     {
-      "t": 9.000016212463379,
+      "t": 8.7000150680542,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -915,6 +987,15 @@
     },
     {
       "t": 9.000016212463379,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 stone-aegis",
+      "payload": {
+        "caster": 1,
+        "spell": "stone-aegis"
+      }
+    },
+    {
+      "t": 9.000016212463379,
       "type": "ShieldGranted",
       "canonical": "shield E1 amt=76.16 dur=5",
       "payload": {
@@ -936,7 +1017,7 @@
       }
     },
     {
-      "t": 9.500018119812012,
+      "t": 9.200016975402832,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -945,7 +1026,7 @@
       }
     },
     {
-      "t": 9.500018119812012,
+      "t": 9.200016975402832,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -959,7 +1040,7 @@
       }
     },
     {
-      "t": 9.500018119812012,
+      "t": 9.200016975402832,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -972,7 +1053,7 @@
       }
     },
     {
-      "t": 9.500018119812012,
+      "t": 9.200016975402832,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -984,7 +1065,7 @@
       }
     },
     {
-      "t": 10.000020027160645,
+      "t": 9.700018882751465,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -993,7 +1074,7 @@
       }
     },
     {
-      "t": 10.000020027160645,
+      "t": 9.700018882751465,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -1007,7 +1088,7 @@
       }
     },
     {
-      "t": 10.000020027160645,
+      "t": 9.700018882751465,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -1020,7 +1101,7 @@
       }
     },
     {
-      "t": 10.000020027160645,
+      "t": 9.700018882751465,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -1032,7 +1113,7 @@
       }
     },
     {
-      "t": 10.500021934509277,
+      "t": 10.200020790100098,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -1041,7 +1122,7 @@
       }
     },
     {
-      "t": 10.500021934509277,
+      "t": 10.200020790100098,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=False absorbed=0",
       "payload": {
@@ -1055,7 +1136,7 @@
       }
     },
     {
-      "t": 10.500021934509277,
+      "t": 10.200020790100098,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=True",
       "payload": {
@@ -1068,7 +1149,7 @@
       }
     },
     {
-      "t": 10.500021934509277,
+      "t": 10.200020790100098,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -1080,7 +1161,7 @@
       }
     },
     {
-      "t": 10.900023460388184,
+      "t": 10.500021934509277,
       "type": "CastStarted",
       "canonical": "cast E2 cyclone-burst",
       "payload": {
@@ -1089,7 +1170,7 @@
       }
     },
     {
-      "t": 10.900023460388184,
+      "t": 10.70002269744873,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=1",
       "payload": {
@@ -1098,7 +1179,7 @@
       }
     },
     {
-      "t": 10.900023460388184,
+      "t": 10.70002269744873,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=102.4 Earth crit=False killed=True absorbed=0",
       "payload": {
@@ -1112,7 +1193,7 @@
       }
     },
     {
-      "t": 10.900023460388184,
+      "t": 10.70002269744873,
       "type": "StatModified",
       "canonical": "modifyStat E2 DamageOut pct=-25 dur=2",
       "payload": {
@@ -1121,6 +1202,15 @@
         "statElement": null,
         "amountPct": -25,
         "duration": 2
+      }
+    },
+    {
+      "t": 10.900023460388184,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 cyclone-burst",
+      "payload": {
+        "caster": 2,
+        "spell": "cyclone-burst"
       }
     },
     {
@@ -1163,7 +1253,7 @@
       }
     },
     {
-      "t": 11.400025367736816,
+      "t": 11.200024604797363,
       "type": "ZoneTicked",
       "canonical": "zoneTick Z1 affected=0",
       "payload": {

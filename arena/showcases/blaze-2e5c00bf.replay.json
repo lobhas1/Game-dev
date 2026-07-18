@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 blaze",
+      "payload": {
+        "caster": 1,
+        "spell": "blaze"
+      }
+    },
+    {
+      "t": 0,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=97.92 Fire crit=False killed=False absorbed=0",
       "payload": {

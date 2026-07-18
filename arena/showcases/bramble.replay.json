@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 bramble",
+      "payload": {
+        "caster": 1,
+        "spell": "bramble"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatusApplied",
       "canonical": "status E2 Root dur=5 stacks=1 refreshed=False",
       "payload": {

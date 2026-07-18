@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 glint",
+      "payload": {
+        "caster": 1,
+        "spell": "glint"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatusApplied",
       "canonical": "status E2 Slow dur=2 stacks=1 refreshed=False",
       "payload": {

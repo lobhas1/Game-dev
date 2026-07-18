@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 dew",
+      "payload": {
+        "caster": 1,
+        "spell": "dew"
+      }
+    },
+    {
+      "t": 0,
       "type": "Healed",
       "canonical": "heal E2 eff=0 over=81.6",
       "payload": {

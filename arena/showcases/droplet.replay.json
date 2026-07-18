@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 droplet",
+      "payload": {
+        "caster": 1,
+        "spell": "droplet"
+      }
+    },
+    {
+      "t": 0,
       "type": "Healed",
       "canonical": "heal E1 eff=0 over=68",
       "payload": {

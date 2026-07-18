@@ -49,6 +49,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 0,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
       "payload": {
@@ -78,6 +87,15 @@
       "t": 0,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -125,9 +143,18 @@
       }
     },
     {
-      "t": 0.9000001549720764,
+      "t": 0.5000000596046448,
       "type": "CastStarted",
       "canonical": "cast E1 ice-lance",
+      "payload": {
+        "caster": 1,
+        "spell": "ice-lance"
+      }
+    },
+    {
+      "t": 0.9000001549720764,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 ice-lance",
       "payload": {
         "caster": 1,
         "spell": "ice-lance"
@@ -180,7 +207,7 @@
       }
     },
     {
-      "t": 1.399999737739563,
+      "t": 1.0000001192092896,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -197,6 +224,15 @@
       "t": 1.399999737739563,
       "type": "CastStarted",
       "canonical": "cast E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 1.399999737739563,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 mending-rime",
       "payload": {
         "caster": 1,
         "spell": "mending-rime"
@@ -232,7 +268,7 @@
       }
     },
     {
-      "t": 1.8999992609024048,
+      "t": 1.4999996423721313,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -265,7 +301,7 @@
       }
     },
     {
-      "t": 2.399998903274536,
+      "t": 1.9999991655349731,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -279,7 +315,7 @@
       }
     },
     {
-      "t": 2.399998903274536,
+      "t": 1.9999991655349731,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E1 Burn",
       "payload": {
@@ -316,9 +352,18 @@
       }
     },
     {
-      "t": 3.2999980449676514,
+      "t": 2.899998426437378,
       "type": "CastStarted",
       "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 3.2999980449676514,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 scorch",
       "payload": {
         "caster": 2,
         "spell": "scorch"
@@ -349,6 +394,15 @@
     },
     {
       "t": 3.799997568130493,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 3.799997568130493,
       "type": "ShieldGranted",
       "canonical": "shield E2 amt=68 dur=5",
       "payload": {
@@ -358,7 +412,7 @@
       }
     },
     {
-      "t": 5.300002098083496,
+      "t": 5.000000953674316,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Chill",
       "payload": {
@@ -370,6 +424,15 @@
       "t": 5.300002098083496,
       "type": "CastStarted",
       "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
       "payload": {
         "caster": 1,
         "spell": "frost-bolt"
@@ -406,6 +469,15 @@
       "t": 5.300002098083496,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 5.300002098083496,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -523,6 +595,15 @@
     },
     {
       "t": 10.300021171569824,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 10.300021171569824,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
       "payload": {
@@ -552,6 +633,15 @@
       "t": 10.300021171569824,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 10.300021171569824,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -602,6 +692,15 @@
       "t": 10.800023078918457,
       "type": "CastStarted",
       "canonical": "cast E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 10.800023078918457,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 mending-rime",
       "payload": {
         "caster": 1,
         "spell": "mending-rime"
@@ -679,6 +778,15 @@
     },
     {
       "t": 12.800030708312988,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 12.800030708312988,
       "type": "ShieldGranted",
       "canonical": "shield E2 amt=68 dur=5",
       "payload": {
@@ -700,6 +808,15 @@
       "t": 15.300040245056152,
       "type": "CastStarted",
       "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
       "payload": {
         "caster": 1,
         "spell": "frost-bolt"
@@ -736,6 +853,15 @@
       "t": 15.300040245056152,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 15.300040245056152,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -783,9 +909,18 @@
       }
     },
     {
-      "t": 16.20003890991211,
+      "t": 15.800042152404785,
       "type": "CastStarted",
       "canonical": "cast E1 ice-lance",
+      "payload": {
+        "caster": 1,
+        "spell": "ice-lance"
+      }
+    },
+    {
+      "t": 16.20003890991211,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 ice-lance",
       "payload": {
         "caster": 1,
         "spell": "ice-lance"
@@ -819,7 +954,7 @@
       }
     },
     {
-      "t": 16.700031280517578,
+      "t": 16.300037384033203,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -833,7 +968,7 @@
       }
     },
     {
-      "t": 17.200023651123047,
+      "t": 16.800029754638672,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -847,7 +982,7 @@
       }
     },
     {
-      "t": 17.700016021728516,
+      "t": 17.30002212524414,
       "type": "DamageDealt",
       "canonical": "damage E1 amt=4.25 Fire crit=False killed=False absorbed=0",
       "payload": {
@@ -861,7 +996,7 @@
       }
     },
     {
-      "t": 17.700016021728516,
+      "t": 17.30002212524414,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E1 Burn",
       "payload": {
@@ -879,9 +1014,18 @@
       }
     },
     {
-      "t": 18.60000228881836,
+      "t": 18.200008392333984,
       "type": "CastStarted",
       "canonical": "cast E2 scorch",
+      "payload": {
+        "caster": 2,
+        "spell": "scorch"
+      }
+    },
+    {
+      "t": 18.60000228881836,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 scorch",
       "payload": {
         "caster": 2,
         "spell": "scorch"
@@ -912,6 +1056,15 @@
     },
     {
       "t": 20.099979400634766,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 mending-rime",
+      "payload": {
+        "caster": 1,
+        "spell": "mending-rime"
+      }
+    },
+    {
+      "t": 20.099979400634766,
       "type": "Healed",
       "canonical": "heal E1 eff=68 over=0",
       "payload": {
@@ -921,7 +1074,7 @@
       }
     },
     {
-      "t": 20.599971771240234,
+      "t": 20.299976348876953,
       "type": "StatusRemoved",
       "canonical": "statusRemoved E2 Chill",
       "payload": {
@@ -933,6 +1086,15 @@
       "t": 20.599971771240234,
       "type": "CastStarted",
       "canonical": "cast E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
       "payload": {
         "caster": 1,
         "spell": "frost-bolt"
@@ -969,6 +1131,15 @@
       "t": 20.599971771240234,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 20.599971771240234,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -1054,6 +1225,15 @@
     },
     {
       "t": 22.09994888305664,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 22.09994888305664,
       "type": "ShieldGranted",
       "canonical": "shield E2 amt=68 dur=5",
       "payload": {
@@ -1105,6 +1285,15 @@
     },
     {
       "t": 26.09988784790039,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 frost-bolt",
+      "payload": {
+        "caster": 1,
+        "spell": "frost-bolt"
+      }
+    },
+    {
+      "t": 26.09988784790039,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=34 Water crit=False killed=False absorbed=0",
       "payload": {
@@ -1134,6 +1323,15 @@
       "t": 26.09988784790039,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 26.09988784790039,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -1251,6 +1449,15 @@
     },
     {
       "t": 31.599803924560547,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 flame-ward",
+      "payload": {
+        "caster": 2,
+        "spell": "flame-ward"
+      }
+    },
+    {
+      "t": 31.599803924560547,
       "type": "ShieldGranted",
       "canonical": "shield E2 amt=68 dur=5",
       "payload": {
@@ -1263,6 +1470,15 @@
       "t": 32.099796295166016,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 32.099796295166016,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"
@@ -1364,6 +1580,15 @@
       "t": 37.59971237182617,
       "type": "CastStarted",
       "canonical": "cast E2 fireball",
+      "payload": {
+        "caster": 2,
+        "spell": "fireball"
+      }
+    },
+    {
+      "t": 37.59971237182617,
+      "type": "CastResolved",
+      "canonical": "castResolved E2 fireball",
       "payload": {
         "caster": 2,
         "spell": "fireball"

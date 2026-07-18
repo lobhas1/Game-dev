@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 eclipse-cut",
+      "payload": {
+        "caster": 1,
+        "spell": "eclipse-cut"
+      }
+    },
+    {
+      "t": 0,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=88.4 Shadow crit=False killed=False absorbed=0",
       "payload": {

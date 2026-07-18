@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 umbra",
+      "payload": {
+        "caster": 1,
+        "spell": "umbra"
+      }
+    },
+    {
+      "t": 0,
       "type": "StatusApplied",
       "canonical": "status E2 Blind dur=5 stacks=1 refreshed=False",
       "payload": {

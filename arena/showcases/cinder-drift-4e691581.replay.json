@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 cinder-drift",
+      "payload": {
+        "caster": 1,
+        "spell": "cinder-drift"
+      }
+    },
+    {
+      "t": 0,
       "type": "Displaced",
       "canonical": "displace E1 Dash to=(0,0,0) blocked=False",
       "payload": {

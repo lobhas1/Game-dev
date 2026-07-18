@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 gust",
+      "payload": {
+        "caster": 1,
+        "spell": "gust"
+      }
+    },
+    {
+      "t": 0,
       "type": "Displaced",
       "canonical": "displace E2 Push to=(14,0,0) blocked=False",
       "payload": {

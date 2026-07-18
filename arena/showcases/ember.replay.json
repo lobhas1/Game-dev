@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 ember",
+      "payload": {
+        "caster": 1,
+        "spell": "ember"
+      }
+    },
+    {
+      "t": 0,
       "type": "DamageDealt",
       "canonical": "damage E2 amt=51 Fire crit=False killed=False absorbed=0",
       "payload": {

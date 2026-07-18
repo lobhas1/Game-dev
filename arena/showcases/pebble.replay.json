@@ -51,6 +51,15 @@
     },
     {
       "t": 0,
+      "type": "CastResolved",
+      "canonical": "castResolved E1 pebble",
+      "payload": {
+        "caster": 1,
+        "spell": "pebble"
+      }
+    },
+    {
+      "t": 0,
       "type": "ShieldGranted",
       "canonical": "shield E1 amt=68 dur=5",
       "payload": {
