@@ -10,8 +10,9 @@ public sealed record ReplayEntity(int Id, string Name, float MaxHp, Vec3 Spawn);
 
 /// <summary>Captures the ordered event stream + per-event sim-time + entity manifest from a live
 /// FightEngine.Run, WITHOUT changing the fight. Passed as an optional argument to Run; when absent
-/// the fight is byte-for-byte identical (pinned by the existing golden). Timestamps are observed at
-/// quantum boundaries — they are not part of any projection line, so they never affect the gate.</summary>
+/// the fight is byte-for-byte identical (pinned by the existing golden). Timestamps are the sim
+/// clock at EMISSION (EventBus.TimeOf) — they are not part of any projection line, so they never
+/// affect the gate.</summary>
 public sealed class ReplayRecorder
 {
     private readonly List<(float Time, GameEvent Event)> _events = new();
@@ -20,12 +21,14 @@ public sealed class ReplayRecorder
 
     public void Init(params ReplayEntity[] entities) => Entities = entities;
 
-    /// <summary>Stamp any events emitted since the last mark with the current sim time.</summary>
+    /// <summary>Harvest any events emitted since the last mark, carrying each event's EMISSION-time
+    /// stamp (EventBus.TimeOf). Mark is a harvesting cadence only — it no longer flattens a batch
+    /// onto the mark instant, so a cast windup that advances the clock inside Cast() records a real
+    /// CastStarted→CastResolved gap (spec docs/specs/2026-07-17-cast-time.md).</summary>
     public void Mark(Sim sim)
     {
         var evs = sim.Events.Events;
-        float now = sim.State.Now;
-        for (int i = _events.Count; i < evs.Count; i++) _events.Add((now, evs[i]));
+        for (int i = _events.Count; i < evs.Count; i++) _events.Add((sim.Events.TimeOf(i), evs[i]));
     }
 }
 
@@ -88,6 +91,7 @@ public static class Replay
         ZoneTicked z => new() { ["id"] = z.Id.Value, ["affected"] = z.AffectedCount },
         ZoneExpired z => new() { ["id"] = z.Id.Value },
         CastStarted c => new() { ["caster"] = c.Caster.Value, ["spell"] = c.Spell.Value },
+        CastResolved c => new() { ["caster"] = c.Caster.Value, ["spell"] = c.Spell.Value },
         CastFailed c => new() { ["caster"] = c.Caster.Value, ["spell"] = c.Spell.Value, ["reason"] = c.Reason },
         _ => throw new InvalidOperationException($"replay export: unknown event type {e.GetType().Name}")
     };
@@ -107,6 +111,7 @@ public static class Replay
         "ZoneTicked" => new ZoneTicked(new ZoneId(I(p, "id")), I(p, "affected")),
         "ZoneExpired" => new ZoneExpired(new ZoneId(I(p, "id"))),
         "CastStarted" => new CastStarted(Ent(p, "caster"), new SpellId(S(p, "spell"))),
+        "CastResolved" => new CastResolved(Ent(p, "caster"), new SpellId(S(p, "spell"))),
         "CastFailed" => new CastFailed(Ent(p, "caster"), new SpellId(S(p, "spell")), S(p, "reason")),
         _ => throw new InvalidOperationException($"replay verify: unknown event type '{type}'")
     };

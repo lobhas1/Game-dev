@@ -617,13 +617,38 @@ public sealed record CastFailed(EntityRef Caster, SpellId Spell, string Reason) 
     public override string Canonical() => $"castFailed {Caster} {Spell} {Reason}";
 }
 
+/// <summary>The cast window closed: emitted once per SUCCESSFUL cast, after the windup completes
+/// and before delivery/effects (spec docs/specs/2026-07-17-cast-time.md). The renderer's resolution
+/// anchor — the cast bar runs CastStarted.t → CastResolved.t. For instants it shares CastStarted's
+/// timestamp; failed casts emit CastFailed and never this.</summary>
+public sealed record CastResolved(EntityRef Caster, SpellId Spell) : GameEvent
+{
+    public override string Canonical() => $"castResolved {Caster} {Spell}";
+}
+
 /// <summary>Collects emitted events in order. "Event flush" (§2 step 6) is modelled as
-/// consumers reading the log after a consistent state is reached.</summary>
+/// consumers reading the log after a consistent state is reached. Each event is stamped with the
+/// sim clock AT EMISSION (the clock delegate is wired by Sim), so a windup that advances the clock
+/// inside Cast() separates CastStarted from the effects it precedes — recorders must read
+/// <see cref="TimeOf"/> rather than batch-stamping at harvest time.</summary>
 public sealed class EventBus
 {
     private readonly List<GameEvent> _events = new();
+    private readonly List<float> _times = new();
+    private readonly Func<float>? _clock;
+
+    public EventBus(Func<float>? clock = null) => _clock = clock;
+
     public IReadOnlyList<GameEvent> Events => _events;
-    public void Emit(GameEvent e) => _events.Add(e);
+    public void Emit(GameEvent e)
+    {
+        _events.Add(e);
+        _times.Add(_clock?.Invoke() ?? 0f);
+    }
+
+    /// <summary>Sim time at which event <paramref name="index"/> was emitted.</summary>
+    public float TimeOf(int index) => _times[index];
+
     public IReadOnlyList<string> Projection() => _events.Select(e => e.Canonical()).ToList();
 }
 

@@ -12,6 +12,7 @@ public class GoldenTests
     private static string Kind(GameEvent e) => e switch
     {
         CastStarted => "cast",
+        CastResolved => "castResolved",
         CastFailed => "castFailed",
         DamageDealt d => d.Evaded ? "evaded" : "damage",
         Healed => "heal",
@@ -43,7 +44,7 @@ public class GoldenTests
         var report = sim.Cast(caster.Ref, spell, target: enemy.Ref);
 
         Assert.True(report.Success);
-        Assert.Equal(new[] { "cast", "displace", "damage", "status" }, Kinds(sim));
+        Assert.Equal(new[] { "cast", "castResolved", "displace", "damage", "status" }, Kinds(sim));
 
         // final-state invariants
         Assert.Equal(enemy.Position, caster.Position);            // teleported onto the impact point
@@ -66,6 +67,7 @@ public class GoldenTests
 
         sim.Tick(1.0f); // 4 quanta-aligned ticks at interval 0.25 (after the 0.8s windup)
 
+        Assert.Equal(1, Count<CastResolved>(sim)); // windup closed once
         Assert.Equal(1, Count<ZoneSpawned>(sim));
         Assert.Equal(4, Count<ZoneTicked>(sim));
         Assert.Equal(4, Count<Displaced>(sim));
@@ -91,7 +93,7 @@ public class GoldenTests
         var report = sim.Cast(caster.Ref, spell, target: enemy.Ref);
 
         Assert.True(report.Success);
-        Assert.Equal(new[] { "cast", "damage", "statusRemoved", "status" }, Kinds(sim));
+        Assert.Equal(new[] { "cast", "castResolved", "damage", "statusRemoved", "status" }, Kinds(sim));
 
         // tier1 100 × 0.5 × instant 0.85 = 42.5, amplified ×2.5 (major) = 106.25
         Assert.Equal(200.0 - 106.25, enemy.Hp, 2);
@@ -110,7 +112,7 @@ public class GoldenTests
         var spell = SpellJson.Parse(Fixtures.Load("frost-shatter.proposal.json"));
         sim.Cast(caster.Ref, spell, target: enemy.Ref);
 
-        Assert.Equal(new[] { "cast", "damage" }, Kinds(sim)); // ifStatus branch not taken
+        Assert.Equal(new[] { "cast", "castResolved", "damage" }, Kinds(sim)); // ifStatus branch not taken
         Assert.Equal(200.0 - 42.5, enemy.Hp, 2);
         Assert.False(sim.State.HasStatus(enemy.Ref, StatusId.Vulnerable));
     }

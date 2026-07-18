@@ -833,7 +833,7 @@ public sealed class Sim
     private const float Eps = 1e-4f;
 
     public WorldState State { get; } = new();
-    public EventBus Events { get; } = new();
+    public EventBus Events { get; }
     public IWorldApi World { get; } = new HeadlessWorldApi();
 
     private readonly long _baseSeed;
@@ -845,6 +845,7 @@ public sealed class Sim
     {
         _baseSeed = seed;
         _overrides = overrides;
+        Events = new EventBus(() => State.Now); // events carry emission-time stamps (cast-time spec)
     }
 
     // ── §2 resolution pipeline ──
@@ -865,6 +866,10 @@ public sealed class Sim
         // 2. cast windup (advances the clock; DoTs/zones progress during the cast)
         if (spell.Cast.Mode == CastMode.Cast && spell.Cast.CastTime > 0f)
             Tick(spell.Cast.CastTime);
+
+        // The window closed: the renderer's resolution anchor. Post-windup so its emission time is
+        // the resolution instant (instants: same stamp as CastStarted); a failed cast never gets here.
+        Events.Emit(new CastResolved(caster, spell.Id));
 
         // 3. delivery
         var (targets, impact) = ResolveDelivery(caster, spell.Delivery, target, point);
